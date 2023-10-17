@@ -1,0 +1,54 @@
+\begin{thebibliography}{9}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[\protect\citeauthoryear{Almudevar}{Almudevar}{2000}]{almudevar2000exact}
+Almudevar A (2000) Exact confidence regions for species assignment based on DNA
+  markers. {\em Canadian Journal of Statistics\/}, {\bf 28}, 81--95.
+
+\bibitem[\protect\citeauthoryear{Anderson, Waples, \& Kalinowski}{Anderson {\em
+  et~al.\/}}{2008}]{anderson2008improved}
+Anderson EC, Waples RS, Kalinowski ST (2008) An improved method for predicting
+  the accuracy of genetic stock identification. {\em Canadian Journal of
+  Fisheries and Aquatic Sciences\/}, {\bf 65}, 1475--1486.
+
+\bibitem[\protect\citeauthoryear{Beerli}{Beerli}{2004}]{beerli2004effect}
+Beerli P (2004) Effect of unsampled populations on the estimation of population
+  sizes and migration rates between sampled populations. {\em Molecular
+  ecology\/}, {\bf 13}, 827--836.
+
+\bibitem[\protect\citeauthoryear{Huestis, Dao, Diallo, Sanogo, Samake, Yaro,
+  Ousman, Linton, Krishna, Veru {\em et~al.\/}}{Huestis {\em
+  et~al.\/}}{2019}]{huestis2019windborne}
+Huestis DL, Dao A, Diallo M, Sanogo ZL, Samake D, Yaro AS, Ousman Y, Linton YM,
+  Krishna A, Veru L, {\em et~al.\/} (2019) Windborne long-distance migration of
+  malaria mosquitoes in the Sahel. {\em Nature\/}, {\bf 574}, 404--408.
+
+\bibitem[\protect\citeauthoryear{Latch, Boarman, Walde, \& Fleischer}{Latch
+  {\em et~al.\/}}{2011}]{latch2011fine}
+Latch EK, Boarman WI, Walde A, Fleischer RC (2011) Fine-scale analysis reveals
+  cryptic landscape genetic structure in desert tortoises. {\em PLoS one\/},
+  {\bf 6}, e27794.
+
+\bibitem[\protect\citeauthoryear{Paetkau, Calvert, Stirling, \&
+  Strobeck}{Paetkau {\em et~al.\/}}{1995}]{paetkau1995microsatellite}
+Paetkau D, Calvert W, Stirling I, Strobeck C (1995) Microsatellite analysis of
+  population structure in Canadian polar bears. {\em Molecular ecology\/}, {\bf
+  4}, 347--354.
+
+\bibitem[\protect\citeauthoryear{Pritchard, Stephens, \& Donnelly}{Pritchard
+  {\em et~al.\/}}{2000}]{pritchard2000inference}
+Pritchard JK, Stephens M, Donnelly P (2000) Inference of population structure
+  using multilocus genotype data. {\em Genetics\/}, {\bf 155}, 945--959.
+
+\bibitem[\protect\citeauthoryear{V{\"a}h{\"a} \& Primmer}{V{\"a}h{\"a} \&
+  Primmer}{2006}]{vaha2006efficiency}
+V{\"a}h{\"a} JP, Primmer CR (2006) Efficiency of model-based Bayesian methods
+  for detecting hybrid individuals under different hybridization scenarios and
+  with different numbers of loci. {\em Molecular Ecology\/}, {\bf 15}, 63--72.
+
+\bibitem[\protect\citeauthoryear{Wilson \& Rannala}{Wilson \&
+  Rannala}{2003}]{wilson2003bayesian}
+Wilson GA, Rannala B (2003) Bayesian inference of recent migration rates using
+  multilocus genotypes. {\em Genetics\/}, {\bf 163}, 1177--1191.
+
+\end{thebibliography}
