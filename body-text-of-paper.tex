@@ -11,12 +11,54 @@ Pairing empirical data with closely derived simulation-based approaches has been
 	In response to these needs, we developed gscramble – an approach to simulate genotypes that minimizes bias associated with forward-in-time simulations by sampling alleles from respective populations without replacement, thus preserving the genetic differences observed in the empirical dataset.  Further, by simulating individual genotypes based on user-defined pedigrees, gscramble allows for the simulation of admixed genotypes of varying degrees of complexity while allowing the tracking of haplotype blocks from source populations within the specified pedigree.  By integrating species-specific recombination rates, gscramble simulates biologically informed genotypes that mirror empirical data.  We develop and illustrate gscramble with use of single nucleotide polymorphic (SNP) genotypes.
 
 
-Can we say something about Anthony Almudevar's visionary method for GSI power assessment \citep{almudevar2000exact}
 
+  
 
 \section*{Methods}
 
-Something here.
+\subsection*{An introductory motivating example}
+
+Before we proceed to a description of the methodology used by gscramble,
+we demonstrate a case in which using a standard sampling-with-replacement
+approach to simulate genotypes leads to the incorrect conclusion that a set of genetic
+markers is sufficient to accurately estimate admixture fractions between two populations.
+To construct this simple example, we used the R programming language (CITE) to
+simulate allele frequencies for $L$ biallelic
+loci in a single population from a $\mathrm{Beta}(1, 8)$ distribution and then simulated
+two samples, $A$ and $B$ of size $N$ diploid genotypes from this population by drawing each of the three
+possible genotypes at each locus from their
+expected genotype frequencies under Hardy-Weinberg equilibrium.  In this case,
+each set of $N$ individuals is a sample from exactly the same population, so
+there would be no basis for performing population assignment between $A$ and $B$.  
+
+However, we treated samples $A$ and $B$ as if they were sampled from two potentially different
+populations, and simulated $9n$ new individuals: $n$ new individuals at each of the 9 values of
+$q_A$, the admixture fraction for population $A$, in  $\{0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1.0\}$.
+We then added these $9n$ to the original $2N$ individuals ($N$ from sample $A$ and $N$ from $B$)
+and analyzed the genotypes using ADMIXTURE with $K=2$, doing a completely
+unsupervised analysis or doing a supervised analysis in which the original $N$ samples from each
+population were provided as learning samples. 
+
+For each combination $L \in \{10^2, 10^3, 10^4, 10^5\}$, 
+$N \in \{25, 50, 100, 250\}$ and $n\in\{3,12,24\}$ we conducted multiple replicates
+of the entire process of
+simulating samples $A$ and $B$, simulating the $9n$ additional individuals, and
+then analyzing them with ADMIXTURE.  We conducted sufficient replicates so that,
+for each combination of $L$, $N$, and $n$ we had simulated 480 new individuals
+at each $q_A$ value; thus, $160$ replicates when $n = 3$, $40$ when $n=12$, and
+$20$ when $n=24$.
+
+We hypothesized that ADMIXTURE would return estimates of $q_A$ that were
+centered around the true values, even though there is no basis for that, because
+the simulations were done in a na\"{i}ve way that effectively assumes that the population
+allele frequencies are identical to those observed in the samples themselves. 
+We further expected that ADMIXTURE would return more accurate estimates of
+$q_A$ when $N$ was smaller and the number of loci was larger.
+We summarized the results by plotting boxplots of the 480
+ADMIXTURE-inferred $q_A$ values, for each combination of $L$, $N$, and $n$.
+
+
+
 
 \subsection*{Genomic Simulation Pedigrees}
 
@@ -39,6 +81,32 @@ Blah, blah blobbity blah.
 \end{figure*}
 
 
+\section*{Results}
+
+\subsection*{An introductory motivating example}
+
+As expected, the perceived ability to estimate $q_A$ with ADMIXTURE was higher
+for larger values of $L$ and for smaller values of $N$ (Figure~\ref{fig:bias-sims}).  
+%%%
+\begin{figure*}
+\includegraphics[width=\textwidth]{figures/bias-sims-unsup-and-sup.pdf}
+\caption{ADMIXTURE estimates of $q_A$ as described in
+{\em An introductory motivating example} In these results, the ability to estimate $q_A$
+is a product of a bias.
+}
+\label{fig:bias-sims}
+\end{figure*}
+%%%
+It is interesting to note
+that, for numbers of loci,  $L$, that are 100 (or smaller) the effect is observed only when
+sample size, $N$, is as small as 25---and even then the effect is slight.  However, when the
+number of markers increases to 100,000---values that are becoming commonplace with the availability of chip-
+or sequencing-based approaches---it is apparent that the sampling-with-replacement approach
+induces an extreme bias.  With 100,000 markers, even if sample sizes are as large as 250 individuals,
+using na\"{i}ve simulations improperly indicate that admixture fractions of individuals can be
+accurately estimated, even when there are no genetic differences, whatsoever between the populations that
+samples $A$ and $B$ are drawn.   
+ 
 
 
 \section*{Discussion}
