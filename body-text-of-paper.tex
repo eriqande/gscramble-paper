@@ -138,7 +138,8 @@ uses terminology that is defined in the figure caption.
 %%%%%%%%%%%
 \begin{figure}
 \newcommand{\gspcapone}{\footnotesize 
-(I NEED TO UPDATE THE FIGURE TO MATCH THE DESCRIPTION)
+(I NEED TO UPDATE THE FIGURE TO MATCH THE DESCRIPTION AND MAKE
+THE LABELS BIGGER IN THE SQUARES).
 A genomic simulation pedigree (GSP) for simulating $F_2$ individuals.
 Squares denote founder and non-founder nodes in the pedigree. There are four founders in the pedigree,
 individuals 1--4.  The two triangles above each of those founders denotes, in color
@@ -180,24 +181,26 @@ created from a single simulation on this GSP.
 It is important to understand that, apart from the founder nodes, the individual
 nodes in a GSP do not necessarily represent only a single individual.  Specifically,
 since we are preserving all genetic material, multiple gametes may get segregated
-through each non-founder node in a GSP.   Genetic material is segregated through
+through each non-founder node in a GSP\@.   Genetic material is segregated through
 a GSP using these steps, done upon each node in an order such that the steps
 are run on each node's parents before being run on the node itself:
 \begin{enumerate}
-\item Each genome in a triangle above a founder node is assorted into
-two gametes with recombination occurring between each chromosome
+\item Each genome in a triangle above a founder node represents a gamete.
+These gametes are united within the founder individual and then
+following recombination between each chromosome
 with probability $\frac{1}{2}$ and within each chromosome according to
-a user-specified recombination map.  
-\item Each non-founder individual node, $x$, will have exactly two edges coming
+a user-specified recombination map, 
+ one gamete is assorted down each edge from the founder node to its daughter.
+\item Each non-founder node, $x$, will have exactly two edges coming
 into it---one from each parent.  Each of the $G^+_{x,1}$ gametes coming in from the
 first edge is united with a single one of the $G^+_{x,2}$ gametes coming
 in on the second edge (in a random order). 
-\item If a non-founder individual node $x$ has an edge to a sample node,
+\item If a non-founder node $x$ has an edge to a sample node,
 a randomly chosen $S_x$ of the united pairs of gametes are delivered
 to the sample node to constitute the $S_x$ samples taken from individual
 node $x$. Any remaining united pairs of gametes are treated as in (4) below.
-\item United pairs of gametes (or those remaining after delivery
-to a sample node) in each non-founder individual node $x$ are segregated into
+\item United pairs of gametes (including those remaining after delivery
+to a sample node) in each non-founder node $x$ are segregated into
 gametes with recombination, and each of these gametes is assigned, in
 random order, to the gamete edges proceeding downward out of the node,
 with the number of gametes assigned to the $i\thh$ downward edge being
@@ -211,30 +214,42 @@ samples obtained from a GSP can be simulated with the expected admixture fractio
 for any hybrid category that can be specified by a pedigree.  They have also been simulated
 in a way that 1) respects physical linkage---each individual inherits segments of the genome
 simulated using a recombination map; 2) does not duplicate any genetic material---the sampling of
-genetic material is entirely without replacement so it will not induce any bias in clustering
-power assessment; and 3) no genetic material has been lost---all the genetic material of the founders
-is represented in the samples, maximizing the number of individual and markers available to
+genetic material is entirely without replacement so it will not induce RIPI; and 3) no genetic material has been lost---all the genetic material of the founders
+is represented in the samples, maximizing the number of individuals and markers available to
 use in downstream analyses.
 
 In the gscramble package there is a convenience function called {\footnotesize\tt create\_GSP()} that
 will create GSPs for samples up to and including second-generation backcrosses; however, gscramble is designed
 to handle user-specified GSPs of arbitrary complexity.  When creating one's own GSP, it is useful
-to keep in mind a handful of requirements for a GSP to be valid. Writing $\founders$ for the set of all founder nodes, $\nonfound$ for the set of all non-founder individual nodes, and $\nonfounds$ for all non-founder
-nodes that are not parents of other indivduals, but are adjacent to a sample node, $\nonfounde$ for all
-non-founder nodes that have individual node daughters, but no sample nodes, and $\nonfoundse$ for all
-non-founder nodes that are parents of individual nodes and also adjacent to sample-nodes, the necessary conditions 
-for a valid GSP are:
+to keep in mind a handful of requirements for a GSP to be valid. Writing $\founders$ for the set of all founder nodes, $\nonfound$ for the set of all non-founder nodes, and $\nonfounds$ for all non-founder
+nodes that are not parents of other non-founders, but are adjacent to a sample node, $\nonfounde$ for all
+non-founder nodes that have non-founder node daughters, but no sample nodes, and $\nonfoundse$ for all
+non-founder nodes that are parents of non-founder nodes and also adjacent to sample-nodes, the necessary conditions 
+for a valid GSP, in addition to having no inbreeding loops, are:
 \begin{equation}
 \begin{aligned}
-\sum_{x \in \nonfounds \cup \nonfoundse} S_x &= |\founders|   \\ 
+\sum_{x \in \nonfounds \cup \nonfoundse} S_x &= |\founders| &  \\ 
 \sum_{i=1}^{e_x} G^-_{x,i} &= 2 & \forall x \in \founders \\
 G^+_{x,1} &= G^+_{x,2} & \forall x \in \nonfound \\
 \sum_{i=1}^{e_x} G^-_{x,i} &= G^+_{x,1} +  G^+_{x,2} & \forall x \in \nonfounde  \\ 
-\sum_{i=1}^{e_x} G^-_{x,i} + S_x/2 &= G^+_{x,1} +  G^+_{x,2} & \forall x \in \nonfoundse.  \\ 
+ S_x/2 + \sum_{i=1}^{e_x} G^-_{x,i} &= G^+_{x,1} +  G^+_{x,2} & ~~~\forall x \in \nonfoundse.  \\ 
 \end{aligned}
 \end{equation}
+Before simulating from a GSP, gscramble checks to ensure the GSP
+satisfies these validity conditions.
 
+\subsection*{Permutation procedures}
 
+gscramble uses a GSP to segregate segments of genetic material from the founders
+to the samples.  At the end of segment simulation, the genome of each sample
+is recorded as a mosaic of segments that derived from different founders.  In order
+to create a data set of markers in each sample, it is necessary only to identify the alleles
+that occurred on each segment within the founders and propagate those alleles to the
+corresponding segments within the samples.  At the stage of assigning alleles to
+founders, gscramble provides a variety of options for to permute alleles amongst
+individuals within samples from which the founders are drawn.  By using permutation,
+variability in the data is created, but without sampling with replacement, and hence
+not inducing RIPI.  
 
 
 \subsection*{Empirical Examples}
