@@ -7,6 +7,7 @@
 \usepackage{amssymb}
 \usepackage{epstopdf}
 \usepackage{amsfonts}
+\usepackage{amsmath}
 \usepackage{natbib}
 \usepackage{eca_molecolres}
 \usepackage{xspace}
@@ -44,6 +45,24 @@
 \fi
 \vskip\belowcaptionskip}
 \makeatother
+
+%% change section heading styles
+\makeatletter
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {1.5ex \@plus 0ex}%
+                                   {\normalfont\normalsize\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\normalsize\itshape}}
+\renewcommand\subsubsection{\@startsection{subsection}{2}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\footnotesize\bfseries}}
+\makeatother
+
+
 
 \setcitestyle{aysep={}}
 \AtBeginDelayedFloats{\renewcommand{\baselinestretch}{1.6}}
