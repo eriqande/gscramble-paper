@@ -2,18 +2,36 @@
 
 \section*{Introduction}
 
-Genetic clustering algorithms are a commonly used approach to describe genetic structure among populations, reflecting the cumulative effects of isolation, connectivity (i.e., genetic migration), selection, and genetic drift.  The ability of such algorithms to differentiate populations is limited by the extent of genetic differentiation among populations and the capacity to resolve those differences given the available marker set and sample sizes from the respective populations.  Based on an initial description of genetic structure, ecologists are frequently interested in describing patterns of genetic movement among populations, often inferred from the mismatch between the sampling location and genetic origins of a given individual \citep{paetkau1995microsatellite,wilson2003bayesian}.  Genetic movement has many implications, influencing evolutionary processes, maintenance of genetic variation through gene flow, disease dynamics \citep{huestis2019windborne}, or patterns of invasive species expansion CITE.
+Genetic clustering algorithms are a commonly used approach to describe genetic structure among populations, reflecting the cumulative effects of isolation, connectivity (i.e., genetic migration), selection, and genetic drift.  The ability of such algorithms to differentiate populations is limited by the extent of genetic differentiation among populations and the capacity to resolve those differences given the available marker set and sample sizes from the respective populations.  Based on an initial description of genetic structure, ecologists are frequently interested in describing patterns of genetic movement among populations, often inferred from the mismatch between the sampling location and genetic origins of a given individual \citep{paetkau1995microsatellite,wilson2003bayesian}.  Genetic movement has many implications, such as influencing evolutionary processes, maintaining genetic variation through gene flow, and driving disease dynamics \citep{huestis2019windborne} and affecting patterns of invasive species expansion CITE.
 
-	In using clustering algorithms to describe genetic structure among natural populations, researchers frequently identify individuals with complex ancestry patterns (i.e., the proportion of an individual’s genome assigned to sampled populations, sensu \citealt{pritchard2000inference}) that demonstrate mixed associations to multiple populations.  Various processes could contribute to such mixed associations.  Most simplistically, individuals may represent the influences of gene flow among populations, occurring in recent or prior generations, with the observed complex ancestry patterns accurately representing contributions from multiple populations included in the study.  However, alternative processes could also create similarly complex ancestry patterns.  For example, individuals may have genomic associations to unsampled populations as immigrants or as descendant of immigrant from unsampled populations \citep{pritchard2000inference,beerli2004effect}.  Yet a limitation of clustering algorithms is that exogenous immigrants can only be associated to populations represented within the sample.  Similarly, individuals with mixed associations may reflect a discrepancy between the genetic structure as described by the analysis and the underlying ecological process creating patterns of genetic differentiation (e.g., when clinal systems governed by isolation by distance are described as discrete genetic clusters).  Finally, such patterns may represent a limitation of the statistical power of the genetic data, as a function of both the marker set and sample size, to resolve the true underlying patterns of genetic structure.  The challenge for researchers then becomes correctly identifying the ecological process by which similar, complex ancestry patterns were created.
+	In using clustering algorithms to describe genetic structure among natural populations, researchers frequently identify individuals of mixed ancestry---a trait often summarized as the proportion of an individual’s genome originating from each of $K$ subpopulations, sensu \citet{pritchard2000inference}.  Various processes could contribute to such mixed associations.  Most directly, individuals may represent the influences of gene flow among populations, occurring in recent or prior generations, with the observed complex ancestry patterns accurately representing contributions from multiple sampled populations.  However, similar patterns may result from functionally different patterns of population structuring such as when . For example, when clinal systems governed by isolation by distance are described as discrete genetic clusters. Furthermore, inferred patterns of admixture may represent a limitation of the statistical power of the genetic data, as a function of both the marker set and sample size, to resolve the true underlying patterns of genetic structure.  The challenge for researchers then becomes correctly identifying the ecological and/or statistical processes by which observed complex ancestry patterns were created.
 
-A best practice for evaluating the behavior of genetic clustering algorithms on an empirical dataset is to pair the data with closely derived simulations where the truth is known \citep{vaha2006efficiency,anderson2008improved,latch2011fine}.
-	Techniques to simulate individual genotypes frequently use sampling with replacement from the observed allele frequencies.
-	However, sampling with replacement implicitly increases the pairwise genetic distance (e.g., FST) among populations and inflates the perceived ability to correctly assign individuals back to source populations \cite{almudevar2000exact,anderson2008improved}.
-	\textcolor{red}{Seems like 2 additional sentences here would be appropriate to draw from a study that has demonstrated this process.}
-	These issues could be addressed with simulations that fix observed genetic differences among populations by sampling from the empirical data without replacement (citations for simulation frameworks that use this approach).
+A best practice for evaluating the behavior of genetic clustering algorithms on an empirical dataset is to conduct
+parallel analyses on simulated data where the truth is known, structured to mirror the empirical data set
+as closely as possible \citep{vaha2006efficiency,anderson2008improved,latch2011fine}.
+Techniques to simulate individual genotypes in this context frequently use sampling with replacement from the 
+observed allele frequencies (see CITE, CITE, CITE).
+However, sampling with replacement implicitly increases the pairwise genetic distance among simulated samples, relative to the observed samples, and 
+inflates the perceived ability to correctly assign individuals back to source populations. \citet{anderson2008improved}
+documented this type of artifact in the context of simulations to assess the power for
+genetic stock identification (GSI), a type of clustering application in which individuals are constrained to have
+all their ancestry from a single subpopulation. We demonstrate, below, that similar artifacts occur when simulating data to 
+assess how accurately admixture fractions can be estimated.  We refer to this phenomenon as resampling-induced
+power inflation, or RIPI for short.  
+In this study, we additionally develop and illustrate an approach by which RIPI can be eliminated
+from simulations by constraining the genetic differences among simulated populations to match
+those of populations from which the samples were obtained. 
 
-	Beyond simply evaluating the resolution of discrete populations in a simulated framework, researchers may also be interested in how individuals of admixed ancestry are genetically characterized.
-	Recognizing that connectivity among genetically distinct populations may be relatively rare, researchers can gain additional insights into the frequency of immigration by also identifying descendants of migrants among study populations (directly [F1 hybrids] or advanced hybrids reflecting the effect of backcrossing across multiple generations [BC1, \ldots, BCX]).
+Beyond simply evaluating the resolution of discrete populations in a simulated framework, researchers may also be 
+interested in how individuals of admixed ancestry are genetically characterized.
+Recognizing that connectivity among genetically distinct populations may be relatively rare, additional insight into the 
+frequency of immigration can be gained by 
+identifying the descendants of migrants in addition to those individuals that may be direct migrants.
+
+
+ 
+direct migrants but also identifying the influence of migration over multiple generations (i.e., F1 hybrids or advanced hybrids reflecting the effect of backcrossing across multiple generations [BC1, \ldots, 
+BCX]).
 	The process of recombination during meiosis creates a distribution of expected associations to parental populations among advanced hybrid classes.
 	Treating linked loci as independent can lead to the false interpretation that the association of advanced hybrid classes to parental population occur strictly as discrete distributions.
 	Therefore, in evaluating descendants of migrants within a simulated framework, it is imperative to take into consideration the pattern of linkage among loci available for analysis.
@@ -32,55 +50,200 @@ A best practice for evaluating the behavior of genetic clustering algorithms on 
 
 Before we proceed to a description of the methodology used by gscramble,
 we demonstrate a case in which using a standard sampling-with-replacement
-approach to simulate genotypes leads to the incorrect conclusion that a set of genetic
-markers is sufficient to accurately estimate admixture fractions between two populations.
-To construct this simple example, we used the R programming language (CITE) to
+approach induces RIPI when estimating admixture fractions.
+To construct this simple example, we used the R programming language \citep{Rcoreteam} to
 simulate allele frequencies for $L$ biallelic
 loci in a single population from a $\mathrm{Beta}(1, 8)$ distribution and then simulated
-two samples, $A$ and $B$ of size $N$ diploid genotypes from this population by drawing each of the three
-possible genotypes at each locus from their
-expected genotype frequencies under Hardy-Weinberg equilibrium.  In this case,
+two samples, $A$ and $B$, each of size $N$ diploid genotypes. The genotypes in $A$ and $B$ were simulated
+from the same allele frequencies assuming Hardy-Weinberg equilibrium.  
+
+In this case,
 each set of $N$ individuals is a sample from exactly the same population, so
-there would be no basis for performing population assignment between $A$ and $B$.
-
-However, we treated samples $A$ and $B$ as if they were sampled from two potentially different
+there is no basis for performing population assignment between $A$ and $B$;
+however, we treated samples $A$ and $B$ as if they were sampled from two potentially different
 populations, and simulated $9n$ new individuals: $n$ new individuals at each of the 9 values of
-$q_A$, the admixture fraction for population $A$, in  $\{0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1.0\}$.
-We then added these $9n$ to the original $2N$ individuals ($N$ from sample $A$ and $N$ from $B$)
-and analyzed the genotypes using ADMIXTURE with $K=2$, doing a completely
-unsupervised analysis or doing a supervised analysis in which the original $N$ samples from each
-population were provided as learning samples.
+$q_A$, the admixture fraction for population $A$, in  $\{0, \frac{1}{8}, \frac{1}{4}, \frac{3}{8}, \frac{1}{2}, \frac{5}{8}, \frac{3}{4}, \frac{7}{8}, 1\}$. We simulated these genotypes according to the "admixture model" used in {\em structure} \citep{pritchard2000inference}.  Briefly, at each locus, independently, the origin
+of each gene copy was simulated to be from
+population $A$ with probability $q_A$ and from population $B$ with probability $1-q_A$.  Subsequently,
+the allelic types of gene copies from $A$ ($B$), at a locus, were simulated by sampling with replacement
+from the alleles at that locus in sample $A$ ($B$).
+We then added these $9n$ simulated individuals to the $N$ original individuals  from $A$ and $N$ from $B$
+and analyzed all the genotypes using ADMIXTURE with $K=2$. On each data set we performed a supervised analysis in which the original $N$ samples from each
+population were provided as learning samples, and also an
+unsupervised analysis when the origin of the samples from $A$ and $B$ were regarded as unknown.
 
-For each combination $L \in \{10^2, 10^3, 10^4, 10^5\}$,
+For each combination of $L \in \{10^2, 10^3, 10^4, 10^5\}$,
 $N \in \{25, 50, 100, 250\}$ and $n\in\{3,12,24\}$ we conducted multiple replicates
 of the entire process of
 simulating samples $A$ and $B$, simulating the $9n$ additional individuals, and
-then analyzing them with ADMIXTURE.  We conducted sufficient replicates so that,
-for each combination of $L$, $N$, and $n$ we had simulated 480 new individuals
-at each $q_A$ value; thus, $160$ replicates when $n = 3$, $40$ when $n=12$, and
-$20$ when $n=24$.
+then analyzing them with ADMIXTURE.  We conducted $R$ replicates so that,
+for each combination of $L$, $N$, and $n$ we had simulated $Rn=480$ new individuals
+at each $q_A$ value; thus, $R=160$ replicates when $n = 3$, $R=40$ when $n=12$, and
+$R=20$ when $n=24$.
 
-We hypothesized that ADMIXTURE would return estimates of $q_A$ that were
-centered around the true values, even though there is no basis for that, because
-the simulations were done in a na\"{i}ve way that effectively assumes that the population
-allele frequencies are identical to those observed in the samples themselves.
+Because the simulations were done in a na\"{i}ve way that effectively assumes that the population
+allele frequencies are identical to those observed in the samples themselves, we hypothesized that ADMIXTURE would return estimates of $q_A$ that were
+centered around the true values, even though samples $A$ and $B$ were drawn from the same
+population.
 We further expected that ADMIXTURE would return more accurate estimates of
 $q_A$ when $N$ was smaller and the number of loci was larger.
-We summarized the results by plotting boxplots of the 480
-ADMIXTURE-inferred $q_A$ values, for each combination of $L$, $N$, and $n$.
+We summarized the results by plotting boxplots of the ADMIXTURE-inferred $q_A$ values,
+ for the 480 newly simulated individuals (and for the original samples, $A$ and $B$, in the
+ case of unsupervised clustering),
+for each combination of $L$, $N$, and $n$.
 
 
 
 
 \subsection*{Genomic Simulation Pedigrees}
 
-For the purposes here, we define blah, blah.
+Our approach for simulating admixed individuals without inflating perceived power for
+the estimation of their admixture fractions is motivated by the traditional cross-validation
+approach for evaluating the power of mixture proportion
+estimation in genetic stock identification \citep{Moran&AndersonRubias}.
+In that cross-validation approach, individuals are removed from the reference
+samples and placed in a mixture sample of "unknowns", whose origin
+is inferred using the remaining individuals in the reference samples.  A key
+feature of this approach is that no new genetic material is being created by
+sampling with replacement; however the genetic material of all individuals
+in the original samples is being used---either within the remaining individuals in the
+reference samples or within the individuals in the mixture. This latter condition
+is not essential, but it does indicate that the methodology is using all the
+available individuals for estimating power through simulation.
 
-\subsection*{Another subsection}
+Our scheme extends the traditional cross-validation approach
+by simulating the descent of chunks of chromosome through a user-specified
+pedigree to create admixed individuals.  By imposing certain constraints
+on the pedigree, our framework ensures that all the genetic material
+within the original individuals is used to either create admixed individuals or to
+remain within reference individuals (i.e., those that are purely of one
+putative subopulation), and yet no new genetic material is
+created by sampling with replacement from the original samples.  We call the structure
+we use to do this a {\em genomic simulation pedigree} or GSP.  Like any pedigree,
+a GSP includes a set of founders (individuals that have no parents specified in the
+pedigree), and it includes non-founders; however, we introduce an additional node
+type in the GSP that represents samples taken from the non-founders. These samples
+are the simulated admixed individuals.  A GSP must have no inbreeding loops, since
+any inbreeding loop indicates that more than one copy of a gene in an ancestor has
+been created amongst its descendants, which is a type of sampling without
+replacement.  Furthermore, in a GSP, the amount of genetic material taken from the
+samples at the sample nodes should be equal to the amount of material in the founders,
+to ensure that all available data is being used to estimate power for the estimation of
+admixture fractions.
+
+Figure~\ref{fig:gsp1} shows an example GSP for the simple case
+of simulating $F_2$ individuals. The figure and its caption
+should be studied, as the following section
+uses terminology that is defined in the figure caption.
+%%%%%%%%%%%
+\begin{figure}
+\newcommand{\gspcapone}{\footnotesize 
+(I NEED TO UPDATE THE FIGURE TO MATCH THE DESCRIPTION)
+A genomic simulation pedigree (GSP) for simulating $F_2$ individuals.
+Squares denote founder and non-founder nodes in the pedigree. There are four founders in the pedigree,
+individuals 1--4.  The two triangles above each of those founders denotes, in color
+and text, the population of origin of each of the two genomes within each founder.
+Thus, individuals~1 and~2 are founders purely from population~$A$, and~3 and~4
+are purely from population~$B$.  The pink hexagon labeled s7 is the sample node.
+It represents samples that are taken from non-founder node~7, which, from the structure
+of the pedigree, clearly represents an $F_2$ hybrid between populations $A$ and $B$.  The red numbers
+on edges above and leading into each non-founder node indicate the number of
+gametes that get segregated from the parent node (at the top of the edge) to the
+daughter node (at the bottom of the edge).
+This emphasizes that,
+in dropping genes through a GSP, in contrast
+to a traditional pedigree, each parent
+node may segregate multiple gametes to a daughter node.  See the text for
+further explanation. 
+Each non-founder node $x$ will have exactly two edges coming into it from above
+(from its two parents), we denote the numbers associated with those edges as $G^+_{x,1}$ and $G^+_{x,2}$. 
+For example, node 6 has $G^+_{6,1}=G^+_{6,2} = 2$.
+A non-founder individual may have more or less than two edges coming downward
+out of it.  Letting $e_x$ be the number of downward edges out of node $x$ to its $e_x$
+non-founder daughter nodes, we denote the number of gametes segregated
+through each edge as $G^{-}_{x, 1},\ldots,G^{-}_{x, e_x}$.  For example,
+non-founder node~5, $e_5 = 1$ and $G^{-}_{5,1}=4$.
+Finally, the purple number adjacent to the edge leading into the
+sample node indicates how many sample individuals are drawn from individual
+node 7. Any non-founder individual node can have a maximum of one edge leading
+to a sample node.  We denote the number of samples emanating from node $x$
+node as $S_x$. In our example $S_7=4$ indicates that four $F_2$ individuals are
+created from a single simulation on this GSP.
+}
+\begin{center}
+\includegraphics[width=\columnwidth]{images/gsp4-700.pdf}
+\end{center}
+\caption[\gspcapone]{\gspcapone}
+\label{fig:gsp1}
+\end{figure}
+%%%%%%%%%%%%
+It is important to understand that, apart from the founder nodes, the individual
+nodes in a GSP do not necessarily represent only a single individual.  Specifically,
+since we are preserving all genetic material, multiple gametes may get segregated
+through each non-founder node in a GSP.   Genetic material is segregated through
+a GSP using these steps, done upon each node in an order such that the steps
+are run on each node's parents before being run on the node itself:
+\begin{enumerate}
+\item Each genome in a triangle above a founder node is assorted into
+two gametes with recombination occurring between each chromosome
+with probability $\frac{1}{2}$ and within each chromosome according to
+a user-specified recombination map.  
+\item Each non-founder individual node, $x$, will have exactly two edges coming
+into it---one from each parent.  Each of the $G^+_{x,1}$ gametes coming in from the
+first edge is united with a single one of the $G^+_{x,2}$ gametes coming
+in on the second edge (in a random order). 
+\item If a non-founder individual node $x$ has an edge to a sample node,
+a randomly chosen $S_x$ of the united pairs of gametes are delivered
+to the sample node to constitute the $S_x$ samples taken from individual
+node $x$. Any remaining united pairs of gametes are treated as in (4) below.
+\item United pairs of gametes (or those remaining after delivery
+to a sample node) in each non-founder individual node $x$ are segregated into
+gametes with recombination, and each of these gametes is assigned, in
+random order, to the gamete edges proceeding downward out of the node,
+with the number of gametes assigned to the $i\thh$ downward edge being
+$G^-_{x,i}$. 
+\end{enumerate}
+At the end of this process, the samples simulated (as united pairs of gametes)
+into the sample nodes will contain all of the genetic material found in the founders (and
+no more than that)
+but that material will have been segregated and recombined according to the pedigree.  Thus the
+samples obtained from a GSP can be simulated with the expected admixture fractions
+for any hybrid category that can be specified by a pedigree.  They have also been simulated
+in a way that 1) respects physical linkage---each individual inherits segments of the genome
+simulated using a recombination map; 2) does not duplicate any genetic material---the sampling of
+genetic material is entirely without replacement so it will not induce any bias in clustering
+power assessment; and 3) no genetic material has been lost---all the genetic material of the founders
+is represented in the samples, maximizing the number of individual and markers available to
+use in downstream analyses.
+
+In the gscramble package there is a convenience function called {\footnotesize\tt create\_GSP()} that
+will create GSPs for samples up to and including second-generation backcrosses; however, gscramble is designed
+to handle user-specified GSPs of arbitrary complexity.  When creating one's own GSP, it is useful
+to keep in mind a handful of requirements for a GSP to be valid. Writing $\founders$ for the set of all founder nodes, $\nonfound$ for the set of all non-founder individual nodes, and $\nonfounds$ for all non-founder
+nodes that are not parents of other indivduals, but are adjacent to a sample node, $\nonfounde$ for all
+non-founder nodes that have individual node daughters, but no sample nodes, and $\nonfoundse$ for all
+non-founder nodes that are parents of individual nodes and also adjacent to sample-nodes, the necessary conditions 
+for a valid GSP are:
+\begin{equation}
+\begin{aligned}
+\sum_{x \in \nonfounds \cup \nonfoundse} S_x &= |\founders|   \\ 
+\sum_{i=1}^{e_x} G^-_{x,i} &= 2 & \forall x \in \founders \\
+G^+_{x,1} &= G^+_{x,2} & \forall x \in \nonfound \\
+\sum_{i=1}^{e_x} G^-_{x,i} &= G^+_{x,1} +  G^+_{x,2} & \forall x \in \nonfounde  \\ 
+\sum_{i=1}^{e_x} G^-_{x,i} + S_x/2 &= G^+_{x,1} +  G^+_{x,2} & \forall x \in \nonfoundse.  \\ 
+\end{aligned}
+\end{equation}
 
 
 
-\subsection*{Empirical Example}
+
+\subsection*{Empirical Examples}
+
+\subsubsection*{Rainbow/cutthroat trout hybrids in California}
+
+Boing.
+
+\subsubsection*{Feral pigs in Missouri}
 
 Genetic samples were collected from invasive wild pigs across a SPATIAL EXTENT in southeastern Missouri that were lethally removed through population control efforts conducted as a component of the Missouri Feral Hog Elimination Partnership
 by US Department of Agriculture – Animal Plant Health Inspection Services – Wildlife Services, Missouri Department of Conservation, and other cooperative state agencies CHECK.
@@ -97,12 +260,6 @@ FST OF EMPIRICAL AND GSCRAMBLE CORE POPULATIONS
 
 
 
-\begin{figure*}
-\begin{center}
-\includegraphics[width=0.8\textwidth]{images/gsp4-700.pdf}
-\end{center}
-\caption[]{Stick this thing in somewhere}
-\end{figure*}
 
 
 \section*{Results}
@@ -113,11 +270,15 @@ As expected, the perceived ability to estimate $q_A$ with ADMIXTURE was higher
 for larger values of $L$ and for smaller values of $N$ (Figure~\ref{fig:bias-sims}).
 %%%
 \begin{figure*}
-\includegraphics[width=\textwidth]{figures/bias-sims-unsup-and-sup.pdf}
-\caption{ADMIXTURE estimates of $q_A$ as described in
-{\em An introductory motivating example} In these results, the ability to estimate $q_A$
-is a product of a bias.
-}
+\newcommand{\biassimscap}{\footnotesize ADMIXTURE estimates of $q_A$ as described in
+{\em An introductory motivating example}. In these results, the apparent ability to estimate $q_A$
+is a bias resulting from the use of sampling with replacement to simulate new, admixed genotypes to
+test in ADMIXTURE.  In each figure, the different columns represent different numbers of markers
+from 10 to 100,000, while different rows represent different original sample sizes, $N$, taken. Colors
+of the boxplots indicate how many new individuals, $n$, of each $q_A$ value were simulated during each
+replicate.}
+\includegraphics[width=0.96\textwidth]{figures/bias-sims-unsup-and-sup.pdf}
+\caption[\biassimscap]{\biassimscap}
 \label{fig:bias-sims}
 \end{figure*}
 %%%
@@ -126,15 +287,26 @@ that, for numbers of loci,  $L$, that are 100 (or smaller) the effect is observe
 sample size, $N$, is as small as 25---and even then the effect is slight.  However, when the
 number of markers increases to 100,000---values that are becoming commonplace with the availability of chip-
 or sequencing-based approaches---it is apparent that the sampling-with-replacement approach
-induces an extreme bias.  With 100,000 markers, even if sample sizes are as large as 250 individuals,
-using na\"{i}ve simulations improperly indicate that admixture fractions of individuals can be
+induces an extreme bias.  With 100,000 markers, even if sample sizes ($N$) are as large as 250 individuals,
+using na\"{i}ve simulations improperly indicates that admixture fractions of individuals can be
 accurately estimated, even when there are no genetic differences, whatsoever between the populations that
 samples $A$ and $B$ are drawn.
 
 
 
 \section*{Discussion}
-Hey! Let's discuss this!
+
+Somewhere here I want to mention that the Anderson et al. (2008) approach for simulating
+mixtures of genotypes to assess how well one can estimate mixture proportions---the fraction
+of individuals from each of a set of baseline or reference populations---allows the user to
+simulate, if desired, more genotypes than occur in the reference samples.  This is because
+a trick is done in the inference stage to remove the correlation between the simulated individual
+and the reference sample, relative to the true population, by removing the simulated individual's
+genotypes from its own reference population when calculating the likelihood that its genotype
+originated from each of the reference populations.  To do the same when doing simulations for
+assessing power using ADMIXTURE or STRUCTURE would require hacking the underlying code
+of those programs, which is not desirable.  So, for these cases we have used the sampling
+without replacement approach.
 
 
 
