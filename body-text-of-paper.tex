@@ -4,7 +4,15 @@
 
 Genetic clustering algorithms are a commonly used approach to describe genetic structure among populations, reflecting the cumulative effects of isolation, connectivity (i.e., genetic migration), selection, and genetic drift.  The ability of such algorithms to differentiate populations is limited by the extent of genetic differentiation among populations and the capacity to resolve those differences given the available marker set and sample sizes from the respective populations.  Based on an initial description of genetic structure, ecologists are frequently interested in describing patterns of genetic movement among populations, often inferred from the mismatch between the sampling location and genetic origins of a given individual \citep{paetkau1995microsatellite,wilson2003bayesian}.  Genetic movement has many implications, such as influencing evolutionary processes, maintaining genetic variation through gene flow, and driving disease dynamics \citep{huestis2019windborne} and affecting patterns of invasive species expansion CITE.
 
-	In using clustering algorithms to describe genetic structure among natural populations, researchers frequently identify individuals of mixed ancestry---a trait often summarized as the proportion of an individual’s genome originating from each of $K$ subpopulations, sensu \citet{pritchard2000inference}.  Various processes could contribute to such mixed associations.  Most directly, individuals may represent the influences of gene flow among populations, occurring in recent or prior generations, with the observed complex ancestry patterns accurately representing contributions from multiple sampled populations.  However, similar patterns may result from functionally different patterns of population structuring such as when . For example, when clinal systems governed by isolation by distance are described as discrete genetic clusters. Furthermore, inferred patterns of admixture may represent a limitation of the statistical power of the genetic data, as a function of both the marker set and sample size, to resolve the true underlying patterns of genetic structure.  The challenge for researchers then becomes correctly identifying the ecological and/or statistical processes by which observed complex ancestry patterns were created.
+	In using clustering algorithms to describe genetic structure among natural populations, researchers frequently identify individuals of mixed ancestry--- 
+	characterized as individuals with proportions of their genome attributed to multiple subpopulations, sensu \citet{pritchard2000inference.}
+	a trait often summarized as the proportion of an individual’s genome originating from each of $K$ subpopulations, sensu \citet{pritchard2000inference}.  Various processes could contribute to such mixed associations.  Most directly, individuals may represent the influences of gene flow among populations, occurring in recent or prior generations, with the observed complex ancestry patterns accurately representing contributions from multiple sampled populations.  However, similar patterns may result from functionally different patterns of population structuring.  For example, such patterns might be expected when clinal systems governed by isolation by distance are described as discrete genetic clusters. 
+	NOTE I think a line here about exogenous immigrants might be worthwhile to set up 2 biological processes paired with a statistical process, something like END NOTE
+	Alternatively, individuals of mixed ancestry could reflect immigration from outlying populations (e.g., exogenous immigration), with true source populations not sufficiently
+	represented in the sample to be among the characterized $K$ subpopulations.
+	Furthermore, the characterization of admixed individuals may reflect a limitation of the statistical power of the genetic data, 
+	as a function of both the marker set and sample size, to resolve the true underlying patterns of genetic structure. 
+	 The challenge for researchers then becomes correctly identifying the ecological and/or statistical processes by which observed complex ancestry patterns were created.
 
 A best practice for evaluating the behavior of genetic clustering algorithms on an empirical dataset is to conduct
 parallel analyses on simulated data where the truth is known, structured to mirror the empirical data set
@@ -15,24 +23,23 @@ However, sampling with replacement implicitly increases the pairwise genetic dis
 inflates the perceived ability to correctly assign individuals back to source populations. \citet{anderson2008improved}
 documented this type of artifact in the context of simulations to assess the power for
 genetic stock identification (GSI), a type of clustering application in which individuals are constrained to have
-all their ancestry from a single subpopulation. We demonstrate, below, that similar artifacts occur when simulating data to 
+all their ancestry from a single subpopulation. 
+, a type of clustering application with the limitation that individuals are fully assigned to single subpopulations (ignoring the possibility of mixed ancestry).
+We demonstrate, below, that similar artifacts occur when simulating data to 
 assess how accurately admixture fractions can be estimated.  We refer to this phenomenon as resampling-induced
 power inflation, or RIPI for short.  
+NOTE I would proposed holding on to the next sentence as we build the idea of mixed ancestry in the next paragraph END NOTE
 In this study, we additionally develop and illustrate an approach by which RIPI can be eliminated
 from simulations by constraining the genetic differences among simulated populations to match
 those of populations from which the samples were obtained. 
 
 Beyond simply evaluating the resolution of discrete populations in a simulated framework, researchers may also be 
-interested in how individuals of admixed ancestry are genetically characterized.
+interested in how individuals of admixed ancestry are genetically characterized given the statistical power of the available dataset and the analysis methods used.
 Recognizing that connectivity among genetically distinct populations may be relatively rare, additional insight into the 
-frequency of immigration can be gained by 
-identifying the descendants of migrants in addition to those individuals that may be direct migrants.
-
-
- 
-direct migrants but also identifying the influence of migration over multiple generations (i.e., F1 hybrids or advanced hybrids reflecting the effect of backcrossing across multiple generations [BC1, \ldots, 
+frequency of immigration can be gained by integrating across generations to identify both direct migrants and descendants of migrants
+ (i.e., F1 hybrids or advanced hybrids reflecting the effect of backcrossing across multiple generations [BC1, \ldots, 
 BCX]).
-	The process of recombination during meiosis creates a distribution of expected associations to parental populations among advanced hybrid classes.
+	However, the process of recombination during meiosis creates a distribution of expected associations to parental populations among advanced hybrid classes.
 	Treating linked loci as independent can lead to the false interpretation that the association of advanced hybrid classes to parental population occur strictly as discrete distributions.
 	Therefore, in evaluating descendants of migrants within a simulated framework, it is imperative to take into consideration the pattern of linkage among loci available for analysis.
 
