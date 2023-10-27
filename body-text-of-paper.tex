@@ -2,29 +2,47 @@
 
 \section*{Introduction}
 
-Genetic clustering algorithms are a commonly used approach to describe genetic structure among populations, reflecting the cumulative effects of isolation, connectivity (i.e., genetic migration), selection, and genetic drift.  The ability of such algorithms to differentiate populations is limited by the extent of genetic differentiation among populations and the capacity to resolve those differences given the available marker set and sample sizes from the respective populations.  Based on an initial description of genetic structure, ecologists are frequently interested in describing patterns of genetic movement among populations, often inferred from the mismatch between the sampling location and genetic origins of a given individual \citep{paetkau1995microsatellite,wilson2003bayesian}.  Genetic movement has many implications, such as influencing evolutionary processes, maintaining genetic variation through gene flow, and driving disease dynamics \citep{huestis2019windborne} and affecting patterns of invasive species expansion CITE.
+Genetic clustering algorithms are a commonly used approach to describe genetic structure among populations, reflecting the cumulative 
+effects of isolation, connectivity (i.e., genetic migration), selection, and genetic drift.  The ability of such algorithms to differentiate populations 
+is limited by the extent of genetic differentiation among populations and the capacity to resolve those differences given the available marker 
+set and sample sizes from the respective populations.  Based on an initial description of genetic structure, ecologists are frequently 
+interested in describing patterns of genetic movement among populations, often inferred from the mismatch between the sampling location 
+and genetic origins of a given individual \citep{paetkau1995microsatellite,wilson2003bayesian}.  Genetic movement has many implications, 
+such as influencing evolutionary processes, maintaining genetic variation through gene flow, and driving disease dynamics 
+\citep{huestis2019windborne} and affecting patterns of invasive species expansion CITE.
 
-	In using clustering algorithms to describe genetic structure among natural populations, researchers frequently identify individuals of mixed ancestry---
-	characterized as individuals with proportions of their genome attributed to multiple subpopulations, sensu \citet{pritchard2000inference}.
-	a trait often summarized as the proportion of an individual’s genome originating from each of $K$ subpopulations, sensu \citet{pritchard2000inference}.  Various processes could contribute to such mixed associations.  Most directly, individuals may represent the influences of gene flow among populations, occurring in recent or prior generations, with the observed complex ancestry patterns accurately representing contributions from multiple sampled populations.  However, similar patterns may result from functionally different patterns of population structuring.  For example, such patterns might be expected when clinal systems governed by isolation by distance are described as discrete genetic clusters.
-	NOTE I think a line here about exogenous immigrants might be worthwhile to set up 2 biological processes paired with a statistical process, something like END NOTE
-	Alternatively, individuals of mixed ancestry could reflect immigration from outlying populations (e.g., exogenous immigration), with true source populations not sufficiently
-	represented in the sample to be among the characterized $K$ subpopulations.
-	Furthermore, the characterization of admixed individuals may reflect a limitation of the statistical power of the genetic data,
-	as a function of both the marker set and sample size, to resolve the true underlying patterns of genetic structure.
-	 The challenge for researchers then becomes correctly identifying the ecological and/or statistical processes by which observed complex ancestry patterns were created.
+In using clustering algorithms to describe genetic structure among natural populations, researchers frequently identify individuals of 
+mixed ancestry---
+characterized as individuals with proportions of their genome attributed to multiple subpopulations, sensu \citet{pritchard2000inference}.
+a trait often summarized as the proportion of an individual’s genome originating from each of $K$ subpopulations, sensu 
+\citet{pritchard2000inference}.  Various processes could contribute to such mixed associations.  Most directly, individuals may represent the 
+influences of gene flow among populations, occurring in recent or prior generations, with the observed complex ancestry patterns accurately 
+representing contributions from multiple sampled populations.  However, similar patterns may result from functionally different patterns of 
+population structuring.  For example, such patterns might be expected when clinal systems governed by isolation by distance are described 
+as discrete genetic clusters.
+NOTE I think a line here about exogenous immigrants might be worthwhile to set up 2 biological processes paired with a statistical process, 
+something like END NOTE
+Alternatively, individuals of mixed ancestry could reflect immigration from outlying populations (e.g., exogenous immigration), with true source 
+populations not sufficiently
+represented in the sample to be among the characterized $K$ subpopulations.
+Furthermore, the characterization of admixed individuals may reflect a limitation of the statistical power of the genetic data,
+as a function of both the marker set and sample size, to resolve the true underlying patterns of genetic structure.
+ The challenge for researchers then becomes correctly identifying the ecological and/or statistical processes by which observed complex 
+ ancestry patterns were created.
 
 A best practice for evaluating the behavior of genetic clustering algorithms on an empirical dataset is to conduct
 parallel analyses on simulated data where the truth is known, structured to mirror the empirical data set
 as closely as possible \citep{vaha2006efficiency,anderson2008improved,latch2011fine}.
 Techniques to simulate individual genotypes in this context frequently use sampling with replacement from the
 observed allele frequencies (see CITE, CITE, CITE).
-However, sampling with replacement implicitly increases the pairwise genetic distance among simulated samples, relative to the observed samples, and
+However, sampling with replacement implicitly increases the pairwise genetic distance among simulated samples, relative to the observed 
+samples, and
 inflates the perceived ability to correctly assign individuals back to source populations. \citet{anderson2008improved}
 documented this type of artifact in the context of simulations to assess the power for
 genetic stock identification (GSI), a type of clustering application in which individuals are constrained to have
 all their ancestry from a single subpopulation.
-, a type of clustering application with the limitation that individuals are fully assigned to single subpopulations (ignoring the possibility of mixed ancestry).
+, a type of clustering application with the limitation that individuals are fully assigned to single subpopulations (ignoring the possibility of 
+mixed ancestry).
 We demonstrate, below, that similar artifacts occur when simulating data to
 assess how accurately admixture fractions can be estimated.  We refer to this phenomenon as resampling-induced
 power inflation, or RIPI for short.
@@ -34,19 +52,25 @@ from simulations by constraining the genetic differences among simulated populat
 those of populations from which the samples were obtained.
 
 Beyond simply evaluating the resolution of discrete populations in a simulated framework, researchers may also be
-interested in how individuals of admixed ancestry are genetically characterized given the statistical power of the available dataset and the analysis methods used.
+interested in how individuals of admixed ancestry are genetically characterized given the statistical power of the available dataset and the 
+analysis methods used.
 Recognizing that connectivity among genetically distinct populations may be relatively rare, additional insight into the
 frequency of immigration can be gained by integrating across generations to identify both direct migrants and descendants of migrants
  (i.e., F1 hybrids or advanced hybrids reflecting the effect of backcrossing across multiple generations [BC1, \ldots,
 BCX]).
-	However, the process of recombination during meiosis creates a distribution of expected associations to parental populations among advanced hybrid classes.
-	Treating linked loci as independent can lead to the false interpretation that the association of advanced hybrid classes to parental population occur strictly as discrete distributions.
-	Therefore, in evaluating descendants of migrants within a simulated framework, it is imperative to take into consideration the pattern of linkage among loci available for analysis.
+However, the process of recombination during meiosis creates a distribution of expected associations to parental populations among
+advanced hybrid classes.
+Treating linked loci as independent can lead to the false interpretation that the association of advanced hybrid classes to parental population 
+occur strictly as discrete distributions.
+Therefore, in evaluating descendants of migrants within a simulated framework, it is imperative to take into consideration the pattern of
+linkage among loci available for analysis.
 
-	In response to these needs, we developed \gscramble{} – a simulation approach that samples alleles from respective populations without replacement, thus maintaining the genetic differences in the empirical dataset.
-	Further, by simulating individual genotypes based on user-defined pedigrees, \gscramble{} allows for the simulation of admixed genotypes of varying degrees of complexity while allowing the tracking of haplotype blocks from source populations within the specified pedigree.
-	By integrating species-specific recombination rates, \gscramble{} simulates biologically informed genotypes that mirror empirical data.
-	We develop and illustrate \gscramble{} with use of single nucleotide polymorphic (SNP) genotypes.
+In response to these needs, we developed \gscramble{} – a simulation approach that samples alleles from respective populations without 
+replacement, thus maintaining the genetic differences in the empirical dataset.
+Further, by simulating individual genotypes based on user-defined pedigrees, \gscramble{} allows for the simulation of admixed genotypes of 
+varying degrees of complexity while allowing the tracking of haplotype blocks from source populations within the specified pedigree.
+By integrating species-specific recombination rates, \gscramble{} simulates biologically informed genotypes that mirror empirical data.
+We develop and illustrate \gscramble{} with use of single nucleotide polymorphic (SNP) genotypes.
 
 
 
@@ -54,6 +78,7 @@ BCX]).
 \section*{Methods}
 
 \subsection*{An introductory motivating example}
+
 
 Before we proceed to a description of the methodology used by \gscramble{},
 we demonstrate a case in which using a standard sampling-with-replacement
@@ -69,13 +94,16 @@ each set of $N$ individuals is a sample from exactly the same population, so
 there is clearly no basis for performing population assignment between $A$ and $B$;
 however, we treated samples $A$ and $B$ as if they were sampled from two potentially different
 populations, and simulated $9n$ new individuals: $n$ new individuals at each of the 9 values of
-$q_A$, the admixture fraction for population $A$, in  $\{0, \frac{1}{8}, \frac{1}{4}, \frac{3}{8}, \frac{1}{2}, \frac{5}{8}, \frac{3}{4}, \frac{7}{8}, 1\}$. We simulated these genotypes according to the "admixture model" used in {\em structure} \citep{pritchard2000inference}.  Briefly, at each locus, independently, the origin
+$q_A$, the admixture fraction for population $A$, in  $\{0, \frac{1}{8}, \frac{1}{4}, \frac{3}{8}, \frac{1}{2}, \frac{5}{8}, \frac{3}{4}, \frac{7}{8}, 1\}$. 
+We simulated these genotypes according to the "admixture model" used in {\em structure} \citep{pritchard2000inference}.  Briefly, at each 
+locus, independently, the origin
 of each gene copy was simulated to be from
 population $A$ with probability $q_A$ and from population $B$ with probability $1-q_A$.  Subsequently,
 the allelic types of gene copies from $A$ ($B$), at a locus, were simulated by sampling with replacement
 from the alleles at that locus in sample $A$ ($B$).
 We then added these $9n$ simulated individuals to the $N$ original individuals  from $A$ and $N$ from $B$
-and analyzed all the genotypes using ADMIXTURE with $K=2$. On each data set we performed a supervised analysis in which the original $N$ samples from each
+and analyzed all the genotypes using ADMIXTURE with $K=2$. On each data set we performed a supervised analysis in which the original 
+$N$ samples from each
 population were provided as learning samples, and also an
 unsupervised analysis when the origin of the samples from $A$ and $B$ were regarded as unknown.
 
@@ -88,8 +116,10 @@ for each combination of $L$, $N$, and $n$ we had simulated $Rn=480$ new individu
 at each $q_A$ value; thus, $R=160$ replicates when $n = 3$, $R=40$ when $n=12$, and
 $R=20$ when $n=24$.
 
+
 Because the simulations were done in a na\"{i}ve way that effectively assumes that the population
-allele frequencies are identical to those observed in the samples themselves, we hypothesized that ADMIXTURE would return estimates of $q_A$ that were
+allele frequencies are identical to those observed in the samples themselves, we hypothesized that ADMIXTURE would return estimates of 
+$q_A$ that were
 centered around the true values, even though samples $A$ and $B$ were drawn from the same
 population.
 We further expected that ADMIXTURE would return more accurate estimates of
