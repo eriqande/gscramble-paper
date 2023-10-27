@@ -257,49 +257,69 @@ different sampled groups of individuals.
 
 \gscramble{} uses a GSP to segregate segments of genetic material from the founders
 to the samples.  At the end of segment simulation, the genome of each sample
-is recorded as a mosaic of segments that derived from different founders.  In order
+is recorded as a mosaic of segments that derive from different founders.  In order
 to create a data set of markers in each sample, it is necessary only to identify the alleles
 that occurred on each segment within the founders and propagate those alleles to the
 corresponding segments within the samples.  At the stage of assigning alleles to
 founders, \gscramble{} provides a variety of ways to permute alleles amongst
-individuals within samples from which the founders are drawn.  By using permutation,
-variability in the data is created, but without sampling with replacement, and hence
-not inducing RIPI.
+the collection of individuals from which the founders are drawn.  By using permutation,
+variability in the data is created, but, since it is done without sampling with replacement, it does
+not induce RIPI.
 
-To execute these permutations, it is necessary to have a matrix of genotypes for
-the individuals, and also, each population must belong to exactly one
-population.  Permutation of alleles then proceeds within populations, hence the frequencies
-of alleles from each population remain the same as those observed
-in the samples themselves. Following permutation, there remain individuals 1,2,\ldots,
-in each population, but the alleles that they carry will be different after permutation.  These
-individuals are assigned in order to be the founders from each population in the GSP. Subsequently,
+These permutations are executed upon the genotypes provided by the user.
+\gscramble{} accepts genetic data as a matrix with $N$ rows (one for each individual) and
+$2L$ columns (two for each locus). If the data have been phased, then the phased alleles from the
+first haplotype should occupy the
+first entry for each locus within an individual, while alleles phased together on the second hapltotype should occupy the
+second entry for each locus. 
+There can be several populations represented in the data set, but
+each individual must belong to exactly one
+population.  
+
+Permutation of alleles proceeds within populations, such that
+the frequencies of alleles from each population remain the same as those observed
+in the samples themselves. Following permutation, there remain individuals
+in each population, but the alleles that they carry are different after permutation.  These
+individuals are assigned, in order, to be the founders from each population in the GSP. Subsequently,
 after genetic material is segregated to the samples, the alleles found on each genomic segment in those permuted
 founders are then propagated to the samples.  It is worth noting that this approach allows for simulation
 with large genomic data sets, with hundreds of thousands to millions of markers, since segregation
-through the pedigree is not done via by segments, and not on a locus-by-locus basis. The only operations
+through the pedigree is done by segments, and not on a locus-by-locus basis. The only operations
 involving all the alleles in all the individuals are the permutation steps and indexing into the segments,
 which may be done efficiently with matrices in R.
 
 Permutation of alleles is handled within the \gscramble{} function {\footnotesize\tt segments2markers()}
 which takes as input the segments segregated down a GSP, a matrix of sampled genotypes, and a specification
-of the group that each sampled individuals belongs to.
+of the group that each sampled individual belongs to.  The permutation performed when running
+{\footnotesize\tt segments2markers()} is controlled by two main options.  The first, {\tt\footnotesize preserve\_individuals},
+can take three different values.  If {\tt\footnotesize preserve\_individuals = TRUE}, then entire individuals are permuted,
+such that all the alleles within an individual remain together.  If {\tt\footnotesize preserve\_individuals = "BY\_CHROM"}, then
+the alleles within an individual found on a homologous pair of chromosomes remain together, but the different
+chromosome pairs of an individual are independently permuted into new positions in the data set.  This form of permutation
+maintains the LD between markers on the same chromosome, which may be desirable in some contexts.
+If {\tt\footnotesize preserve\_individuals = FALSE} then each gene copy within an individual is permuted separately,
+providing the maximal scrambling of the data.   The second option, {\tt\footnotesize preserve\_haplotypes}, can take two
+different values, {{\tt\footnotesize FALSE} (the default) and {\tt\footnotesize TRUE}.  This option, which keeps alleles together
+on the same haplotype, should be set to true only
+if the original genotypes are phased into separate haplotypes. 
+
 %%%%%%%
 \newcommand{\permcap}{\footnotesize An illustration of how \gscramble{} permutes data under
 different options.  {\bf (a)}~A picture
-representing an original data set of 12 diploids sampled from three populations and typed at 15 markers. 
+representing an original data set of $N=12$ diploids sampled from three populations and typed at $L=15$ markers. 
 Different colors represent different sampled individuals. Individuals 1--5 are shades of blue and green, indicating that they 
 are from a single population.  Individuals 6--9 are from another population, (shades of red and orange), while 10--12
-are from a different population and are colored shades of violet. Thick vertical black lines separate the different 
+are from a third population and are colored shades of violet. Thick vertical black lines separate the different 
 populations.  Markers are shown in rows. There are 6 markers on the first chromosome, 5 on the second, and 4 on the 
-third.  Each chromosome is delimited by a thick, horizontal black line. The "a" and the "b" in the colored cells denote the first and second gene copies at each marker.  {\bf (b)}~Examples of how the {\tt\footnotesize preserve\_individuals} and {\tt\footnotesize preserve\_haplotypes} options of the {\tt\footnotesize segments2markers()}
+third.  Each chromosome is delimited by a thick, horizontal black line. The "a" and the "b" in the colored cells denote the first and second gene copies within an individual at each marker.  It is worth noting that this representation shows a $2L \times N$ matrix,
+which is the transpose of the $N\times 2L$ matrix used to supply genetic marker data to \gscramble{}. {\bf (b)}~Examples of how the {\tt\footnotesize preserve\_individuals} and {\tt\footnotesize preserve\_haplotypes} options of the {\tt\footnotesize segments2markers()}
 function affect the permutation of 
 the genetic data of the original data set.  Panel headers show the option values while the colors and "a" and "b" values
 in the colored cells show the original position of each gene copy in the original sample.  Note that permutation is always
 done within the populations.  When {\tt\footnotesize preserve\_individuals = TRUE},  then just the 
 individuals in their entirety are permuted.  When {\tt\footnotesize preserve\_individuals = "BY\_CHROM"}, each pair
 of a single chromosome within an individual remains together when permuted. When {\tt\footnotesize preserve\_individuals = FALSE}, gene copies are freely permuted between individuals.  The option {\tt\footnotesize preserve\_haplotypes = TRUE} causes each haplotype on a chromosome to be preserved
-while permuting. This option should only be used when the original data set is phased (the phasing is
-reflected in the input order of gene copies at each locus).
+while permuting. This option should only be used when the original data set is phased.
 }
 \begin{figure*}
 \includegraphics[width=\textwidth]{figures/permutations-plot.png}
