@@ -1,5 +1,11 @@
-\begin{thebibliography}{9}
+\begin{thebibliography}{11}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[\protect\citeauthoryear{Alexander, Novembre, \& Lange}{Alexander {\em
+  et~al.\/}}{2009}]{alexander2009fast}
+Alexander DH, Novembre J, Lange K (2009) Fast model-based estimation of
+  ancestry in unrelated individuals. {\em Genome research\/}, {\bf 19},
+  1655--1664.
 
 \bibitem[\protect\citeauthoryear{Anderson, Waples, \& Kalinowski}{Anderson {\em
   et~al.\/}}{2008}]{anderson2008improved}
@@ -36,6 +42,14 @@ Paetkau D, Calvert W, Stirling I, Strobeck C (1995) Microsatellite analysis of
   {\em et~al.\/}}{2000}]{pritchard2000inference}
 Pritchard JK, Stephens M, Donnelly P (2000) Inference of population structure
   using multilocus genotype data. {\em Genetics\/}, {\bf 155}, 945--959.
+
+\bibitem[\protect\citeauthoryear{Purcell, Neale, Todd-Brown, Thomas, Ferreira,
+  Bender, Maller, Sklar, De~Bakker, Daly {\em et~al.\/}}{Purcell {\em
+  et~al.\/}}{2007}]{purcell2007plink}
+Purcell S, Neale B, Todd-Brown K, Thomas L, Ferreira MA, Bender D, Maller J,
+  Sklar P, De~Bakker PI, Daly MJ, {\em et~al.\/} (2007) PLINK: a tool set for
+  whole-genome association and population-based linkage analyses. {\em The
+  American journal of human genetics\/}, {\bf 81}, 559--575.
 
 \bibitem[\protect\citeauthoryear{{R Core Team}}{{R Core
   Team}}{2023}]{Rcoreteam}

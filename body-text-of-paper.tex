@@ -257,7 +257,7 @@ is represented in the samples, maximizing the number of individuals and markers 
 use in downstream analyses.
 
 In the \gscramble{} package there is a convenience function called {\footnotesize\tt create\_GSP()} that
-will create GSPs for samples up to and including second-generation backcrosses (an example appears in Figure~\ref{fig:exampleGSPs}); 
+will create GSPs for samples up to and including second-generation backcrosses (an example appears in Figure~\ref{fig:gsp2}); 
 %%%%%
 \begin{figure}
 \newcommand{\gspcaptwo}{\footnotesize
@@ -268,7 +268,7 @@ admixture categories: one~$F_1$ in sample node~s7; two~$F_2$'s in sample node~s1
 \includegraphics[width=\columnwidth]{figures/AllThem.pdf}
 \end{center}
 \caption[\gspcaptwo]{\gspcaptwo}
-\label{fig:gsp1}
+\label{fig:gsp2}
 \end{figure}
 %%%%
 however, \gscramble{} is designed
@@ -312,7 +312,7 @@ These permutations are executed upon the genotypes provided by the user.
 \gscramble{} accepts genetic data as a matrix with $N$ rows (one for each individual) and
 $2L$ columns (two for each locus). If the data have been phased, then the phased alleles from the
 first haplotype should occupy the
-first entry for each locus within an individual, while alleles phased together on the second hapltotype should occupy the
+first entry for each locus within an individual, while alleles phased together on the second haplotype should occupy the
 second entry for each locus. 
 There can be several populations represented in the data set, but
 each individual must belong to exactly one
@@ -375,14 +375,43 @@ while permuting. This option should only be used when the original data set is p
 
 Boing.
 
-\subsubsection*{Feral pigs in Missouri}
+\subsubsection*{Invasive wild pigs in Missouri}
 
-Genetic samples were collected from invasive wild pigs across a SPATIAL EXTENT in southeastern Missouri that were lethally removed through population control efforts conducted as a component of the Missouri Feral Hog Elimination Partnership
-by US Department of Agriculture – Animal Plant Health Inspection Services – Wildlife Services, Missouri Department of Conservation, and other cooperative state agencies CHECK.
-DNA was extracted from hair or tissue (collected from animals at the time of euthanasia) with commercially available magnetic bead recovery kits (MagMax DNA, Thermo Fisher Scientific).
-Genotyping was performed with GeneSeek’s Genomic Profiler for Porcine HD which provides 62,128 biallelic SNP loci that are mapped across the 18 autosomal chromosomes.
-We implemented standard genotype quality control metrics, specifically, we pruned genotypes with call rates <95\% and minor allele frequencies <5\%.
-We implemented linkage disequilibrium (LD) pruning using a window size of 50 loci and step size of 5 loci to remove markers above a linkage threshold of R2 > 0.5.
+Genetic samples were collected from 160 invasive wild pigs across a SPATIAL EXTENT in 
+southeastern Missouri that were lethally removed through population control efforts conducted 
+as a component of the Missouri Feral Hog Elimination Partnership
+by US Department of Agriculture – Animal Plant Health Inspection Services – Wildlife Services, Missouri Department of Conservation, 
+and other cooperative state agencies CHECK.
+DNA was extracted from hair or tissue (collected from animals at the time of euthanasia) with 
+commercially available magnetic bead recovery kits (MagMax DNA, Thermo Fisher Scientific).
+Genotyping was performed with GeneSeek’s Genomic Profiler for Porcine HD which provides 
+62,128 biallelic SNP loci that are mapped across the 18 autosomal chromosomes.
+We implemented standard genotype quality control metrics, specifically, we pruned genotypes with 
+call rates <95\% and minor allele frequencies <5\%.
+We implemented linkage disequilibrium (LD) pruning using a window size of 50 loci and step size 
+of 5 loci to remove markers above a linkage threshold of $R^2 > 0.5$.
+
+The 160 invasive wild pig samples represented 120 reference individuals from the core regions of 
+3 populations (40 individuals each from Pop1, Pop2, Pop14) and 40 individuals from the contact regions of these populations. 
+We used ADMIXTURE version 1.3.0 \citep{alexander2009fast} to characterize the genetic structure of the 160 samples (for $K = {1...6}$)
+and identify that indeed the 120 reference individuals represented 3 distinct genetic clusters.
+
+Using the 120 reference individuals, we sought to classify the admixture patterns of the 40 empirical samples 
+from the contact regions using simulated pedigrees from \gscramble{}. To address this objective we simulated 
+pedigrees to represent the likely classes of admixed individuals that would be present in the samples 
+from the contact regions of the 3 reference populations. The types of admixed individuals we considered were 
+all two-population combinations of $F_1$, $F_2$, $B_1$ and $B_2$. We also 
+simulated individuals from each of the founder populations. The first step of this workflow involved 
+simulating admixed individuals for 2 founder populations using one of the preset \gscramble{} 
+GSPs provided by the function {\footnotesize\tt create\_GSP()} for producing each of the types of admixed 
+individuals. While we could have simulated all 4 types of admixed individuals from a single GSP (Figure~\ref{fig:gsp2}), 
+different numbers of simulated individuals are produced for each hybrid class. Therefore, for the sake of the 
+computational efficiency from simulating the exact number of desired individuals, we chose to simulate from 
+a single GSP for each of the hybrid classes by setting the corresponding hybrid parameter in {\footnotesize\tt create\_GSP()} to {\footnotesize\tt TRUE}. We used the default settings of the {\footnotesize\tt plink\_map2rec\_rates()} to specify the recombination rates. The 120 simulated genotypes were written to PLINK .ped and .map files using {\footnotesize\tt gscramble2plink()}. We used PLINK version 1.9 \citep{purcell2007plink} to convert the genotypes to binary files and used these as input into ADMIXTURE for which we specified $K=3$ to produce ancestry values. We iteratively 
+performed this workflow to produce 1,000 simulated genotypes and ancestry values for each of the 
+4 hybrid classes, as well as founder individuals, for each of the population combinations, for a total of 
+21,000 simulated individuals.
+
 
 \gscramble{} REFERENCE GROUPS
 \gscramble{} PEDIGREES
@@ -424,7 +453,16 @@ using na\"{i}ve simulations improperly indicates that admixture fractions of ind
 accurately estimated, even when there are no genetic differences, whatsoever between the populations that
 samples $A$ and $B$ are drawn.
 
+\subsection*{Empirical Examples}
 
+\subsubsection*{Rainbow/cutthroat trout hybrids in California}
+
+Boing.
+
+\subsubsection*{Invasive wild pigs in Missouri}
+
+SNP filtering resulted in 14,233 loci that were used for subsequent analysis. Using the 160 empirical samples, ADMIXTURE results supported the identification of 3 genetic clusters (SUPPLEMENTAL FIGURE CROSS VALIDATION?). Admixture *q* values clearly grouped individuals from each of the core populations into 3 clusters while the 40 individuals from the contact regions were highly admixed (SUPPLEMENTAL FIGURE ADMIXTURE). The
+$F_{ST}$ divergence from ADMIXTURE was: $F_{ST} = 0.243$ for Pop1-Pop2, $F_{ST} = 0.145$ for Pop1-Pop14 and $F_{ST} = 0.133$ for Pop2-Pop14.
 
 \section*{Discussion}
 
@@ -443,4 +481,5 @@ without replacement approach.
 
 
 \section*{Acknowledgements}
-We thank etc. etc.   Contribution number  mHAVEAGAS-003
+We thank etc. etc.   Contribution number  mHAVEAGAS-003. 
+This work utilized the Alpine high performance computing resource at the University of Colorado Boulder. Alpine is jointly funded by the University of Colorado Boulder, the University of Colorado Anschutz, Colorado State University, and the National Science Foundation (award 2201538).
