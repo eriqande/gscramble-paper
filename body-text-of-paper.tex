@@ -377,7 +377,7 @@ Boing.
 
 \subsubsection*{Invasive wild pigs in Missouri}
 
-Genetic samples were collected from 160 invasive wild pigs across a SPATIAL EXTENT in 
+Genetic samples were collected from 160 invasive wild pigs in 
 southeastern Missouri that were lethally removed through population control efforts conducted 
 as a component of the Missouri Feral Hog Elimination Partnership
 by US Department of Agriculture – Animal Plant Health Inspection Services – Wildlife Services, Missouri Department of Conservation, 
@@ -387,7 +387,7 @@ commercially available magnetic bead recovery kits (MagMax DNA, Thermo Fisher Sc
 Genotyping was performed with GeneSeek’s Genomic Profiler for Porcine HD which provides 
 62,128 biallelic SNP loci that are mapped across the 18 autosomal chromosomes.
 We implemented standard genotype quality control metrics, specifically, we pruned genotypes with 
-call rates <95\% and minor allele frequencies <5\%.
+call rates $<95\%$ and minor allele frequencies $<5\%$.
 We implemented linkage disequilibrium (LD) pruning using a window size of 50 loci and step size 
 of 5 loci to remove markers above a linkage threshold of $R^2 > 0.5$.
 
@@ -400,7 +400,7 @@ Using the 120 reference individuals, we sought to classify the admixture pattern
 from the contact regions using simulated pedigrees from \gscramble{}. To address this objective we simulated 
 pedigrees to represent the likely classes of admixed individuals that would be present in the samples 
 from the contact regions of the 3 reference populations. The types of admixed individuals we considered were 
-all two-population combinations of $F_1$, $F_2$, $B_1$ and $B_2$. We also 
+all two-population combinations of $F_1$, $F_2$, $BC_1$ and $BC_2$. We also 
 simulated individuals from each of the founder populations. The first step of this workflow involved 
 simulating admixed individuals for 2 founder populations using one of the preset \gscramble{} 
 GSPs provided by the function {\footnotesize\tt create\_GSP()} for producing each of the types of admixed 
@@ -461,8 +461,33 @@ Boing.
 
 \subsubsection*{Invasive wild pigs in Missouri}
 
-SNP filtering resulted in 14,233 loci that were used for subsequent analysis. Using the 160 empirical samples, ADMIXTURE results supported the identification of 3 genetic clusters (SUPPLEMENTAL FIGURE CROSS VALIDATION?). Admixture *q* values clearly grouped individuals from each of the core populations into 3 clusters while the 40 individuals from the contact regions were highly admixed (SUPPLEMENTAL FIGURE ADMIXTURE). The
-$F_{ST}$ divergence from ADMIXTURE was: $F_{ST} = 0.243$ for Pop1-Pop2, $F_{ST} = 0.145$ for Pop1-Pop14 and $F_{ST} = 0.133$ for Pop2-Pop14.
+SNP filtering resulted in 14,233 loci that were used for subsequent analysis. 
+Using the 160 empirical samples, ADMIXTURE results supported the identification of 
+3 genetic clusters (SUPPLEMENTAL FIGURE). Admixture $q$ values clearly grouped individuals 
+from each of the core populations into 3 clusters while the 40 individuals from the contact regions were 
+highly admixed (SUPPLEMENTAL FIGURE). The
+$F_{ST}$ divergence from ADMIXTURE was: 
+$F_{ST} = 0.24$ for Pop1-Pop2, 
+$F_{ST} = 0.14$ for Pop1-Pop14 and 
+$F_{ST} = 0.13$ for Pop2-Pop14.
+
+The simulated hybrid classes produce 
+the expected range of admixture with $F_1$ and $F_2$ individuals having mean $q=0.5$, with $F_2$ individuals having 
+more variation. Backcrossed individuals have higher ancestry associated with the backcrossed population with $q$ 
+approximately $0.75$ ($BC_1$) and $0.875$ ($BC_2$) (Figure~\ref{fig:pig-sim-qs}).
+
+%%%
+\begin{figure*}
+\newcommand{\pigsimsqscap}{\footnotesize ADMIXTURE estimates of $q$ for $K=3$ of the simulated hybrid classes 
+($F_1$, $F_2$, $BC_1$ and $BC_2$) from all two-population combinations of the invasive wild pig genotypes. 
+Rows and columns provide the population combinations of the hybrids and for backcrossed hybrids the rows 
+specify the backcrossed population. Plots where the rows and columns specify the same population depict the 
+$q$ values for simulated non-hybrid (or "Core") individuals from the population.}
+\includegraphics[width=0.96\textwidth]{figures/simulated-pigs-Q-facet.pdf}
+\caption[\pigsimsqscap]{\pigsimsqscap}
+\label{fig:pig-sim-qs}
+\end{figure*}
+%%%
 
 \section*{Discussion}
 
@@ -482,4 +507,6 @@ without replacement approach.
 
 \section*{Acknowledgements}
 We thank etc. etc.   Contribution number  mHAVEAGAS-003. 
-This work utilized the Alpine high performance computing resource at the University of Colorado Boulder. Alpine is jointly funded by the University of Colorado Boulder, the University of Colorado Anschutz, Colorado State University, and the National Science Foundation (award 2201538).
+This work utilized the Alpine high performance computing resource at the University of Colorado Boulder. 
+Alpine is jointly funded by the University of Colorado Boulder, the University of Colorado Anschutz, Colorado State University, 
+and the National Science Foundation (award 2201538).
