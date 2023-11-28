@@ -1,4 +1,4 @@
-\begin{thebibliography}{11}
+\begin{thebibliography}{12}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[\protect\citeauthoryear{Alexander, Novembre, \& Lange}{Alexander {\em
@@ -12,6 +12,11 @@ Alexander DH, Novembre J, Lange K (2009) Fast model-based estimation of
 Anderson EC, Waples RS, Kalinowski ST (2008) An improved method for predicting
   the accuracy of genetic stock identification. {\em Canadian Journal of
   Fisheries and Aquatic Sciences\/}, {\bf 65}, 1475--1486.
+
+\bibitem[\protect\citeauthoryear{Estoup \& Guillemaud}{Estoup \&
+  Guillemaud}{2010}]{estoup2010reconstructing}
+Estoup A, Guillemaud T (2010) Reconstructing routes of invasion using genetic
+  data: why, how and so what? {\em Molecular ecology\/}, {\bf 19}, 4113--4130.
 
 \bibitem[\protect\citeauthoryear{Huestis, Dao, Diallo, Sanogo, Samake, Yaro,
   Ousman, Linton, Krishna, Veru {\em et~al.\/}}{Huestis {\em

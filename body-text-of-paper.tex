@@ -2,55 +2,48 @@
 
 \section*{Introduction}
 
-Genetic clustering algorithms are commonly used to describe genetic structure among populations, reflecting the cumulative 
-effects of isolation, connectivity (i.e., genetic migration), selection, and genetic drift.  The ability of such algorithms to differentiate populations 
-is limited by the extent of genetic differentiation among populations and the capacity to resolve those differences given the available marker 
-set and sample sizes from the respective populations.  Based on an initial description of genetic structure, ecologists are frequently 
-interested in describing patterns of genetic movement among populations, often inferred from the mismatch between the sampling location 
-and genetic origins of a given individual \citep{paetkau1995microsatellite,wilson2003bayesian}.  Genetic movement has many implications, 
-such as influencing evolutionary processes, maintaining genetic variation through gene flow, and driving disease dynamics 
-\citep{huestis2019windborne} and affecting patterns of invasive species expansion CITE.
+Genetic clustering algorithms are commonly used to describe genetic structure among populations, reflecting the cumulative
+effects of isolation, connectivity (i.e., genetic migration), selection, and genetic drift.  The ability of such algorithms to differentiate populations
+is limited by the extent of genetic differentiation among populations and the capacity to resolve those differences given the available marker
+set and sample sizes from the respective populations.  Based on an initial description of genetic structure, ecologists are frequently
+interested in describing patterns of genetic movement among populations, often inferred from the mismatch between the sampling location
+and genetic origins of a given individual \citep{paetkau1995microsatellite,wilson2003bayesian}.  Genetic movement has many implications,
+such as influencing evolutionary processes, maintaining genetic variation through gene flow, driving disease dynamics and affecting patterns 
+of invasive species expansion \citep{huestis2019windborne, estoup2010reconstructing}.
 
-In using clustering algorithms to describe genetic structure among natural populations, researchers frequently identify individuals of 
-mixed ancestry---
-characterized as individuals with proportions of their genome attributed to multiple subpopulations, sensu \citet{pritchard2000inference}.
-a trait often summarized as the proportion of an individual’s genome originating from each of $K$ subpopulations, sensu 
-\citet{pritchard2000inference}.  Various processes could contribute to such mixed associations.  Most directly, individuals may represent the 
-influences of gene flow among populations, occurring in recent or prior generations, with the observed complex ancestry patterns accurately 
-representing contributions from multiple sampled populations.  However, similar patterns may result from functionally different patterns of 
-population structuring.  For example, such patterns might be expected when clinal systems governed by isolation by distance are described 
+In using clustering algorithms to describe genetic structure among natural populations, researchers frequently identify individuals of
+mixed ancestry--- individuals with proportions of their genome attributed to multiple subpopulations, sensu \citet{pritchard2000inference}. 
+Various processes could contribute to such mixed associations.  Most directly, individuals may represent the
+influences of gene flow among populations, occurring in recent or prior generations, with the observed complex ancestry patterns accurately
+representing contributions from multiple sampled populations.  However, similar patterns may result from functionally different patterns of
+population structuring.  For example, such patterns might be expected when clinal systems governed by isolation by distance are described
 as discrete genetic clusters.
-NOTE I think a line here about exogenous immigrants might be worthwhile to set up 2 biological processes paired with a statistical process, 
-something like END NOTE
-Alternatively, individuals of mixed ancestry could reflect immigration from outlying populations (e.g., exogenous immigration), with true source 
+Alternatively, individuals of mixed ancestry could reflect immigration from outlying populations (e.g., exogenous immigration), with true source
 populations not sufficiently
 represented in the sample to be among the characterized $K$ subpopulations.
 Furthermore, the characterization of admixed individuals may reflect a limitation of the statistical power of the genetic data,
 as a function of both the marker set and sample size, to resolve the true underlying patterns of genetic structure.
- The challenge for researchers then becomes correctly identifying the ecological and/or statistical processes by which observed complex 
+ The challenge for researchers then becomes correctly identifying the ecological and/or statistical processes by which observed complex
  ancestry patterns were created.
 
 A best practice for evaluating the behavior of genetic clustering algorithms on an empirical dataset is to conduct
-parallel analyses on simulated data where the truth is known, structured to mirror the empirical data set
+parallel analyses on simulated data where the truth is known, yet structured to mirror the empirical data set
 as closely as possible \citep{vaha2006efficiency,anderson2008improved,latch2011fine}.
 Techniques to simulate individual genotypes in this context frequently use sampling with replacement from the
 observed allele frequencies (see CITE, CITE, CITE).
-However, sampling with replacement implicitly increases the pairwise genetic distance among simulated samples, relative to the observed 
+However, sampling with replacement implicitly increases the pairwise genetic distance among simulated samples, relative to the observed
 samples, and
-inflates the perceived ability to correctly assign individuals back to source populations. \citet{anderson2008improved}
-documented this type of artifact in the context of simulations to assess the power for
+inflates the perceived statistical power to correctly assign individuals back to source populations. 
+We refer to this phenomenon as resampling-induced power inflation (RIPI).
+\citet{anderson2008improved} used simulations to document this type of artifact in the context of 
 genetic stock identification (GSI), a type of clustering application in which individuals are constrained to have
 all their ancestry from a single subpopulation.
-We demonstrate, below, that similar artifacts occur when simulating data to
-assess how accurately admixture fractions can be estimated.  We refer to this phenomenon as resampling-induced
-power inflation, or RIPI for short.
-NOTE I would proposed holding on to the next sentence as we build the idea of mixed ancestry in the next paragraph END NOTE
-In this study, we additionally develop and illustrate an approach by which RIPI can be eliminated
-from simulations by constraining the genetic differences among simulated populations to match
-those of populations from which the samples were obtained.
+Similar statistical artifacts occur when simulating data to
+assess how accurately admixture fractions can be estimated. 
+
 
 Beyond simply evaluating the resolution of discrete populations in a simulated framework, researchers may also be
-interested in how individuals of admixed ancestry are genetically characterized given the statistical power of the available dataset and the 
+interested in how individuals of admixed ancestry are genetically characterized given the statistical power of the available dataset and the
 analysis methods used.
 Recognizing that connectivity among genetically distinct populations may be relatively rare, additional insight into the
 frequency of immigration can be gained by integrating across generations to identify both direct migrants and descendants of migrants
@@ -58,14 +51,14 @@ frequency of immigration can be gained by integrating across generations to iden
 BCX]).
 However, the process of recombination during meiosis creates a distribution of expected associations to parental populations among
 advanced hybrid classes.
-Treating linked loci as independent can lead to the false interpretation that the association of advanced hybrid classes to parental population 
+Treating linked loci as independent can lead to the false interpretation that the association of advanced hybrid classes to parental population
 occur strictly as discrete distributions.
 Therefore, in evaluating descendants of migrants within a simulated framework, it is imperative to take into consideration the pattern of
 linkage among loci available for analysis.
 
-In response to these needs, we developed \gscramble{} – a simulation approach that samples alleles from respective populations without 
-replacement, thus maintaining the genetic differences in the empirical dataset.
-Further, by simulating individual genotypes based on user-defined pedigrees, \gscramble{} allows for the simulation of admixed genotypes of 
+In response to these needs, we developed \gscramble{} – a simulation approach that samples alleles from respective populations without
+replacement, thus maintaining the genetic differences in the empirical dataset and eliminating the effect of RIPI.
+Further, by simulating individual genotypes based on user-defined pedigrees, \gscramble{} allows for the simulation of admixed genotypes of
 varying degrees of complexity while allowing the tracking of haplotype blocks from source populations within the specified pedigree.
 By integrating species-specific recombination rates, \gscramble{} simulates biologically informed genotypes that mirror empirical data.
 We develop and illustrate \gscramble{} with use of single nucleotide polymorphic (SNP) genotypes.
@@ -92,15 +85,15 @@ each set of $N$ individuals is a sample from exactly the same population, so
 there is clearly no basis for performing population assignment between $A$ and $B$;
 however, we treated samples $A$ and $B$ as if they were sampled from two potentially different
 populations, and simulated $9n$ new individuals: $n$ new individuals at each of the 9 values of
-$q_A$, the admixture fraction for population $A$, in  $\{0, \frac{1}{8}, \frac{1}{4}, \frac{3}{8}, \frac{1}{2}, \frac{5}{8}, \frac{3}{4}, \frac{7}{8}, 1\}$. 
-We simulated these genotypes according to the "admixture model" used in {\em structure} \citep{pritchard2000inference}.  Briefly, at each 
+$q_A$, the admixture fraction for population $A$, in  $\{0, \frac{1}{8}, \frac{1}{4}, \frac{3}{8}, \frac{1}{2}, \frac{5}{8}, \frac{3}{4}, \frac{7}{8}, 1\}$.
+We simulated these genotypes according to the "admixture model" used in {\em structure} \citep{pritchard2000inference}.  Briefly, at each
 locus, independently, the origin
 of each gene copy was simulated to be from
 population $A$ with probability $q_A$ and from population $B$ with probability $1-q_A$.  Subsequently,
 the allelic types of gene copies from $A$ ($B$), at a locus, were simulated by sampling with replacement
 from the alleles at that locus in sample $A$ ($B$).
 We then added these $9n$ simulated individuals to the $N$ original individuals  from $A$ and $N$ from $B$
-and analyzed all the genotypes using ADMIXTURE with $K=2$. On each data set we performed a supervised analysis in which the original 
+and analyzed all the genotypes using ADMIXTURE with $K=2$. On each data set we performed a supervised analysis in which the original
 $N$ samples from each
 population were provided as learning samples, and also an
 unsupervised analysis when the origin of the samples from $A$ and $B$ were regarded as unknown.
@@ -116,7 +109,7 @@ $R=20$ when $n=24$.
 
 
 Because the simulations were done in a na\"{i}ve way that effectively assumes that the population
-allele frequencies are identical to those observed in the samples themselves, we hypothesized that ADMIXTURE would return estimates of 
+allele frequencies are identical to those observed in the samples themselves, we hypothesized that ADMIXTURE would return estimates of
 $q_A$ that were
 centered around the true values, even though samples $A$ and $B$ were drawn from the same
 population.
@@ -136,26 +129,26 @@ Our approach for simulating admixed individuals without inflating perceived powe
 the estimation of their admixture fractions is motivated by the traditional cross-validation
 approach for evaluating the power of mixture proportion
 estimation in genetic stock identification (e.g., the cross-validation approach
-desribed in \citealt{moran2019bayesian}).
+described in \citealt{moran2019bayesian}).
 In the cross-validation approach, individuals are removed from the reference
 samples and placed in a mixture sample of "unknowns", whose origin
 is inferred using the remaining individuals in the reference samples.  A key
 feature of this approach is that no new genetic material is being created by
-sampling with replacement; however the genetic material of all individuals
-in the original samples is being used---either within the remaining individuals in the
+sampling with replacement; rather the genetic material of all individuals
+in the original sample is being used---either within the remaining individuals in the
 reference samples or within the individuals in the mixture.
 
 Our scheme, described here, extends the traditional cross-validation approach
-by simulating the descent of chunks of chromosome through a user-specified
+by simulating the descent of chromosomal linkage blocks through a user-specified
 pedigree to create admixed individuals.  By imposing certain constraints
 on the pedigree, our framework ensures that all the genetic material
-within the original individuals is used to either create admixed individuals or to
-remain within reference individuals (i.e., those that are purely of one
+within the original individuals is used to either create admixed individuals or is retained 
+within reference individuals (i.e., those that are purely of one
 putative subopulation), and yet no new genetic material is
 created by sampling with replacement from the original samples.
 
-We call the structure
-we use to do this sort of cross-validation simulation of admixed individuals
+We refer to the structure used to implement this cross-validation simulation 
+of admixed individuals
 a {\em genomic simulation pedigree} or GSP.  Like any pedigree,
 a GSP includes a set of founders (individuals that have no parents specified in the
 pedigree), and it includes non-founders; however, we introduce an additional node
@@ -245,24 +238,23 @@ with the number of gametes assigned to the $i\thh$ downward edge being
 $G^-_{x,i}$.
 \end{enumerate}
 At the end of this process, the samples simulated (as united pairs of gametes)
-into the sample nodes will contain all of the genetic material found in the founders (and
-no more than that)
-but that material will have been segregated and recombined according to the pedigree.  Thus the
+into the sample nodes will contain all of the genetic material (and no more) found among the founders but that 
+material will have been segregated and recombined according to the pedigree.  Thus the
 samples obtained from a GSP can be simulated with the expected admixture fractions
 for any hybrid category that can be specified by a pedigree.  They have also been simulated
-in a way that 1) respects physical linkage---each individual inherits segments of the genome
+in a way that 1) reflects physical linkage---each individual inherits segments of the genome
 simulated using a recombination map; 2) does not duplicate any genetic material---the sampling of
 genetic material is entirely without replacement so it will not induce RIPI; and 3) no genetic material has been lost---all the genetic material of the founders
 is represented in the samples, maximizing the number of individuals and markers available to
 use in downstream analyses.
 
 In the \gscramble{} package there is a convenience function called {\footnotesize\tt create\_GSP()} that
-will create GSPs for samples up to and including second-generation backcrosses (an example appears in Figure~\ref{fig:gsp2}); 
+will create GSPs for samples up to and including second-generation backcrosses (an example appears in Figure~\ref{fig:gsp2});
 %%%%%
 \begin{figure}
 \newcommand{\gspcaptwo}{\footnotesize
 An example GSP generated by {\footnotesize\tt create\_GSP()} that produces four different
-admixture categories: one~$F_1$ in sample node~s7; two~$F_2$'s in sample node~s11; one $BC_1$ in sample node~s9; and two $BC_2$'s in sample node~s10. 
+admixture categories: one~$F_1$ in sample node~s7; two~$F_2$'s in sample node~s11; one $BC_1$ in sample node~s9; and two $BC_2$'s in sample node~s10.
 }
 \begin{center}
 \includegraphics[width=\columnwidth]{figures/AllThem.pdf}
@@ -272,8 +264,10 @@ admixture categories: one~$F_1$ in sample node~s7; two~$F_2$'s in sample node~s1
 \end{figure}
 %%%%
 however, \gscramble{} is designed
-to handle user-specified GSPs of arbitrary complexity.  When creating one's own GSP, it is useful
-to keep in mind a handful of requirements for a GSP to be valid. Writing $\founders$ for the set of all founder nodes, $\nonfound$ for the set of all non-founder nodes, and $\nonfounds$ for all non-founder
+to handle user-specified GSPs of arbitrary complexity.  When creating a unique GSP, 
+the following requirements are necessary for the GSP to be valid 
+and the simulation to execute successfully. 
+Writing $\founders$ for the set of all founder nodes, $\nonfound$ for the set of all non-founder nodes, and $\nonfounds$ for all non-founder
 nodes that are not parents of other non-founders, but are adjacent to a sample node, $\nonfounde$ for all
 non-founder nodes that have non-founder node daughters, but no sample nodes, and $\nonfoundse$ for all
 non-founder nodes that are parents of non-founder nodes and also adjacent to sample-nodes, the necessary conditions
@@ -308,15 +302,15 @@ the collection of individuals from which the founders are drawn.  By using permu
 variability in the data is created, but, since it is done without sampling with replacement, it does
 not induce RIPI.
 
-These permutations are executed upon the genotypes provided by the user.
+These permutations are implemented with the genotypes provided by the user.
 \gscramble{} accepts genetic data as a matrix with $N$ rows (one for each individual) and
 $2L$ columns (two for each locus). If the data have been phased, then the phased alleles from the
 first haplotype should occupy the
 first entry for each locus within an individual, while alleles phased together on the second haplotype should occupy the
-second entry for each locus. 
+second entry for each locus.
 There can be several populations represented in the data set, but
 each individual must belong to exactly one
-population.  
+population.
 
 Permutation of alleles proceeds within populations, such that
 the frequencies of alleles from each population remain the same as those observed
@@ -338,27 +332,28 @@ can take three different values.  If {\tt\footnotesize preserve\_individuals = T
 such that all the alleles within an individual remain together.  If {\tt\footnotesize preserve\_individuals = "BY\_CHROM"}, then
 the alleles within an individual found on a homologous pair of chromosomes remain together, but the different
 chromosome pairs of an individual are independently permuted into new positions in the data set.  This form of permutation
-maintains the LD between markers on the same chromosome, which may be desirable in some contexts.
+maintains the linkage disequilibrium (LDL between markers on the same chromosome, which may be desirable in some contexts.
 If {\tt\footnotesize preserve\_individuals = FALSE} then each gene copy within an individual is permuted separately,
-providing the maximal scrambling of the data.   The second option, {\tt\footnotesize preserve\_haplotypes}, can take two
-different values, {{\tt\footnotesize FALSE} (the default) and {\tt\footnotesize TRUE}.  This option, which keeps alleles together
+providing the maximal scrambling of the data. The second option, {\tt\footnotesize preserve\_haplotypes}, can take two
+different values, {{\tt\footnotesize FALSE} (the default) and {\tt\footnotesize TRUE}. 
+This option, which keeps alleles together
 on the same haplotype, should be set to true only
-if the original genotypes are phased into separate haplotypes. 
+if the original genotypes are phased into separate haplotypes.
 
 %%%%%%%
 \newcommand{\permcap}{\footnotesize An illustration of how \gscramble{} permutes data under
 different options.  {\bf (a)}~A picture
-representing an original data set of $N=12$ diploids sampled from three populations and typed at $L=15$ markers. 
-Different colors represent different sampled individuals. Individuals 1--5 are shades of blue and green, indicating that they 
+representing an original data set of $N=12$ diploids sampled from three populations and typed at $L=15$ markers.
+Different colors represent different sampled individuals. Individuals 1--5 are shades of blue and green, indicating that they
 are from a single population.  Individuals 6--9 are from another population, (shades of red and orange), while 10--12
-are from a third population and are colored shades of violet. Thick vertical black lines separate the different 
-populations.  Markers are shown in rows. There are 6 markers on the first chromosome, 5 on the second, and 4 on the 
+are from a third population and are colored shades of violet. Thick vertical black lines separate the different
+populations.  Markers are shown in rows. There are 6 markers on the first chromosome, 5 on the second, and 4 on the
 third.  Each chromosome is delimited by a thick, horizontal black line. The "a" and the "b" in the colored cells denote the first and second gene copies within an individual at each marker.  It is worth noting that this representation shows a $2L \times N$ matrix,
 which is the transpose of the $N\times 2L$ matrix used to supply genetic marker data to \gscramble{}. {\bf (b)}~Examples of how the {\tt\footnotesize preserve\_individuals} and {\tt\footnotesize preserve\_haplotypes} options of the {\tt\footnotesize segments2markers()}
-function affect the permutation of 
+function affect the permutation of
 the genetic data of the original data set.  Panel headers show the option values while the colors and "a" and "b" values
 in the colored cells show the original position of each gene copy in the original sample.  Note that permutation is always
-done within the populations.  When {\tt\footnotesize preserve\_individuals = TRUE},  then just the 
+done within the populations.  When {\tt\footnotesize preserve\_individuals = TRUE},  then just the
 individuals in their entirety are permuted.  When {\tt\footnotesize preserve\_individuals = "BY\_CHROM"}, each pair
 of a single chromosome within an individual remains together when permuted. When {\tt\footnotesize preserve\_individuals = FALSE}, gene copies are freely permuted between individuals.  The option {\tt\footnotesize preserve\_haplotypes = TRUE} causes each haplotype on a chromosome to be preserved
 while permuting. This option should only be used when the original data set is phased.
@@ -377,51 +372,42 @@ Boing.
 
 \subsubsection*{Invasive wild pigs in Missouri}
 
-Genetic samples were collected from 160 invasive wild pigs in 
-southeastern Missouri that were lethally removed through population control efforts conducted 
+Genetic samples were collected from 160 invasive wild pigs in
+southeastern Missouri, lethally removed through population control efforts conducted
 as a component of the Missouri Feral Hog Elimination Partnership
-by US Department of Agriculture – Animal Plant Health Inspection Services – Wildlife Services, Missouri Department of Conservation, 
-and other cooperative state agencies CHECK.
-DNA was extracted from hair or tissue (collected from animals at the time of euthanasia) with 
+by US Department of Agriculture – Animal Plant Health Inspection Services – Wildlife Services, Missouri Department of Conservation,
+and other cooperative state agencies.
+DNA was extracted from hair or tissue (collected from animals at the time of euthanasia) with
 commercially available magnetic bead recovery kits (MagMax DNA, Thermo Fisher Scientific).
-Genotyping was performed with GeneSeek’s Genomic Profiler for Porcine HD which provides 
+Genotyping was performed with GeneSeek’s Genomic Profiler for Porcine HD which provides
 62,128 biallelic SNP loci that are mapped across the 18 autosomal chromosomes.
-We implemented standard genotype quality control metrics, specifically, we pruned genotypes with 
+We implemented standard genotype quality control measures; specifically, we pruned loci with
 call rates $<95\%$ and minor allele frequencies $<5\%$.
-We implemented linkage disequilibrium (LD) pruning using a window size of 50 loci and step size 
+We implemented linkage disequilibrium (LD) pruning using a window size of 50 loci and step size
 of 5 loci to remove markers above a linkage threshold of $R^2 > 0.5$.
 
-The 160 invasive wild pig samples represented 120 reference individuals from the core regions of 
-3 populations (40 individuals each from Pop1, Pop2, Pop14) and 40 individuals from the contact regions of these populations. 
-We used ADMIXTURE version 1.3.0 \citep{alexander2009fast} to characterize the genetic structure of the 160 samples (for $K = {1...6}$)
-and identify that indeed the 120 reference individuals represented 3 distinct genetic clusters.
-
-Using the 120 reference individuals, we sought to classify the admixture patterns of the 40 empirical samples 
-from the contact regions using simulated pedigrees from \gscramble{}. To address this objective we simulated 
-pedigrees to represent the likely classes of admixed individuals that would be present in the samples 
+The 160 invasive wild pig samples represented 120 reference individuals from the core regions of
+3 populations (40 individuals each informed by previous analyses) 
+and 40 individuals from the contact regions of these populations.
+We used ADMIXTURE version 1.3.0 \citep{alexander2009fast} to characterize the genetic structure 
+of the 160 samples (for $K = {1...6}$). Using the 120 reference individuals identified to represent population cores, 
+we sought to classify the admixture patterns of the 40 empirical samples
+from the contact regions using simulated pedigrees from \gscramble{}. To address this objective we simulated
+pedigrees to represent the likely classes of admixed individuals that would be present in the samples
 from the contact regions of the 3 reference populations. The types of admixed individuals we considered were 
-all two-population combinations of $F_1$, $F_2$, $BC_1$ and $BC_2$. We also 
-simulated individuals from each of the founder populations. The first step of this workflow involved 
-simulating admixed individuals for 2 founder populations using one of the preset \gscramble{} 
-GSPs provided by the function {\footnotesize\tt create\_GSP()} for producing each of the types of admixed 
-individuals. While we could have simulated all 4 types of admixed individuals from a single GSP (Figure~\ref{fig:gsp2}), 
-different numbers of simulated individuals are produced for each hybrid class. Therefore, for the sake of the 
-computational efficiency from simulating the exact number of desired individuals, we chose to simulate from 
-a single GSP for each of the hybrid classes by setting the corresponding hybrid parameter in {\footnotesize\tt create\_GSP()} to {\footnotesize\tt TRUE}. We used the default settings of the {\footnotesize\tt plink\_map2rec\_rates()} to specify the recombination rates. The 120 simulated genotypes were written to PLINK .ped and .map files using {\footnotesize\tt gscramble2plink()}. We used PLINK version 1.9 \citep{purcell2007plink} to convert the genotypes to binary files and used these as input into ADMIXTURE for which we specified $K=3$ to produce ancestry values. We iteratively 
-performed this workflow to produce 1,000 simulated genotypes and ancestry values for each of the 
-4 hybrid classes, as well as founder individuals, for each of the population combinations, for a total of 
+$F_1$, $F_2$, $F_{1}BC_1$ and $F_{1}BC_2$ representing all two-population combinations 
+(Pop1 x Pop2, Pop1 x Pop3, Pop2 x Pop3, and reciprocally Pop2 x Pop1, Pop3 x Pop1, Pop3 x Pop2 as required 
+to simulate backcrossed classes). 
+We also simulated individuals from each of the founder populations. The first step of this workflow involved
+simulating admixed individuals for 2 founder populations using one of the preset \gscramble{}
+GSPs provided by the function {\footnotesize\tt create\_GSP()} for producing each of the types of admixed
+individuals. Although we could have simulated all 4 types of admixed individuals from a single GSP (Figure~\ref{fig:gsp2}),
+different numbers of simulated individuals are produced for each hybrid class. Therefore, for the sake of the
+computational efficiency from simulating the exact number of desired individuals, we chose to simulate from
+a single GSP for each of the hybrid classes by setting the corresponding hybrid parameter in {\footnotesize\tt create\_GSP()} to {\footnotesize\tt TRUE}. We used the default settings of the {\footnotesize\tt plink\_map2rec\_rates()} to specify the recombination rates. The 120 simulated genotypes were written to PLINK .ped and .map files using {\footnotesize\tt gscramble2plink()}. We used PLINK version 1.9 \citep{purcell2007plink} to convert the genotypes to binary files and used these as input into ADMIXTURE for which we specified $K=3$ to produce ancestry values. We iteratively
+performed this workflow to produce 1,000 simulated genotypes and ancestry values for each of the
+4 hybrid classes, as well as founder individuals, for each of the population combinations, for a total of
 21,000 simulated individuals.
-
-
-\gscramble{} REFERENCE GROUPS
-\gscramble{} PEDIGREES
-ADMIXTURE \gscramble{} VS EMPIRICAL
-FST OF EMPIRICAL AND \gscramble{} CORE POPULATIONS
-
-
-
-
-
 
 \section*{Results}
 
@@ -461,27 +447,27 @@ Boing.
 
 \subsubsection*{Invasive wild pigs in Missouri}
 
-SNP filtering resulted in 14,233 loci that were used for subsequent analysis. 
-Using the 160 empirical samples, ADMIXTURE results supported the identification of 
-3 genetic clusters (SUPPLEMENTAL FIGURE). Admixture $q$ values clearly grouped individuals 
-from each of the core populations into 3 clusters while the 40 individuals from the contact regions were 
+SNP filtering resulted in 14,233 loci that were used for subsequent analysis.
+Using the 160 empirical samples, ADMIXTURE results supported the identification of
+3 genetic clusters (SUPPLEMENTAL FIGURE). Admixture $q$ values clearly grouped individuals
+from each of the core populations into 3 clusters while the 40 individuals from the contact regions were
 highly admixed (SUPPLEMENTAL FIGURE). The
-$F_{ST}$ divergence from ADMIXTURE was: 
-$F_{ST} = 0.24$ for Pop1-Pop2, 
-$F_{ST} = 0.14$ for Pop1-Pop14 and 
+$F_{ST}$ divergence from ADMIXTURE was:
+$F_{ST} = 0.24$ for Pop1-Pop2,
+$F_{ST} = 0.14$ for Pop1-Pop14 and
 $F_{ST} = 0.13$ for Pop2-Pop14.
 
-The simulated hybrid classes produce 
-the expected range of admixture with $F_1$ and $F_2$ individuals having mean $q=0.5$, with $F_2$ individuals having 
-more variation. Backcrossed individuals have higher ancestry associated with the backcrossed population with $q$ 
+The simulated hybrid classes produce
+the expected range of admixture with $F_1$ and $F_2$ individuals having mean $q=0.5$, with $F_2$ individuals having
+more variation. Backcrossed individuals have higher ancestry associated with the backcrossed population with $q$
 approximately $0.75$ ($BC_1$) and $0.875$ ($BC_2$) (Figure~\ref{fig:pig-sim-qs}).
 
 %%%
 \begin{figure*}
-\newcommand{\pigsimsqscap}{\footnotesize ADMIXTURE estimates of $q$ for $K=3$ of the simulated hybrid classes 
-($F_1$, $F_2$, $BC_1$ and $BC_2$) from all two-population combinations of the invasive wild pig genotypes. 
-Rows and columns provide the population combinations of the hybrids and for backcrossed hybrids the rows 
-specify the backcrossed population. Plots where the rows and columns specify the same population depict the 
+\newcommand{\pigsimsqscap}{\footnotesize ADMIXTURE estimates of $q$ for $K=3$ of the simulated hybrid classes
+($F_1$, $F_2$, $BC_1$ and $BC_2$) from all two-population combinations of the invasive wild pig genotypes.
+Rows and columns provide the population combinations of the hybrids and for backcrossed hybrids the rows
+specify the backcrossed population. Plots where the rows and columns specify the same population depict the
 $q$ values for simulated non-hybrid (or "Core") individuals from the population.}
 \includegraphics[width=0.96\textwidth]{figures/simulated-pigs-Q-facet.pdf}
 \caption[\pigsimsqscap]{\pigsimsqscap}
@@ -506,7 +492,12 @@ without replacement approach.
 
 
 \section*{Acknowledgements}
-We thank etc. etc.   Contribution number  mHAVEAGAS-003. 
-This work utilized the Alpine high performance computing resource at the University of Colorado Boulder. 
-Alpine is jointly funded by the University of Colorado Boulder, the University of Colorado Anschutz, Colorado State University, 
+Research was supported in part by the USDA-APHIS-National Feral Swine Damage 
+Management Program. We are grateful for the numerous Wildlife Services and Missouri 
+Department of Conservation employees that contributed to genetic sampling of wild pigs 
+within southeastern Missouri. Writing of this paper was facilitated by the Mobile High Altitude Venue for Ecological Analysis, 
+Genetics and Statistics, through which ECA, MGD, and TJS were scientists-in-residence on location in 
+Cheyenne, WY for 3 days in October 2023. This is contribution number mHAVEAGAS-003.
+This work utilized the Alpine high performance computing resource at the University of Colorado Boulder.
+Alpine is jointly funded by the University of Colorado Boulder, the University of Colorado Anschutz, Colorado State University,
 and the National Science Foundation (award 2201538).
