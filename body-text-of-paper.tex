@@ -8,11 +8,11 @@ is limited by the extent of genetic differentiation among populations and the ca
 set and sample sizes from the respective populations.  Based on an initial description of genetic structure, ecologists are frequently
 interested in describing patterns of genetic movement among populations, often inferred from the mismatch between the sampling location
 and genetic origins of a given individual \citep{paetkau1995microsatellite,wilson2003bayesian}.  Genetic movement has many implications,
-such as influencing evolutionary processes, maintaining genetic variation through gene flow, driving disease dynamics and affecting patterns 
+such as influencing evolutionary processes, maintaining genetic variation through gene flow, driving disease dynamics and affecting patterns
 of invasive species expansion \citep{huestis2019windborne, estoup2010reconstructing}.
 
 In using clustering algorithms to describe genetic structure among natural populations, researchers frequently identify individuals of
-mixed ancestry--- individuals with proportions of their genome attributed to multiple subpopulations, sensu \citet{pritchard2000inference}. 
+mixed ancestry--- individuals with proportions of their genome attributed to multiple subpopulations, sensu \citet{pritchard2000inference}.
 Various processes could contribute to such mixed associations.  Most directly, individuals may represent the
 influences of gene flow among populations, occurring in recent or prior generations, with the observed complex ancestry patterns accurately
 representing contributions from multiple sampled populations.  However, similar patterns may result from functionally different patterns of
@@ -33,13 +33,13 @@ Techniques to simulate individual genotypes in this context frequently use sampl
 observed allele frequencies (see CITE, CITE, CITE).
 However, sampling with replacement implicitly increases the pairwise genetic distance among simulated samples, relative to the observed
 samples, and
-inflates the perceived statistical power to correctly assign individuals back to source populations. 
+inflates the perceived statistical power to correctly assign individuals back to source populations.
 We refer to this phenomenon as resampling-induced power inflation (RIPI).
-\citet{anderson2008improved} used simulations to document this type of artifact in the context of 
+\citet{anderson2008improved} used simulations to document this type of artifact in the context of
 genetic stock identification (GSI), a type of clustering application in which individuals are constrained to have
 all their ancestry from a single subpopulation.
 Similar statistical artifacts occur when simulating data to
-assess how accurately admixture fractions can be estimated. 
+assess how accurately admixture fractions can be estimated.
 
 
 Beyond simply evaluating the resolution of discrete populations in a simulated framework, researchers may also be
@@ -142,12 +142,12 @@ Our scheme, described here, extends the traditional cross-validation approach
 by simulating the descent of chromosomal linkage blocks through a user-specified
 pedigree to create admixed individuals.  By imposing certain constraints
 on the pedigree, our framework ensures that all the genetic material
-within the original individuals is used to either create admixed individuals or is retained 
+within the original individuals is used to either create admixed individuals or is retained
 within reference individuals (i.e., those that are purely of one
 putative subopulation), and yet no new genetic material is
 created by sampling with replacement from the original samples.
 
-We refer to the structure used to implement this cross-validation simulation 
+We refer to the structure used to implement this cross-validation simulation
 of admixed individuals
 a {\em genomic simulation pedigree} or GSP.  Like any pedigree,
 a GSP includes a set of founders (individuals that have no parents specified in the
@@ -238,7 +238,7 @@ with the number of gametes assigned to the $i\thh$ downward edge being
 $G^-_{x,i}$.
 \end{enumerate}
 At the end of this process, the samples simulated (as united pairs of gametes)
-into the sample nodes will contain all of the genetic material (and no more) found among the founders but that 
+into the sample nodes will contain all of the genetic material (and no more) found among the founders but that
 material will have been segregated and recombined according to the pedigree.  Thus the
 samples obtained from a GSP can be simulated with the expected admixture fractions
 for any hybrid category that can be specified by a pedigree.  They have also been simulated
@@ -264,9 +264,9 @@ admixture categories: one~$F_1$ in sample node~s7; two~$F_2$'s in sample node~s1
 \end{figure}
 %%%%
 however, \gscramble{} is designed
-to handle user-specified GSPs of arbitrary complexity.  When creating a unique GSP, 
-the following requirements are necessary for the GSP to be valid 
-and the simulation to execute successfully. 
+to handle user-specified GSPs of arbitrary complexity.  When creating a unique GSP,
+the following requirements are necessary for the GSP to be valid
+and the simulation to execute successfully.
 Writing $\founders$ for the set of all founder nodes, $\nonfound$ for the set of all non-founder nodes, and $\nonfounds$ for all non-founder
 nodes that are not parents of other non-founders, but are adjacent to a sample node, $\nonfounde$ for all
 non-founder nodes that have non-founder node daughters, but no sample nodes, and $\nonfoundse$ for all
@@ -335,7 +335,7 @@ chromosome pairs of an individual are independently permuted into new positions 
 maintains the linkage disequilibrium (LDL between markers on the same chromosome, which may be desirable in some contexts.
 If {\tt\footnotesize preserve\_individuals = FALSE} then each gene copy within an individual is permuted separately,
 providing the maximal scrambling of the data. The second option, {\tt\footnotesize preserve\_haplotypes}, can take two
-different values, {{\tt\footnotesize FALSE} (the default) and {\tt\footnotesize TRUE}. 
+different values, {{\tt\footnotesize FALSE} (the default) and {\tt\footnotesize TRUE}.
 This option, which keeps alleles together
 on the same haplotype, should be set to true only
 if the original genotypes are phased into separate haplotypes.
@@ -372,11 +372,12 @@ Boing.
 
 \subsubsection*{Invasive wild pigs in Missouri}
 
-Genetic samples were collected from 160 invasive wild pigs in
-southeastern Missouri, lethally removed through population control efforts conducted
-as a component of the Missouri Feral Hog Elimination Partnership
-by US Department of Agriculture – Animal Plant Health Inspection Services – Wildlife Services, Missouri Department of Conservation,
-and other cooperative state agencies.
+Genetic samples were collected from 160 invasive wild pigs in southeastern
+Missouri that were lethally removed through population control efforts
+conducted as a component of the Missouri Feral Hog Elimination Partnership
+by US Department of Agriculture – Animal Plant Health Inspection Services –
+Wildlife Services, Missouri Department of Conservation, and other cooperative
+federal and state agencies.
 DNA was extracted from hair or tissue (collected from animals at the time of euthanasia) with
 commercially available magnetic bead recovery kits (MagMax DNA, Thermo Fisher Scientific).
 Genotyping was performed with GeneSeek’s Genomic Profiler for Porcine HD which provides
@@ -387,17 +388,17 @@ We implemented linkage disequilibrium (LD) pruning using a window size of 50 loc
 of 5 loci to remove markers above a linkage threshold of $R^2 > 0.5$.
 
 The 160 invasive wild pig samples represented 120 reference individuals from the core regions of
-3 populations (40 individuals each informed by previous analyses) 
+3 populations (40 individuals each informed by previous analyses)
 and 40 individuals from the contact regions of these populations.
-We used ADMIXTURE version 1.3.0 \citep{alexander2009fast} to characterize the genetic structure 
-of the 160 samples (for $K = {1...6}$). Using the 120 reference individuals identified to represent population cores, 
+We used ADMIXTURE version 1.3.0 \citep{alexander2009fast} to characterize the genetic structure
+of the 160 samples (for $K = {1...6}$). Using the 120 reference individuals identified to represent population cores,
 we sought to classify the admixture patterns of the 40 empirical samples
 from the contact regions using simulated pedigrees from \gscramble{}. To address this objective we simulated
 pedigrees to represent the likely classes of admixed individuals that would be present in the samples
-from the contact regions of the 3 reference populations. The types of admixed individuals we considered were 
-$F_1$, $F_2$, $F_{1}BC_1$ and $F_{1}BC_2$ representing all two-population combinations 
-(Pop1 x Pop2, Pop1 x Pop3, Pop2 x Pop3, and reciprocally Pop2 x Pop1, Pop3 x Pop1, Pop3 x Pop2 as required 
-to simulate backcrossed classes). 
+from the contact regions of the 3 reference populations. The types of admixed individuals we considered were
+$F_1$, $F_2$, $F_{1}BC_1$ and $F_{1}BC_2$ representing all two-population combinations
+(Pop1 x Pop2, Pop1 x Pop3, Pop2 x Pop3, and reciprocally Pop2 x Pop1, Pop3 x Pop1, Pop3 x Pop2 as required
+to simulate backcrossed classes).
 We also simulated individuals from each of the founder populations. The first step of this workflow involved
 simulating admixed individuals for 2 founder populations using one of the preset \gscramble{}
 GSPs provided by the function {\footnotesize\tt create\_GSP()} for producing each of the types of admixed
@@ -449,44 +450,44 @@ Boing.
 
 SNP filtering resulted in 14,233 loci that were used for subsequent analysis.
 Using the 160 empirical samples, ADMIXTURE results supported the identification of
-$K=3$ genetic clusters grouped individuals from each of the core populations into 3 clusters 
+$K=3$ genetic clusters grouped individuals from each of the core populations into 3 clusters
 while the 40 individuals from the contact regions were highly admixed. The
 $F_\mathrm{ST}$ divergence from ADMIXTURE was:
 $F_\mathrm{ST} = 0.24$ for Pop1-Pop2,
 $F_\mathrm{ST} = 0.14$ for Pop1-Pop3 and
-$F_\mathrm{ST} = 0.13$ for Pop2-Pop3. 
+$F_\mathrm{ST} = 0.13$ for Pop2-Pop3.
 
 The simulated hybrid classes produce
 the expected range of admixture with $F_1$ and $F_2$ individuals having mean $Q=0.5$, with $F_2$ individuals having
-more variation (Figure~\ref{fig:pig-sim-qs}A). 
+more variation (Figure~\ref{fig:pig-sim-qs}A).
 Backcrossed individuals have higher ancestry associated with the backcrossed population with mean $Q$
-approximately $0.75$ ($BC_1$) and $0.87$ ($BC_2$) (Figure~\ref{fig:pig-sim-qs}A). Notably, the simulated 
-$F_1$ hybrids have the most variation in the distribution of the $Q$ values associated with each of the genetic clusters. 
-When the estimated Q values for the $F_1$ hybrids are separated by the population combinations, 
-$F_1$ hybrids for Pop1-Pop2 have the least variation around $q=0.5$ (standard deviation 
-= 0.008), while Pop1-Pop3 and Pop2-Pop3 
-have higher variation (standard deviation = 0.011-0.016) (Figure~\ref{fig:pig-sim-qs}B). Also, all $Q$ 
-distributions for $F_1$ hybrids, regardless of population combination, center around 
-$0.50$ except for the two distributions 
+approximately $0.75$ ($BC_1$) and $0.87$ ($BC_2$) (Figure~\ref{fig:pig-sim-qs}A). Notably, the simulated
+$F_1$ hybrids have the most variation in the distribution of the $Q$ values associated with each of the genetic clusters.
+When the estimated Q values for the $F_1$ hybrids are separated by the population combinations,
+$F_1$ hybrids for Pop1-Pop2 have the least variation around $q=0.5$ (standard deviation
+= 0.008), while Pop1-Pop3 and Pop2-Pop3
+have higher variation (standard deviation = 0.011-0.016) (Figure~\ref{fig:pig-sim-qs}B). Also, all $Q$
+distributions for $F_1$ hybrids, regardless of population combination, center around
+$0.50$ except for the two distributions
 of Pop3, which have a mean of $Q=0.49$ (Figure~\ref{fig:pig-sim-qs}B).
-The differences among these 
-distributions of $Q$ values for the simulated data reflect the genetic differences observed 
-in the empirical data, specifically, that genetic differentiation is highest between Pop1 and Pop2 and that 
+The differences among these
+distributions of $Q$ values for the simulated data reflect the genetic differences observed
+in the empirical data, specifically, that genetic differentiation is highest between Pop1 and Pop2 and that
 Pop14 is the most admixed population with ancestry contributions from both Pop1 and Pop2.
 
 
 %%%
 \begin{figure*}
-\newcommand{\pigsimsqscap}{\footnotesize (A) The density of the estimated Q values from ADMIXTURE for 
-the simulated runs are 
-grouped across all population-combinations for each hybrid class and colored by the $K$ genetic cluster 
-(e.g., the Pop1 density plot for the $F_{1}BC_1$ plots the Pop1 genetic cluster for both 
-the Pop1-Pop2 and Pop1-Pop3 combinations). The density plots across the $K$ 
-genetic clusters are mostly similar with the most variation among the genetic clusters evident in 
-the $F_1$ plot. (B) Plotting the density of the estimated Q values from ADMIXTURE for the $F_1$ hybrids, 
-separated by the population combinations, reveals the least variance in estimated Q values for 
-Pop1-Pop2 compared to Pop1-Pop3 and Pop2-Pop3. Note that these population combinations group the 
-reciprocal population combination in each plot (e.g., "Pop1_Pop2" has simulations 
+\newcommand{\pigsimsqscap}{\footnotesize (A) The density of the estimated Q values from ADMIXTURE for
+the simulated runs are
+grouped across all population-combinations for each hybrid class and colored by the $K$ genetic cluster
+(e.g., the Pop1 density plot for the $F_{1}BC_1$ plots the Pop1 genetic cluster for both
+the Pop1-Pop2 and Pop1-Pop3 combinations). The density plots across the $K$
+genetic clusters are mostly similar with the most variation among the genetic clusters evident in
+the $F_1$ plot. (B) Plotting the density of the estimated Q values from ADMIXTURE for the $F_1$ hybrids,
+separated by the population combinations, reveals the least variance in estimated Q values for
+Pop1-Pop2 compared to Pop1-Pop3 and Pop2-Pop3. Note that these population combinations group the
+reciprocal population combination in each plot (e.g., "Pop1_Pop2" has simulations
 from both Pop1-Pop2 and Pop2-Pop1).}
 \includegraphics[width=0.96\textwidth]{figures/simulation-density-multipanel.pdf}
 \caption[\pigsimsqscap]{\pigsimsqscap}
@@ -511,11 +512,11 @@ without replacement approach.
 
 
 \section*{Acknowledgements}
-Research was supported in part by the USDA-APHIS-National Feral Swine Damage 
-Management Program. We are grateful for the numerous Wildlife Services and Missouri 
-Department of Conservation employees that contributed to genetic sampling of wild pigs 
-within southeastern Missouri. Writing of this paper was facilitated by the Mobile High Altitude Venue for Ecological Analysis, 
-Genetics and Statistics, through which ECA, MGD, and TJS were scientists-in-residence on location in 
+Research was supported in part by the USDA-APHIS-National Feral Swine Damage
+Management Program. We are grateful for the numerous Wildlife Services and Missouri
+Department of Conservation employees that contributed to genetic sampling of wild pigs
+within southeastern Missouri. Writing of this paper was facilitated by the Mobile High Altitude Venue for Ecological Analysis,
+Genetics and Statistics, through which ECA, MGD, and TJS were scientists-in-residence on location in
 Cheyenne, WY for 3 days in October 2023. This is contribution number mHAVEAGAS-003.
 This work utilized the Alpine high performance computing resource at the University of Colorado Boulder.
 Alpine is jointly funded by the University of Colorado Boulder, the University of Colorado Anschutz, Colorado State University,
