@@ -449,23 +449,45 @@ Boing.
 
 SNP filtering resulted in 14,233 loci that were used for subsequent analysis.
 Using the 160 empirical samples, ADMIXTURE results supported the identification of
-3 genetic clusters (SUPPLEMENTAL FIGURE). Admixture $q$ values clearly grouped individuals
-from each of the core populations into 3 clusters while the 40 individuals from the contact regions were
-highly admixed (SUPPLEMENTAL FIGURE). The
-$F_{ST}$ divergence from ADMIXTURE was:
-$F_{ST} = 0.24$ for Pop1-Pop2,
-$F_{ST} = 0.14$ for Pop1-Pop14 and
-$F_{ST} = 0.13$ for Pop2-Pop14. The simulated hybrid classes produce
-the expected range of admixture with $F_1$ and $F_2$ individuals having mean $q=0.5$, with $F_2$ individuals having
-more variation. Backcrossed individuals have higher ancestry associated with the backcrossed population with $q$
-approximately $0.75$ ($BC_1$) and $0.875$ ($BC_2$) (Figure~\ref{fig:pig-sim-qs}). MATT NEEDS TO AUGMENT AND 
-REVISE THE RESULTS
+$K=3$ genetic clusters grouped individuals from each of the core populations into 3 clusters 
+while the 40 individuals from the contact regions were highly admixed. The
+$F_\mathrm{ST}$ divergence from ADMIXTURE was:
+$F_\mathrm{ST} = 0.24$ for Pop1-Pop2,
+$F_\mathrm{ST} = 0.14$ for Pop1-Pop3 and
+$F_\mathrm{ST} = 0.13$ for Pop2-Pop3. 
 
+The simulated hybrid classes produce
+the expected range of admixture with $F_1$ and $F_2$ individuals having mean $Q=0.5$, with $F_2$ individuals having
+more variation (Figure~\ref{fig:pig-sim-qs}A). 
+Backcrossed individuals have higher ancestry associated with the backcrossed population with mean $Q$
+approximately $0.75$ ($BC_1$) and $0.87$ ($BC_2$) (Figure~\ref{fig:pig-sim-qs}A). Notably, the simulated 
+$F_1$ hybrids have the most variation in the distribution of the $Q$ values associated with each of the genetic clusters. 
+When the estimated Q values for the $F_1$ hybrids are separated by the population combinations, 
+$F_1$ hybrids for Pop1-Pop2 have the least variation around $q=0.5$ (standard deviation 
+= 0.008), while Pop1-Pop3 and Pop2-Pop3 
+have higher variation (standard deviation = 0.011-0.016) (Figure~\ref{fig:pig-sim-qs}B). Also, all $Q$ 
+distributions for $F_1$ hybrids, regardless of population combination, center around 
+$0.50$ except for the two distributions 
+of Pop3, which have a mean of $Q=0.49$ (Figure~\ref{fig:pig-sim-qs}B).
+The differences among these 
+distributions of $Q$ values for the simulated data reflect the genetic differences observed 
+in the empirical data, specifically, that genetic differentiation is highest between Pop1 and Pop2 and that 
+Pop14 is the most admixed population with ancestry contributions from both Pop1 and Pop2.
 
 
 %%%
 \begin{figure*}
-\newcommand{\pigsimsqscap}{\footnotesize MATT NEEDS TO ADD CAPTION.}
+\newcommand{\pigsimsqscap}{\footnotesize (A) The density of the estimated Q values from ADMIXTURE for 
+the simulated runs are 
+grouped across all population-combinations for each hybrid class and colored by the $K$ genetic cluster 
+(e.g., the Pop1 density plot for the $F_{1}BC_1$ plots the Pop1 genetic cluster for both 
+the Pop1-Pop2 and Pop1-Pop3 combinations). The density plots across the $K$ 
+genetic clusters are mostly similar with the most variation among the genetic clusters evident in 
+the $F_1$ plot. (B) Plotting the density of the estimated Q values from ADMIXTURE for the $F_1$ hybrids, 
+separated by the population combinations, reveals the least variance in estimated Q values for 
+Pop1-Pop2 compared to Pop1-Pop3 and Pop2-Pop3. Note that these population combinations group the 
+reciprocal population combination in each plot (e.g., "Pop1_Pop2" has simulations 
+from both Pop1-Pop2 and Pop2-Pop1).}
 \includegraphics[width=0.96\textwidth]{figures/simulation-density-multipanel.pdf}
 \caption[\pigsimsqscap]{\pigsimsqscap}
 \label{fig:pig-sim-qs}
