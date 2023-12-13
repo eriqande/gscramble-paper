@@ -34,7 +34,7 @@ observed allele frequencies (see CITE, CITE, CITE).
 However, sampling with replacement implicitly increases the pairwise genetic distance among simulated samples, relative to the observed
 samples, and
 inflates the perceived statistical power to correctly assign individuals back to source populations.
-We refer to this phenomenon as resampling-induced power inflation (RIPI).
+We refer to this phenomenon as resampling-induced, spurious power inflation (RISPI).
 \citet{anderson2008improved} used simulations to document this type of artifact in the context of
 genetic stock identification (GSI), a type of clustering application in which individuals are constrained to have
 all their ancestry from a single subpopulation.
@@ -57,7 +57,7 @@ Therefore, in evaluating descendants of migrants within a simulated framework, i
 linkage among loci available for analysis.
 
 In response to these needs, we developed \gscramble{} – a simulation approach that samples alleles from respective populations without
-replacement, thus maintaining the genetic differences in the empirical dataset and eliminating the effect of RIPI.
+replacement, thus maintaining the genetic differences in the empirical dataset and eliminating the effect of RISPI.
 Further, by simulating individual genotypes based on user-defined pedigrees, \gscramble{} allows for the simulation of admixed genotypes of
 varying degrees of complexity while allowing the tracking of haplotype blocks from source populations within the specified pedigree.
 By integrating species-specific recombination rates, \gscramble{} simulates biologically informed genotypes that mirror empirical data.
@@ -73,7 +73,7 @@ We develop and illustrate \gscramble{} with use of single nucleotide polymorphic
 
 Before we proceed to a description of the methodology used by \gscramble{},
 we demonstrate a case in which using a standard sampling-with-replacement
-approach induces RIPI when estimating admixture fractions.
+approach induces RISPI when estimating admixture fractions.
 To construct this simple example, we used the R programming language \citep{Rcoreteam} to
 simulate allele frequencies for $L$ biallelic
 loci in a single population from a $\mathrm{Beta}(1, 8)$ distribution and then simulated
@@ -111,10 +111,10 @@ $R=20$ when $n=24$.
 Because the simulations were done in a na\"{i}ve way that effectively assumes that the population
 allele frequencies are identical to those observed in the samples themselves, we hypothesized that ADMIXTURE would return estimates of
 $q_A$ that were
-centered around the true values, even though samples $A$ and $B$ were drawn from the same
-population.
-We further expected that ADMIXTURE would return more accurate estimates of
-$q_A$ when $N$ was smaller and the number of loci was larger.
+centered around the simulated values, even though samples $A$ and $B$ were drawn from the same
+population. In other words, we expected to observe RISPI.
+We further expected that ADMIXTURE would return more accurate estimates of the simulated
+$q_A$ values when $N$ was smaller and the number of loci was larger.
 We summarized the results by plotting boxplots of the ADMIXTURE-inferred $q_A$ values,
  for the 480 newly simulated individuals (and for the original samples, $A$ and $B$, in the
  case of unsupervised clustering),
@@ -148,7 +148,7 @@ putative subopulation), and yet no new genetic material is
 created by sampling with replacement from the original samples.
 
 We refer to the structure used to implement this cross-validation simulation
-of admixed individuals
+of admixed individuals as
 a {\em genomic simulation pedigree} or GSP.  Like any pedigree,
 a GSP includes a set of founders (individuals that have no parents specified in the
 pedigree), and it includes non-founders; however, we introduce an additional node
@@ -170,7 +170,7 @@ uses terminology that is defined in the figure caption.
 \newcommand{\gspcapone}{\footnotesize
 A genomic simulation pedigree (GSP) for simulating $F_2$ individuals.
 Squares denote founder and non-founder nodes in the pedigree. There are four founders in the pedigree,
-individuals 1--4.  The inverted triangles above each of those founders denotes, in color
+individuals 1--4.  The  triangles above each of those founders denotes, in color
 and text, the population of origin of each of the two genomes within each founder.
 Thus, individuals~1 and~2 are founders purely from population~$A$, and~3 and~4
 are purely from population~$B$.  The pink hexagon labeled s7 is the sample node.
@@ -185,18 +185,17 @@ to a traditional pedigree, each parent
 node may segregate multiple gametes to a daughter node.  See the text for
 further explanation.
 Each non-founder node $x$ will have exactly two edges coming into it from above
-(from its two parents), we denote the numbers associated with those edges as $G^+_{x,1}$ and $G^+_{x,2}$.
+(from its two parents), and we denote the numbers associated with those edges as $G^+_{x,1}$ and $G^+_{x,2}$.
 For example, node 6 has $G^+_{6,1}=G^+_{6,2} = 2$.
-A non-founder individual may have more or less than two edges coming downward
+A founder individual may have, at most, 2 edges coming downward out of it, while a non-founder individual may have more or less than two edges coming downward
 out of it.  Letting $e_x$ be the number of downward edges out of node $x$ to its $e_x$
 non-founder daughter nodes, we denote the number of gametes segregated
-through each edge as $G^{-}_{x, 1},\ldots,G^{-}_{x, e_x}$.  For example,
+through each edge as $G^{-}_{x, 1},\ldots,G^{-}_{x, e_x}$.  For example, at
 non-founder node~5, $e_5 = 1$ and $G^{-}_{5,1}=4$.
 Finally, the purple number adjacent to the edge leading into the
 sample node indicates how many sample individuals are drawn from individual
 node 7. Any non-founder individual node can have a maximum of one edge leading
-to a sample node.  We denote the number of samples emanating from node $x$
-node as $S_x$. In our example $S_7=4$ indicates that four $F_2$ individuals are
+to a sample node.  We denote the number of samples emanating from node $x$ as $S_x$. In our example $S_7=4$ indicates that four $F_2$ individuals are
 created from a single simulation on this GSP.
 }
 \begin{center}
@@ -218,10 +217,10 @@ are run on each node's parents before being run on the node itself:
 \item Each genome in a triangle above a founder node represents a gamete
 carrying a single, haploid copy of the genome.
 These gametes are united within the founder individual and then
-following recombination between each chromosome
+recombination occurs between each chromosome
 with probability $\frac{1}{2}$ and within each chromosome according to
-a user-specified recombination map,
- one gamete is assorted down each edge from the founder node to its daughter.
+a user-specified recombination map to create two new gametes, which are
+recombined version of the original ones.  These two gametes are then segregated at random down the edge (or edges) from the founder node. Upon each edge, $i$ from founder node $f$, $G^-_{f,i}$ gametes are segregated. 
 \item Each non-founder node, $x$, will have exactly two edges coming
 into it---one from each parent.  Each of the $G^+_{x,1}$ gametes coming in from the
 first edge is united with a single one of the $G^+_{x,2}$ gametes coming
@@ -238,14 +237,14 @@ with the number of gametes assigned to the $i\thh$ downward edge being
 $G^-_{x,i}$.
 \end{enumerate}
 At the end of this process, the samples simulated (as united pairs of gametes)
-into the sample nodes will contain all of the genetic material (and no more) found among the founders but that
+into the sample nodes will contain all of the genetic material (and no more) found among the founders, but that
 material will have been segregated and recombined according to the pedigree.  Thus the
 samples obtained from a GSP can be simulated with the expected admixture fractions
 for any hybrid category that can be specified by a pedigree.  They have also been simulated
 in a way that 1) reflects physical linkage---each individual inherits segments of the genome
 simulated using a recombination map; 2) does not duplicate any genetic material---the sampling of
-genetic material is entirely without replacement so it will not induce RIPI; and 3) no genetic material has been lost---all the genetic material of the founders
-is represented in the samples, maximizing the number of individuals and markers available to
+genetic material is entirely without replacement so it will not induce RISPI; and 3) no genetic material has been lost---all the genetic material of the founders
+is represented in the samples, maximizing the number of simulated individuals and markers available to
 use in downstream analyses.
 
 In the \gscramble{} package there is a convenience function called {\footnotesize\tt create\_GSP()} that
@@ -300,7 +299,7 @@ corresponding segments within the samples.  At the stage of assigning alleles to
 founders, \gscramble{} provides a variety of ways to permute alleles amongst
 the collection of individuals from which the founders are drawn.  By using permutation,
 variability in the data is created, but, since it is done without sampling with replacement, it does
-not induce RIPI.
+not induce RISPI.
 
 These permutations are implemented with the genotypes provided by the user.
 \gscramble{} accepts genetic data as a matrix with $N$ rows (one for each individual) and
@@ -328,17 +327,21 @@ Permutation of alleles is handled within the \gscramble{} function {\footnotesiz
 which takes as input the segments segregated down a GSP, a matrix of sampled genotypes, and a specification
 of the group that each sampled individual belongs to.  The permutation performed when running
 {\footnotesize\tt segments2markers()} is controlled by two main options.  The first, {\tt\footnotesize preserve\_individuals},
-can take three different values.  If {\tt\footnotesize preserve\_individuals = TRUE}, then entire individuals are permuted,
+can take three different values.  If {\tt\footnotesize preserve\_individuals = TRUE}, then entire individuals are the unit that gets permuted within the
+data set,
 such that all the alleles within an individual remain together.  If {\tt\footnotesize preserve\_individuals = "BY\_CHROM"}, then
 the alleles within an individual found on a homologous pair of chromosomes remain together, but the different
 chromosome pairs of an individual are independently permuted into new positions in the data set.  This form of permutation
-maintains the linkage disequilibrium (LDL between markers on the same chromosome, which may be desirable in some contexts.
+maintains the linkage disequilibrium (LD) between markers on the same chromosome, which may be desirable in some contexts.
 If {\tt\footnotesize preserve\_individuals = FALSE} then each gene copy within an individual is permuted separately,
 providing the maximal scrambling of the data. The second option, {\tt\footnotesize preserve\_haplotypes}, can take two
 different values, {{\tt\footnotesize FALSE} (the default) and {\tt\footnotesize TRUE}.
 This option, which keeps alleles together
-on the same haplotype, should be set to true only
-if the original genotypes are phased into separate haplotypes.
+on the same haplotype, should be set to {\tt TRUE} only
+if the original genotypes have been phased into separate haplotypes.
+Fig.~\ref{fig:perms} depicts, graphically, the effect of using different settings of
+{\tt\footnotesize preserve\_individuals} and 
+{\tt\footnotesize preserve\_haplotypes}, together.
 
 %%%%%%%
 \newcommand{\permcap}{\footnotesize An illustration of how \gscramble{} permutes data under
@@ -361,10 +364,23 @@ while permuting. This option should only be used when the original data set is p
 \begin{figure*}
 \includegraphics[width=\textwidth]{figures/permutations-plot.png}
 \caption[\permcap]{\permcap}
+\label{fig:perms}
 \end{figure*}
 %%%%%%%
 
 \subsection*{Empirical Examples}
+
+We illustrate the use of \gscramble{} in two examples.  The first involves
+simulating a small number ($<\,$70) of markers that are fixed, or nearly
+fixed, for alternate alleles between two species of trout: rainbow trout ({\em 
+Oncorhynchus mykiss}) and cutthroat trout ({\em O. clarkii}). The goal of the 
+simulation study is to determine how accurately individuals of different hybrid
+categories between the species can be identified, and whether the use of linked 
+markers deflates the estimates of uncertainty to an unacceptable degree.  The 
+second example involves many more markers ($\approx$14,000) and 
+investigates the accuracy for
+identifying individuals admixed between closely related groups of feral
+pigs in Missouri.  
 
 \subsubsection*{Rainbow/cutthroat trout hybrids in California}
 
