@@ -12,8 +12,8 @@ such as influencing evolutionary processes, maintaining genetic variation throug
 of invasive species expansion \citep{huestis2019windborne, estoup2010reconstructing}.
 
 In using clustering algorithms to describe genetic structure among natural populations, researchers frequently identify individuals of
-mixed ancestry--- individuals with proportions of their genome attributed to multiple subpopulations, sensu \citet{pritchard2000inference}.
-Various processes could contribute to such mixed associations.  Most directly, individuals may represent the
+mixed ancestry---individuals with proportions of their genome attributed to multiple subpopulations, sensu \citet{pritchard2000inference}.
+Various processes could contribute to the appearance of mixed ancestry in a clustering analysis.  Most directly, individuals may represent the
 influences of gene flow among populations, occurring in recent or prior generations, with the observed complex ancestry patterns accurately
 representing contributions from multiple sampled populations.  However, similar patterns may result from functionally different patterns of
 population structuring.  For example, such patterns might be expected when clinal systems governed by isolation by distance are described
@@ -27,10 +27,10 @@ as a function of both the marker set and sample size, to resolve the true underl
  ancestry patterns were created.
 
 A best practice for evaluating the behavior of genetic clustering algorithms on an empirical dataset is to conduct
-parallel analyses on simulated data where the truth is known, yet structured to mirror the empirical data set
+parallel analyses on data that have been simulated---so the truth is known---so as to mirror the empirical data set
 as closely as possible \citep{vaha2006efficiency,anderson2008improved,latch2011fine}.
 Techniques to simulate individual genotypes in this context frequently use sampling with replacement from the
-observed allele frequencies (see CITE, CITE, CITE).
+observed allele frequencies (see, for example, \citealt{nielsen2006hybridlab,kinziger2008hybridization}).
 However, sampling with replacement implicitly increases the pairwise genetic distance among simulated samples, relative to the observed
 samples, and
 inflates the perceived statistical power to correctly assign individuals back to source populations.
@@ -49,19 +49,29 @@ Recognizing that connectivity among genetically distinct populations may be rela
 frequency of immigration can be gained by integrating across generations to identify both direct migrants and descendants of migrants
  (i.e., F1 hybrids or advanced hybrids reflecting the effect of backcrossing across multiple generations [BC1, \ldots,
 BCX]).
-However, the process of recombination during meiosis creates a distribution of expected associations to parental populations among
-advanced hybrid classes.
-Treating linked loci as independent can lead to the false interpretation that the association of advanced hybrid classes to parental population
-occur strictly as discrete distributions.
-Therefore, in evaluating descendants of migrants within a simulated framework, it is imperative to take into consideration the pattern of
-linkage among loci available for analysis.
+Evaluating the results of genetic clustering algorithms in the context of data that are
+expected to arrive by such a process of hybridization requires simulation of
+explicit hybrids.  Such simulations are the purpose of the software {\sc hybridlab} 
+\citep{nielsen2006hybridlab}.
+
+{\sc hybridlab} was conceived at a time when
+the data sets used in molecular ecology universally included very few markers, such that
+it was reasonable to assume the markers were unlinked, and, hence, independently segregating.
+Today, however, with data sets of thousands of markers, that assumption is badly violated---alleles
+on the same chromosome are likely to be segregated together into the next generation.
+Simulating linked loci as independent creates simulated hybrids, beyond the $F1$ category, with 
+artificially low variance in admixture fraction, leading to the false interpretation that different
+hybrid categories are more easily distinguished than they are. Therefore, in evaluating descendants of migrants within a simulated framework, it is imperative to take into consideration the pattern of
+linkage among loci available for analysis. This was done recently to assess the power of a SNP panel for identifying descendants of escaped, farm-raised Atlantic salmon \citep{wringe2019development}; however the method used (described at https://eriqande.github.io/SalarHybPower/) was developed in an {\em ad hoc} fashion and was not easily extended to
+complex hybridization scenarios, and was not at all user-friendly.
 
 In response to these needs, we developed \gscramble{} – a simulation approach that samples alleles from respective populations without
-replacement, thus maintaining the genetic differences in the empirical dataset and eliminating the effect of RISPI.
-Further, by simulating individual genotypes based on user-defined pedigrees, \gscramble{} allows for the simulation of admixed genotypes of
-varying degrees of complexity while allowing the tracking of haplotype blocks from source populations within the specified pedigree.
+replacement, thus maintaining genetic differences between the clusters commensurate to those in the empirical dataset, and eliminating the effect of RISPI.
+Further, by simulating individual genotypes based on user-defined pedigrees of arbitrary complexity, \gscramble{} allows for the simulation of admixed genotypes resulting from any conceivable category of hybrid, while allowing the tracking of haplotype blocks from source populations within the specified pedigree.
 By integrating species-specific recombination rates, \gscramble{} simulates biologically informed genotypes that mirror empirical data.
-We develop and illustrate \gscramble{} with use of single nucleotide polymorphic (SNP) genotypes.
+We develop and illustrate \gscramble{} with use of single nucleotide polymorphic (SNP) genotypes, though it is equally applicable to data sets with hundreds or thousands of
+microhaplotypes \citep{baetscher2018microhaplotypes} or microsatellites
+\citep{zhan2017megasat}.
 
 
 
@@ -125,8 +135,7 @@ for each combination of $L$, $N$, and $n$.
 
 \subsection*{Genomic Simulation Pedigrees}
 
-Our approach for simulating admixed individuals without inflating perceived power for
-the estimation of their admixture fractions is motivated by the traditional cross-validation
+Our approach for simulating admixed individuals without creating RISPI is motivated by the traditional cross-validation
 approach for evaluating the power of mixture proportion
 estimation in genetic stock identification (e.g., the cross-validation approach
 described in \citealt{moran2019bayesian}).
@@ -384,7 +393,7 @@ pigs in Missouri.
 
 \subsubsection*{Rainbow/cutthroat trout hybrids in California}
 
-Boing.
+Genotypes for 
 
 \subsubsection*{Invasive wild pigs in Missouri}
 
@@ -525,7 +534,9 @@ assessing power using ADMIXTURE or STRUCTURE would require hacking the underlyin
 of those programs, which is not desirable.  So, for these cases we have used the sampling
 without replacement approach.
 
-
+Also, we need to discuss the fact that, because each time a gamete is segregated in the
+pedigree, its complement is also segregated, this is an example of antithetical variate sampling
+in Monte Carlo.  
 
 \section*{Acknowledgements}
 Research was supported in part by the USDA-APHIS-National Feral Swine Damage

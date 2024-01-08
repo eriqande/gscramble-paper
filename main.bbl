@@ -1,4 +1,4 @@
-\begin{thebibliography}{12}
+\begin{thebibliography}{17}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[\protect\citeauthoryear{Alexander, Novembre, \& Lange}{Alexander {\em
@@ -13,6 +13,12 @@ Anderson EC, Waples RS, Kalinowski ST (2008) An improved method for predicting
   the accuracy of genetic stock identification. {\em Canadian Journal of
   Fisheries and Aquatic Sciences\/}, {\bf 65}, 1475--1486.
 
+\bibitem[\protect\citeauthoryear{Baetscher, Clemento, Ng, Anderson, \&
+  Garza}{Baetscher {\em et~al.\/}}{2018}]{baetscher2018microhaplotypes}
+Baetscher DS, Clemento AJ, Ng TC, Anderson EC, Garza JC (2018) Microhaplotypes
+  provide increased power from short-read DNA sequences for relationship
+  inference. {\em Molecular Ecology Resources\/}, {\bf 18}, 296--305.
+
 \bibitem[\protect\citeauthoryear{Estoup \& Guillemaud}{Estoup \&
   Guillemaud}{2010}]{estoup2010reconstructing}
 Estoup A, Guillemaud T (2010) Reconstructing routes of invasion using genetic
@@ -25,6 +31,13 @@ Huestis DL, Dao A, Diallo M, Sanogo ZL, Samake D, Yaro AS, Ousman Y, Linton YM,
   Krishna A, Veru L, {\em et~al.\/} (2019) Windborne long-distance migration of
   malaria mosquitoes in the Sahel. {\em Nature\/}, {\bf 574}, 404--408.
 
+\bibitem[\protect\citeauthoryear{Kinziger, Loudenslager, Hankin, Anderson, \&
+  Garza}{Kinziger {\em et~al.\/}}{2008}]{kinziger2008hybridization}
+Kinziger AP, Loudenslager EJ, Hankin DG, Anderson EC, Garza JC (2008)
+  Hybridization between spring-and fall-run Chinook salmon returning to the
+  Trinity River, California. {\em North American Journal of Fisheries
+  Management\/}, {\bf 28}, 1426--1438.
+
 \bibitem[\protect\citeauthoryear{Latch, Boarman, Walde, \& Fleischer}{Latch
   {\em et~al.\/}}{2011}]{latch2011fine}
 Latch EK, Boarman WI, Walde A, Fleischer RC (2011) Fine-scale analysis reveals
@@ -36,6 +49,12 @@ Latch EK, Boarman WI, Walde A, Fleischer RC (2011) Fine-scale analysis reveals
 Moran BM, Anderson EC (2019) Bayesian inference from the conditional genetic
   stock identification model. {\em Canadian Journal of Fisheries and Aquatic
   Sciences\/}, {\bf 76}, 551--560.
+
+\bibitem[\protect\citeauthoryear{Nielsen, Bach, \& Kotlicki}{Nielsen {\em
+  et~al.\/}}{2006}]{nielsen2006hybridlab}
+Nielsen EE, Bach LA, Kotlicki P (2006) HYBRIDLAB (version 1.0): a program for
+  generating simulated hybrids from population samples. {\em Molecular Ecology
+  Notes\/}, {\bf 6}, 971--973.
 
 \bibitem[\protect\citeauthoryear{Paetkau, Calvert, Stirling, \&
   Strobeck}{Paetkau {\em et~al.\/}}{1995}]{paetkau1995microsatellite}
@@ -71,5 +90,20 @@ V{\"a}h{\"a} JP, Primmer CR (2006) Efficiency of model-based Bayesian methods
   Rannala}{2003}]{wilson2003bayesian}
 Wilson GA, Rannala B (2003) Bayesian inference of recent migration rates using
   multilocus genotypes. {\em Genetics\/}, {\bf 163}, 1177--1191.
+
+\bibitem[\protect\citeauthoryear{Wringe, Anderson, Jeffery, Stanley, \&
+  Bradbury}{Wringe {\em et~al.\/}}{2019}]{wringe2019development}
+Wringe BF, Anderson EC, Jeffery NW, Stanley RR, Bradbury IR (2019) Development
+  and evaluation of SNP panels for the detection of hybridization between wild
+  and escaped Atlantic salmon (Salmo salar) in the western Atlantic. {\em
+  Canadian journal of fisheries and aquatic sciences\/}, {\bf 76}, 695--704.
+
+\bibitem[\protect\citeauthoryear{Zhan, Paterson, Fraser, Watson, Bradbury,
+  Nadukkalam~Ravindran, Reznick, Beiko, \& Bentzen}{Zhan {\em
+  et~al.\/}}{2017}]{zhan2017megasat}
+Zhan L, Paterson IG, Fraser BA, Watson B, Bradbury IR, Nadukkalam~Ravindran P,
+  Reznick D, Beiko RG, Bentzen P (2017) MEGASAT: automated inference of
+  microsatellite genotypes from sequence data. {\em Molecular Ecology
+  Resources\/}, {\bf 17}, 247--256.
 
 \end{thebibliography}
