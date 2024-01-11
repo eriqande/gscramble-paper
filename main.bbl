@@ -1,4 +1,4 @@
-\begin{thebibliography}{17}
+\begin{thebibliography}{21}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[\protect\citeauthoryear{Alexander, Novembre, \& Lange}{Alexander {\em
@@ -6,6 +6,12 @@
 Alexander DH, Novembre J, Lange K (2009) Fast model-based estimation of
   ancestry in unrelated individuals. {\em Genome research\/}, {\bf 19},
   1655--1664.
+
+\bibitem[\protect\citeauthoryear{Anderson \& Thompson}{Anderson \&
+  Thompson}{2002}]{anderson2002model}
+Anderson E, Thompson E (2002) A model-based method for identifying species
+  hybrids using multilocus genetic data. {\em Genetics\/}, {\bf 160},
+  1217--1229.
 
 \bibitem[\protect\citeauthoryear{Anderson, Waples, \& Kalinowski}{Anderson {\em
   et~al.\/}}{2008}]{anderson2008improved}
@@ -62,6 +68,21 @@ Paetkau D, Calvert W, Stirling I, Strobeck C (1995) Microsatellite analysis of
   population structure in Canadian polar bears. {\em Molecular ecology\/}, {\bf
   4}, 347--354.
 
+\bibitem[\protect\citeauthoryear{Palti, Gao, Liu, Kent, Lien, Miller,
+  Rexroad~III, \& Moen}{Palti {\em et~al.\/}}{2015}]{palti2015development}
+Palti Y, Gao G, Liu S, Kent M, Lien S, Miller M, Rexroad~III C, Moen T (2015)
+  The development and characterization of a 57 K single nucleotide polymorphism
+  array for rainbow trout. {\em Molecular ecology resources\/}, {\bf 15},
+  662--672.
+
+\bibitem[\protect\citeauthoryear{Pearse, Barson, Nome, Gao, Campbell,
+  Abad{\'\i}a-Cardoso, Anderson, Rundio, Williams, Naish {\em et~al.\/}}{Pearse
+  {\em et~al.\/}}{2019}]{pearse2019sex}
+Pearse DE, Barson NJ, Nome T, Gao G, Campbell MA, Abad{\'\i}a-Cardoso A,
+  Anderson EC, Rundio DE, Williams TH, Naish KA, {\em et~al.\/} (2019)
+  Sex-dependent dominance maintains migration supergene in rainbow trout. {\em
+  Nature ecology \& evolution\/}, {\bf 3}, 1731--1742.
+
 \bibitem[\protect\citeauthoryear{Pritchard, Stephens, \& Donnelly}{Pritchard
   {\em et~al.\/}}{2000}]{pritchard2000inference}
 Pritchard JK, Stephens M, Donnelly P (2000) Inference of population structure
@@ -79,6 +100,12 @@ Purcell S, Neale B, Todd-Brown K, Thomas L, Ferreira MA, Bender D, Maller J,
   Team}}{2023}]{Rcoreteam}
 {R Core Team} (2023) {\em R: A Language and Environment for Statistical
   Computing\/}, R Foundation for Statistical Computing, Vienna, Austria.
+
+\bibitem[\protect\citeauthoryear{Rizza, Wilzbach, Kinziger, Anderson, \&
+  Carlos~Garza}{Rizza {\em et~al.\/}}{2023}]{rizza2023limited}
+Rizza SF, Wilzbach MA, Kinziger AP, Anderson EC, Carlos~Garza J (2023) Limited,
+  asymmetric hybridization between coastal cutthroat trout and steelhead in a
+  Northern California river. {\em Journal of Heredity\/}, {\bf 114}, 219--230.
 
 \bibitem[\protect\citeauthoryear{V{\"a}h{\"a} \& Primmer}{V{\"a}h{\"a} \&
   Primmer}{2006}]{vaha2006efficiency}

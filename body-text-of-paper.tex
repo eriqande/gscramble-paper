@@ -62,7 +62,7 @@ on the same chromosome are likely to be segregated together into the next genera
 Simulating linked loci as independent creates simulated hybrids, beyond the $F1$ category, with 
 artificially low variance in admixture fraction, leading to the false interpretation that different
 hybrid categories are more easily distinguished than they are. Therefore, in evaluating descendants of migrants within a simulated framework, it is imperative to take into consideration the pattern of
-linkage among loci available for analysis. This was done recently to assess the power of a SNP panel for identifying descendants of escaped, farm-raised Atlantic salmon \citep{wringe2019development}; however the method used (described at https://eriqande.github.io/SalarHybPower/) was developed in an {\em ad hoc} fashion and was not easily extended to
+linkage among loci available for analysis. This was done recently to assess the power of a SNP panel for identifying descendants of escaped, farm-raised Atlantic salmon \citep{wringe2019development}; however the method used (described at https://eriqande.github.io/SalarHybPower/) was developed in an {\em ad hoc} fashion, was not easily extended to
 complex hybridization scenarios, and was not at all user-friendly.
 
 In response to these needs, we developed \gscramble{} – a simulation approach that samples alleles from respective populations without
@@ -130,8 +130,13 @@ We summarized the results by plotting boxplots of the ADMIXTURE-inferred $q_A$ v
  case of unsupervised clustering),
 for each combination of $L$, $N$, and $n$.
 
+NOTE, WE ALSO DID THESE SIMULATIONS USING GSCRAMBLE AND WE SHOULD NOTE
+HOW THOSE CAME OUT.  
 
+\subsection*{Physical Linkage Matters}
 
+ECA STILL NEEDS TO DESCRIBE AND INCLUDE THE SIMULATIONS THAT HE DID ON THIS.
+THAT WORK IS ALL DONE, I JUST NEED TO PUT IT IN HERE, ALONG WITH THE FIGURE. 
 
 \subsection*{Genomic Simulation Pedigrees}
 
@@ -229,7 +234,7 @@ These gametes are united within the founder individual and then
 recombination occurs between each chromosome
 with probability $\frac{1}{2}$ and within each chromosome according to
 a user-specified recombination map to create two new gametes, which are
-recombined version of the original ones.  These two gametes are then segregated at random down the edge (or edges) from the founder node. Upon each edge, $i$ from founder node $f$, $G^-_{f,i}$ gametes are segregated. 
+recombined versions of the original ones.  These two gametes are then segregated at random down the edge (or edges) from the founder node. Upon each edge, $i$ from founder node $f$, $G^-_{f,i}$ gametes are segregated. 
 \item Each non-founder node, $x$, will have exactly two edges coming
 into it---one from each parent.  Each of the $G^+_{x,1}$ gametes coming in from the
 first edge is united with a single one of the $G^+_{x,2}$ gametes coming
@@ -393,7 +398,52 @@ pigs in Missouri.
 
 \subsubsection*{Rainbow/cutthroat trout hybrids in California}
 
-Genotypes for 
+We used the archived data from \citet{rizza2023limited}, drawing upon their 65 markers
+that are fixed or are nearly fixed for alternate alleles between rainbow trout and cutthroat trout.
+They designated 634 fish as pure cutthroat trout and 213 as pure steelhead.  We used the
+genotypes of these individuals as input to \gscramble{}.
+
+\citeauthor{rizza2023limited} mapped the 65 markers to the Omyk\_v1.0 genome assembly (RefSeq 
+Accession: GCF\_002163495.1), so we used
+the linkage map described in \citep{pearse2019sex} that was prepared by linkage mapping 
+of $\approx$57,000 markers described in \citet{palti2015development} to Omyk\_v1.0. We mapped the $\approx$57,000 markers to Omyk\_v1.0, and then resolved inconsistencies to produce a map
+of 32,923 markers throughout the genome and rendered it to plink format for use with \gscramble{}.
+
+In the original paper, \citet{rizza2023limited} identified 15 $F_1$s,1 $F_2$,6 cutthroat backcrosses ($BC1$s) and 6 second-generation cutthroat backcrosses ($BC2$s),
+and 1 fish of an unknown hybrid category that may have been the
+product of a $BC2$ crossed with a $BC1$.   In our simulations, we sought to simulate
+a similar collection of hybrid individuals, so, for each replicate, we used
+\gscramble{} to simulate 16 $F_1$s, 4 $F_2$s, 6 $BC1$s, 4 $BC2$s, 4 $BC3$s,  4 individuals
+that were the products of a $BC1$ mating with a $BC2$, and finally, 4 individuals that were simulated pure cutthroat. Individuals not used as founders
+in \gscramble{} were retained as pure cutthroat and pure steelhead.  The goal of the simulation
+was to assess how well these different hybrid categories can be distinguished from one another
+when using either all 65 markers, or just the 30 markers occurring on different chromosome arms
+used by  \citet{rizza2023limited}.
+
+HEY! I SHOULD ALSO DO A SET OF SIMULATIONS IN WHICH THE 65 MARKERS ARE
+SIMULATED AS IF THEY ARE INDEPENDENTLY SEGREGATING---I THINK THAT MEANS
+ASSIGNING EACH TO ITS OWN CHROMOSOME.  BUT MAYBE WORRY ABOUT THAT
+LATER.
+
+We performed 500 replicate simulations with \gscramble{} using either 30 or 65 markers.  Each
+simulated data set was then analyzed using {\sc NewHybrids} \citep{anderson2002model}. Individuals not used as founders were given the ``s'' and ``z'' flags, indicating that they were considered training samples.  The remaining 46 individuals were treated as possible hybrids and their genetic data used to calculate the posterior probability that they belonged to one of 10 hybrid categories as shown in Table~\ref{tab:newhybcats}, using 25,000 MCMC sweeps and discarding the first 5,000 as burn-in.
+%%%%%%%%%%%%
+\begin{table}
+\caption{The 10 hybrid categories considered for inference with {\sc NewHybrids} and the
+expected frequency of their genotypes having 2 ($f(C,C)$), 1 ($f(C,S)$) or 0 ($f(S,S)$) copies of ancestry from cutthroat trout.}
+\label{tab:newhybcats}
+{\small
+\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}} lrrr}
+\hline\hline
+Category	& $f(C,C)$ &	$f(C,S)$ & 	$f(S,S)$ \\ \hline
+\input{inputs/newhybs-cats.tsv}
+\end{tabular*}
+}
+\vspace*{-2.3ex}\hrule\vspace*{0.3ex}\hrule
+\end{table}
+%%%%%%%%%%%%
+
+
 
 \subsubsection*{Invasive wild pigs in Missouri}
 
@@ -469,7 +519,17 @@ samples $A$ and $B$ are drawn.
 
 \subsubsection*{Rainbow/cutthroat trout hybrids in California}
 
-Boing.
+PRETTY MUCH DONE HERE EXCEPT I WANT TO SIMULATE THINGS
+UNLINKED.
+%%%%%%%%%%
+\begin{figure}
+\newcommand{\nhbpcap}{\footnotesize Gonna need a caption}
+\includegraphics[width=\columnwidth]{figures/newhybs-texed-crop.pdf}
+\caption[\nhbpcap]{\nhbpcap}
+\label{fig:newhyb-sims-barplot}
+\end{figure}
+%%%%%%%%%%
+
 
 \subsubsection*{Invasive wild pigs in Missouri}
 
@@ -542,7 +602,7 @@ in Monte Carlo.
 Research was supported in part by the USDA-APHIS-National Feral Swine Damage
 Management Program. We are grateful for the numerous Wildlife Services and Missouri
 Department of Conservation employees that contributed to genetic sampling of wild pigs
-within southeastern Missouri. Writing of this paper was facilitated by the Mobile High Altitude Venue for Ecological Analysis,
+within southeastern Missouri. We thank Yniv Palti for providing flanking sequences and the linkage map for 57K markers for making a recombination map for the cutthroat/rainbow trout example. Writing of this paper was facilitated by the Mobile High Altitude Venue for Ecological Analysis,
 Genetics and Statistics, through which ECA, MGD, and TJS were scientists-in-residence on location in
 Cheyenne, WY for 3 days in October 2023. This is contribution number mHAVEAGAS-003.
 This work utilized the Alpine high performance computing resource at the University of Colorado Boulder.
