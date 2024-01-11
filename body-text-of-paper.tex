@@ -192,8 +192,11 @@ We summarized the results by plotting boxplots of the ADMIXTURE-inferred $q_A$ v
  case of unsupervised clustering),
 for each combination of $L$, $N$, and $n$.
 
-NOTE, WE ALSO DID THESE SIMULATIONS USING GSCRAMBLE AND WE SHOULD NOTE
-HOW THOSE CAME OUT.  
+%NOTE, WE ALSO DID THESE SIMULATIONS USING GSCRAMBLE AND WE COULD NOTE
+%HOW THOSE CAME OUT.  
+% BUT MAYBE JUST HAVE THAT IN CASE A REFEREE ASKS ABOUT IT.
+
+
 
 \subsubsection*{Physical Linkage in Hybrid Individuals}
 
@@ -344,6 +347,33 @@ the collection of individuals from which the founders are drawn.  By using permu
 variability in the data is created, but, since it is done without sampling with replacement, it does
 not induce RISPI.
 
+%%%%%%%
+\newcommand{\permcap}{\footnotesize An illustration of how \gscramble{} permutes data under
+different options.  {\bf (a)}~A picture
+representing an original data set of $N=12$ diploids sampled from three populations and typed at $L=15$ markers.
+Different colors represent different sampled individuals. Individuals 1--5 are shades of blue and green, indicating that they
+are from a single population.  Individuals 6--9 are from another population, (shades of red and orange), while 10--12
+are from a third population and are colored shades of violet. Thick vertical black lines separate the different
+populations.  Markers are shown in rows. There are 6 markers on the first chromosome, 5 on the second, and 4 on the
+third.  Each chromosome is delimited by a thick, horizontal black line. The "a" and the "b" in the colored cells denote the first and second gene copies within an individual at each marker.  It is worth noting that this representation shows a $2L \times N$ matrix,
+which is the transpose of the $N\times 2L$ matrix used to supply genetic marker data to \gscramble{}. {\bf (b)}~Examples of how the {\tt\footnotesize preserve\_individuals} and {\tt\footnotesize preserve\_haplotypes} options of the {\tt\footnotesize segments2markers()}
+function affect the permutation of
+the genetic data of the original data set.  Panel headers show the option values while the colors and "a" and "b" values
+in the colored cells show the original position of each gene copy in the original sample.  Note that permutation is always
+done within the populations.  When {\tt\footnotesize preserve\_individuals = TRUE},  then just the
+individuals in their entirety are permuted.  When {\tt\footnotesize preserve\_individuals = "BY\_CHROM"}, each pair
+of a single chromosome within an individual remains together when permuted. When {\tt\footnotesize preserve\_individuals = FALSE}, gene copies are freely permuted between individuals.  The option {\tt\footnotesize preserve\_haplotypes = TRUE} causes each haplotype on a chromosome to be preserved
+while permuting. This option should only be used when the original data set is phased.
+}
+\begin{figure*}
+\includegraphics[width=\textwidth]{figures/permutations-plot.png}
+\caption[\permcap]{\permcap}
+\label{fig:perms}
+\end{figure*}
+%%%%%%%
+
+
+
 These permutations are implemented with the genotypes provided by the user.
 \gscramble{} accepts genetic data as a matrix with $N$ rows (one for each individual) and
 $2L$ columns (two for each locus). If the data have been phased, then the phased alleles from the
@@ -386,30 +416,15 @@ Fig.~\ref{fig:perms} depicts, graphically, the effect of using different setting
 {\tt\footnotesize preserve\_individuals} and 
 {\tt\footnotesize preserve\_haplotypes}, together.
 
-%%%%%%%
-\newcommand{\permcap}{\footnotesize An illustration of how \gscramble{} permutes data under
-different options.  {\bf (a)}~A picture
-representing an original data set of $N=12$ diploids sampled from three populations and typed at $L=15$ markers.
-Different colors represent different sampled individuals. Individuals 1--5 are shades of blue and green, indicating that they
-are from a single population.  Individuals 6--9 are from another population, (shades of red and orange), while 10--12
-are from a third population and are colored shades of violet. Thick vertical black lines separate the different
-populations.  Markers are shown in rows. There are 6 markers on the first chromosome, 5 on the second, and 4 on the
-third.  Each chromosome is delimited by a thick, horizontal black line. The "a" and the "b" in the colored cells denote the first and second gene copies within an individual at each marker.  It is worth noting that this representation shows a $2L \times N$ matrix,
-which is the transpose of the $N\times 2L$ matrix used to supply genetic marker data to \gscramble{}. {\bf (b)}~Examples of how the {\tt\footnotesize preserve\_individuals} and {\tt\footnotesize preserve\_haplotypes} options of the {\tt\footnotesize segments2markers()}
-function affect the permutation of
-the genetic data of the original data set.  Panel headers show the option values while the colors and "a" and "b" values
-in the colored cells show the original position of each gene copy in the original sample.  Note that permutation is always
-done within the populations.  When {\tt\footnotesize preserve\_individuals = TRUE},  then just the
-individuals in their entirety are permuted.  When {\tt\footnotesize preserve\_individuals = "BY\_CHROM"}, each pair
-of a single chromosome within an individual remains together when permuted. When {\tt\footnotesize preserve\_individuals = FALSE}, gene copies are freely permuted between individuals.  The option {\tt\footnotesize preserve\_haplotypes = TRUE} causes each haplotype on a chromosome to be preserved
-while permuting. This option should only be used when the original data set is phased.
-}
-\begin{figure*}
-\includegraphics[width=\textwidth]{figures/permutations-plot.png}
-\caption[\permcap]{\permcap}
-\label{fig:perms}
-\end{figure*}
-%%%%%%%
+
+% I THOUGHT ABOUT PUTTING THESE RESULTS IN, BUT I
+% THINK WE ARE FINE WITHOUT THEM.
+%\subsection{Simulation: \gscramble{} Eliminates RISPI}
+%
+%We present a brief simulation similar to those in
+%section ``RISPI when estimating admixture fractions,'' but conducted using
+%\gscramble{} rather than sampling with replacement.  We focused on two
+%scenarios that 
 
 \subsection*{Empirical Examples}
 
