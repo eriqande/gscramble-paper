@@ -145,6 +145,7 @@ the genotypes of hybrid individuals assuming no physical linkage.
 
 
 \subsubsection*{RISPI when estimating admixture fractions}
+\label{sec:rispi-sim}
 
 To construct this simple example, we used the R programming language \citep{Rcoreteam} to
 simulate allele frequencies for $L$ biallelic
@@ -426,9 +427,13 @@ Fig.~\ref{fig:perms} depicts, graphically, the effect of using different setting
 %\gscramble{} rather than sampling with replacement.  We focused on two
 %scenarios that 
 
-\subsection*{Empirical Examples}
+\subsection*{Examples}
 
-We illustrate the use of \gscramble{} in two examples.  The first involves
+We illustrate the use of \gscramble{} in three example cases. The first is
+a simple simulatino to show that, unlike sampling with replacement, the
+approach of \gscramble{} does not produce RISPI.
+The next two are examples using empirical data sets.
+The first of these involves
 simulating a small number ($<\,$70) of markers that are fixed, or nearly
 fixed, for alternate alleles between two species of trout: rainbow trout ({\em 
 Oncorhynchus mykiss}) and cutthroat trout ({\em O. clarkii}). The goal of the 
@@ -439,6 +444,18 @@ second example involves many more markers ($\approx$14,000) and
 investigates the accuracy for
 identifying individuals admixed between closely related groups of feral
 pigs in Missouri.  
+
+\subsubsection*{No RISPI when using \gscramble{}}
+
+For this example, we repeat the simulation described in \nameref{sec:rispi-sim};
+however, after simulating individuals in the two samples drawn from the same population,
+we create data sets of admixed individuals using \gscramble{}, rather than sampling
+gene copies with replacement.  As before, individuals were simulated with fractions of
+ancestry from sample $A$ in $\{0, \frac{1}{8}, \frac{1}{4}, \frac{3}{8}, \frac{1}{2}, \frac{5}{8}, \frac{3}{4}, \frac{7}{8}, 1\}$, but these were simulated from pedigrees using gscramble.  We limited
+this simulation to one of the scenarios that showed extreme RISPI when sampling gene
+copies with replacement: $L=1,000$ markers with sizes of samples $A$ and $B$ being
+$N=50$. This simulation was repeated 240 times, and the results of each analyzed with
+ADMIXTURE to estimate the ancestry fractions of each simulated individual.
 
 \subsubsection*{Rainbow/cutthroat trout hybrids in California}
 
@@ -561,7 +578,10 @@ samples $A$ and $B$ are drawn.
 
 \subsubsection*{Physical Linkage in Hybrid Individuals}
 
-Figure is completed and is in Fig.~\ref{fig:ad-fract-sims}.
+When hybrids were simulated in a way that accounts for the physical linkage of
+markers, the variance in admixture fractions was considerably higher than when
+markers were simulated under the assumption that none of them are physically
+linked. (Fig.~\ref{fig:ad-fract-sims}).
 %%%%%%%%%%
 \begin{figure}
 \newcommand{\adfcap}{\footnotesize Admixture fractions of individuals simulated
@@ -575,20 +595,58 @@ mistaken impression that admixture fractions of different hybrid categories do n
 \label{fig:ad-fract-sims}
 \end{figure}
 %%%%%%%%%%
-\subsection*{Empirical Examples}
+If markers are assumed to be unlinked, then the variance around the $Q$ estimates of different 
+hybrid categories continually declines as more markers are added, from 100, to 100,000, which 
+makes it appear that different hybrid categories become increasingly well-resolved.  For example, 
+looking at the distributions for 100,000 unlinked markers one would think that it would be easy to 
+distinguish between the $BC_1$ through $BC_4$ categories on the basis of the admixture fractions.
+This is, however, not the case.  The bottom panel of Fig.\ref{fig:ad-fract-sims} shows the distribution
+of the true admixture fraction (calculated as the total length of genome from each of the two
+different species) of each individual when simulated with physical linkage using \gscramble{}.
+When physical linkage is not ignored, it is quite clear that there is considerable overlap in the
+admixture fractions between the $BC_1$ and $BC_2$ categories, and that $BC_2$, $BC_3$, and 
+$BC_4$ all have admixture fraction distributions that overlap greatly.  This shows that,
+in real life, when physical linkage cannot be ignored, it may be quite difficult to distinguish
+between different backcross categories on the basis of their admixture fractions.
+
+
+
+\subsection*{Examples}
+
+\subsubsection*{No RISPI when using \gscramble{}}
+
+As expected, there was no RISPI apparent in the ADMIXTURE-estimated
+ancestry proportions  when simulating individuals
+using \gscramble{} (Fig.~\ref{fig:norispi}).  On average, the estimated $Q$ values
+were around 0.5, which is expected when the samples are drawn from the same
+population.
+%%%
+\begin{figure}
+\newcommand{\gssimcap}{\footnotesize ADMIXTURE estimates of ancestry
+fractions, $Q$, for individuals simulated from samples from the same population,
+simulated using \gscramble{}.  There is a considerable variation in the estimates,
+but the central tendency of them all is around 0.5, as would be expected in this case
+within which there is not genetic basis for distinguishing individuals from the different
+samples.  Contrast this to the corresponding panel ($L=1,000, N=50$) in Fig.~\ref{fig:bias-sims}(b),
+in which the RISPI is readily apparent.}
+\includegraphics[width=\columnwidth]{figures/gscram_supervised_Qs.pdf}
+\caption[\gssimcap]{\gssimcap}
+\label{fig:norispi}
+\end{figure}
+%%%
 
 \subsubsection*{Rainbow/cutthroat trout hybrids in California}
 
-Figure is completed and is Fig.~\ref{fig:newhyb-sims-barplot}
+The barplots in Fig.~\ref{fig:newhyb-sims-barplot} show the distribution of posterior
+probabilities of the different hybrid categories. 
 
-NEED TO DESCRIBE GENERAL PATTERNS AND NOTE THAT THE MAP ESTIMATE
-IS THE SAME FOR 30 AND 60 IN MANY CATEGORIES, BUT NOT ALL.  ETC.
 %%%%%%%%%%
 \begin{figure}
 \newcommand{\nhbpcap}{\footnotesize Posterior probabilities for simulated
 individuals of different trout hybrid categories.  Each pair of plots shows the results
 for individuals of the true hybrid category listed atop the pair.  (See Table~\protect\ref{tab:newhybcats} for meaning of the names.)  The top panel of each pair
-shows results for fish simulated with the 30 markers used by \protect\citet{rizza2023limited}, and the bottom panel shows results for fish simulated an additional  35 markers, some of which are linked
+shows results for fish simulated with the 30 markers used by \protect\citet{rizza2023limited}, and the bottom panel shows results for fish simulated with the original 30 markers,
+plus an additional  35 (65 total), some of which are linked
 on the same chromosome. Each individual appears as a thin vertical line, posterior probabilities of
 each inferred hybrid category are indicated by extent of different colors on those lines.  Individuals
 are sorted according to maximum {\em a posteriori} hybrid category, and, within that by the
@@ -600,7 +658,29 @@ maximum posterior probability. }
 \label{fig:newhyb-sims-barplot}
 \end{figure}
 %%%%%%%%%%
-
+These are similar to ADMIXTURE barplots;
+however, rather than plotting the ancestry fraction, the different colors are showing the
+posterior probabilities of different hybrid categories.  Each individual is represented by a thin
+vertical line, and the individuals have been arranged from left to right and the colors have been
+arranged from top to bottom throughout different sections of the plot to make it easy to see
+the patterns.  The {\em maximum-a-posteriori} (MAP) hybrid category for any individual is represented
+by the color that is on the bottom of the bar, so it is easy to see the shifts where the MAP hybrid
+category changes from one to another.  It is apparent over all individuals simulated to be
+either CCT, $F_1$, $F_2$, $BC_1$--CCT, or $BC_2$--CCT, that the MAP estimate of their
+hybrid categories were correct for largely the same number of individuals whether 30 or 65 markers
+were used. By contrast, for the individuals simulated to be of the complex hybrid category
+$BC_1$--CCT~$\times$~$BC_2$--CCT, the MAP estimate from 65 markers was correct more often 
+than from 
+30 markers.  However, it is also apparent that using 65 markers, some of which are physically
+linked, in the software {\em NewHybrids}---which assumes that all markers are unlinked---yields 
+estimates of uncertainty that are inaccurate.  Tellingly, when the estimates using 65 markers are 
+incorrect (for example, when $BC_1$--CCT individuals have a maximum posterior of being in the 
+$BC_2$--CCT category,
+or when individuals that are truly of the $BC_1$--CCT~$\times$~$BC_2$--CCT category have a
+maximum posterior of being from the $BC_2$--CCT category), many of those incorrect posteriors
+are quite high ($>0.90$).  In fact, using 65 markers yields more incorrect {\em and high} posteriors 
+than does using the 30 unlinked markers. So, as expected, ignoring physical linkage the way
+{\sc NewHybrids} does can yield a poor estimate of the certainty around different inferences.
 
 \subsubsection*{Invasive wild pigs in Missouri}
 
