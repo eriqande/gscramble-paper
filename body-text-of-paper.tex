@@ -254,7 +254,7 @@ pedigree), and it includes non-founders; however, we introduce an additional nod
 type in the GSP that represents samples taken from the non-founders. These samples
 are the simulated admixed individuals.  A GSP must have no inbreeding loops, since
 any inbreeding loop indicates that more than one copy of a gene in an ancestor may
-be created amongst its descendants, which is a type of sampling without
+be created amongst its descendants, which is a type of sampling with
 replacement.  Furthermore, in a GSP, the amount of genetic material taken from the
 samples at the sample nodes should be equal to the amount of material in the founders,
 to ensure that all available data is being used to estimate power for the estimation of
@@ -733,6 +733,48 @@ from both Pop1-Pop2 and Pop2-Pop1).}
 
 \section*{Discussion}
 
+Here, we present \gscramble{}, a simulation approach for creating biologically informed individual 
+genotypes of different hybrid classes. Two integral features of \gscramble{} are: 
+1) alleles are sampled from populations without replacement and 
+2) alleles are segregated based on species-specific recombination rates. 
+Our results show that both 
+of these features are especially important for accurately reflecting empirical data from large genetic 
+marker sets (thousands of markers), 
+which are common from next generation sequencing methods. Sampling alleles without 
+replacement, and thereby preserving the genetic differences (or lack thereof) of populations is 
+essential for avoiding the issue of RISPI---an issue that is exacerbated as the number of 
+alleles sampled for an individual increases. Additionally, we show the importance of accounting for 
+the physical linkage of markers when large marker sets are used and that treating loci as 
+independent results in erroneously reduced variation in the estimation of individuals' admixture 
+fractions.
+
+\gscramble{} is conducive for numerous types of contemporary marker data sets. As mentioned above, 
+one key feature of \gscramble{} is the integration of recombination rates, thereby accounting for physical 
+linkage which is expected among larger contemporary data sets. Furthermore, \gscramble{} performs marker 
+segregation with computational efficiency---for the four different GSPs used with the invasive wild pig data set, 
+the mean run time of each simulation with 14,233 SNP loci was 2.3 seconds (range: 1.9-5.7 $s$). 
+While \gscramble{} is equally applicable to data sets with 
+microhaplotypes \citep{baetscher2018microhaplotypes} or microsatellites \citep{zhan2017megasat}, 
+it is not suited for genotype likelihood data (i.e. from low-coverage whole genome sequencing). 
+The \gscramble{} simulation approach involves the segregation of gametes and therefore requires 
+that genotypes are resolved. 
+
+We envision \gscramble{} to be relevant for a diverse range of potential applications. In our 
+provided empirical examples with trout and wild pig data, we demonstrate the basics of 
+creating hybrid classes. Similarly, \gscramble{} has recently been used to demonstrate the 
+power for hybrid classification of a population genetics method used to differentiate wild pigs with 
+wildboar introgression from domestic pigs \citep{smyser2024probgen}. In \citet{smyser2024probgen}, 
+researchers made use of the segregation options in \gscramble{} in order to preserve founder individuals' 
+genotypes within populations (in contrast to \textit{a priori} shuffling alleles within populations) in order to 
+retain the subpopulation structure present within certain populations---thereby, better reflecting the 
+actual admixture variation expected from wildboar and domestic pig hybrids. We think \gscramble{} 
+may also be useful for assessing relatedness estimates using pedigrees of varying complexity. Here, it 
+is important to note that each time a gamete is segregated in a GSP, its complement is also 
+segregated---an example of antithetical variate sampling in Monte Carlo methods. Thus, in the 
+example of relatedness, fixed specified founders should be repeatedly "mated" with one offspring 
+sampled per iteration to avoid sampling of anticorrelated genotypes.
+
+\textbf{Eric's notes}: 
 Somewhere here I want to mention that the Anderson et al. (2008) approach for simulating
 mixtures of genotypes to assess how well one can estimate mixture proportions---the fraction
 of individuals from each of a set of baseline or reference populations---allows the user to
