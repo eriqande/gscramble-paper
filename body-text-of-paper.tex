@@ -557,7 +557,10 @@ for larger values of $L$ and for smaller values of $N$ (Figure~\ref{fig:bias-sim
 \newcommand{\biassimscap}{\footnotesize ADMIXTURE estimates of $q_A$ as described in
 {\em An introductory motivating example}. In these results, the apparent ability to estimate $q_A$
 is a bias resulting from the use of sampling with replacement to simulate new, admixed genotypes to
-test in ADMIXTURE.  In each figure, the different columns represent different numbers of markers
+test in ADMIXTURE.  ({\bf a}) Results from the supervised analysis in ADMIXTURE, where 
+"ref-2" and "ref-1" show the $Q$-values estimated by ADMIXTURE for the reference samples
+(even though they are treated by the program as being of known origin). ({\bf b}) Results for the
+unsupervised analysis in ADMIXTURE. In both {\bf a} and {\bf b}, the different columns represent different numbers of markers
 from 10 to 100,000, while different rows represent different original sample sizes, $N$, taken. Colors
 of the boxplots indicate how many new individuals, $n$, of each $q_A$ value were simulated during each
 replicate.}
@@ -740,13 +743,13 @@ genotypes of different hybrid classes. Two integral features of \gscramble{} are
 Our results show that both 
 of these features are especially important for accurately reflecting empirical data from large genetic 
 marker sets (thousands of markers), 
-which are common from next generation sequencing methods. Sampling alleles without 
+which are common from  both custom SNP-chip genotyping and next generation sequencing methods. Sampling alleles without 
 replacement, and thereby preserving the genetic differences (or lack thereof) of populations is 
-essential for avoiding the issue of RISPI---an issue that is exacerbated as the number of 
+essential for avoiding RISPI---an issue that is exacerbated as the number of 
 alleles sampled for an individual increases. Additionally, we show the importance of accounting for 
 the physical linkage of markers when large marker sets are used and that treating loci as 
-independent results in erroneously reduced variation in the estimation of individuals' admixture 
-fractions.
+independent results in erroneously reduced variation in the admixture 
+fractions of simulated individuals.
 
 \gscramble{} is conducive for numerous types of contemporary marker data sets. As mentioned above, 
 one key feature of \gscramble{} is the integration of recombination rates, thereby accounting for physical 
