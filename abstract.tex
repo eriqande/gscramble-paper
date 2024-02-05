@@ -1,5 +1,18 @@
 %!TEX main.tex
 
 
-
-We need an abstract.
+While a best practice for evaluating the behavior of genetic clustering algorithms 
+on empirical data is to conduct parallel analyses on simulated data, these types 
+of simulation techniques often involve sampling genetic data with replacement. 
+In this paper we demonstrate that sampling with replacement, especially with large 
+marker sets, inflates the perceived statistical power to correctly assign individuals 
+back to source populations---a phenomenon we refer to as resampling-induced, 
+spurious power inflation (RISPI). To address this issue, we present \gscramble{}, a 
+simulation approach in R for creating biologically informed individual genotypes from 
+empirical data that: 1) samples alleles from populations \textit{without} replacement, 
+2) segregates alleles based on species-specific recombination rates. \gscramble{} is 
+a flexible simulation approach that allows users to create pedigrees of varying complexity 
+in order to simulate admixed genotypes and it allows users to track haplotype blocks 
+from the source populations through the pedigrees. We demonstrate the functionality of 
+\gscramble{} with both simulated and empirical data sets and highlight additional uses of 
+the package that users may find valuable.
