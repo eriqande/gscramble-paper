@@ -33,7 +33,7 @@ Techniques to simulate individual genotypes in this context frequently use sampl
 observed allele frequencies (see, for example, \citealt{nielsen2006hybridlab,kinziger2008hybridization}).
 However, sampling with replacement implicitly increases the pairwise genetic distance among simulated samples, relative to the observed
 samples, and
-inflates the perceived statistical power to correctly assign individuals back to source populations.
+inflates the perceived statistical power to correctly assign individuals (or segments of the genome) back to source populations.
 We refer to this phenomenon as resampling-induced, spurious power inflation (RISPI).
 \citet{anderson2008improved} used simulations to document this type of artifact in the context of
 genetic stock identification (GSI), a type of clustering application in which individuals are constrained to have
@@ -47,8 +47,8 @@ interested in how individuals of admixed ancestry are genetically characterized 
 analysis methods used.
 Recognizing that connectivity among genetically distinct populations may be relatively rare, additional insight into the
 frequency of immigration can be gained by integrating across generations to identify both direct migrants and descendants of migrants
- (i.e., F1 hybrids or advanced hybrids reflecting the effect of backcrossing across multiple generations [BC1, \ldots,
-BCX]).
+ (i.e., F1 hybrids or advanced hybrids reflecting the effect of backcrossing across multiple generations $[BC_1, \ldots,
+BC_X])$.
 Evaluating the results of genetic clustering algorithms in the context of data that are
 expected to arrive by such a process of hybridization requires simulation of
 explicit hybrids.  Such simulations are the purpose of the software {\sc hybridlab} 
@@ -117,13 +117,13 @@ Simulating linked loci as independent creates simulated hybrids, beyond the $F1$
 artificially low variance in admixture fraction, leading to the false interpretation that different
 hybrid categories are more easily distinguished than they are. Therefore, in evaluating descendants of migrants within a simulated framework, it is imperative to take into consideration the pattern of
 linkage among loci available for analysis. This was done recently to assess the power of a SNP panel for identifying descendants of escaped, farm-raised Atlantic salmon \citep{wringe2019development}; however the method used (described at https://eriqande.github.io/SalarHybPower/) was developed in an {\em ad hoc} fashion, was not easily extended to
-complex hybridization scenarios, and was not at all user-friendly.
+complex hybridization scenarios, and is not user-friendly.
 
 In response to these needs, we developed \gscramble{} – a simulation approach that samples alleles from respective populations without
 replacement, thus maintaining genetic differences between the clusters commensurate to those in the empirical dataset, and eliminating the effect of RISPI.
-Further, by simulating individual genotypes based on user-defined pedigrees of arbitrary complexity, \gscramble{} allows for the simulation of admixed genotypes resulting from any conceivable category of hybrid, while allowing the tracking of haplotype blocks from source populations within the specified pedigree.
+Further, by simulating individual genotypes based on user-defined pedigrees of arbitrary complexity, \gscramble{} allows for the simulation of admixed genotypes resulting from any conceivable category of (non-inbred) hybrid, while allowing the tracking of haplotype blocks from source populations within the specified pedigree.
 By integrating species-specific recombination rates, \gscramble{} simulates biologically informed genotypes that mirror empirical data.
-We develop and illustrate \gscramble{} with use of single nucleotide polymorphic (SNP) genotypes, though it is equally applicable to data sets with hundreds or thousands of
+We develop and illustrate \gscramble{} through the use of single nucleotide polymorphism (SNP) genotypes, though it is equally applicable to data sets with hundreds or thousands of
 microhaplotypes \citep{baetscher2018microhaplotypes} or microsatellites
 \citep{zhan2017megasat}.
 
@@ -140,7 +140,7 @@ we demonstrate two important points through two simple simulations.  In the firs
 we show that using a standard sampling-with-replacement
 approach induces RISPI when estimating admixture fractions. In the second, we show
 the effect of physical linkage on the distribution of admixture fractions of hybrid individuals,
-which vividly shows why it is not acceptable with large numbers of markers, to simulate
+which vividly shows why it is not acceptable, with large numbers of markers, to simulate
 the genotypes of hybrid individuals assuming no physical linkage.
 
 
@@ -215,8 +215,8 @@ We also simulated the genomes of 48,000 individuals of each
 hybrid category using \gscramble{}'s {\footnotesize\tt segregate()} function, as described
 below, with number of chromosomes and sex-averaged recombination rates
 for pigs, as estimated by from \citet{tortereau2012high}. In this case, we recorded the
-admixture fraction of each simulated individual as the fraction of all genome segments
-that originated from species~$a$.  This provides the distribution of the true admixture fraction
+admixture fraction of each simulated individual as the cumulative length of all genome segments
+that originated from species~$a$, divided by the total genome length.  This provides the distribution of the true admixture fraction
 when physical linkage of markers is not ignored.  
 
 All the admixture fraction distributions were summarized by plotting them as histograms
@@ -238,7 +238,7 @@ in the original sample is being used---either within the remaining individuals i
 reference samples or within the individuals in the mixture.
 
 Our scheme, described here, extends the traditional cross-validation approach
-by simulating the descent of chromosomal linkage blocks through a user-specified
+by simulating the descent of chromosomal segments through a user-specified
 pedigree to create admixed individuals.  By imposing certain constraints
 on the pedigree, our framework ensures that all the genetic material
 within the original individuals is used to either create admixed individuals or is retained
@@ -257,8 +257,8 @@ any inbreeding loop indicates that more than one copy of a gene in an ancestor m
 be created amongst its descendants, which is a type of sampling with
 replacement.  Furthermore, in a GSP, the amount of genetic material taken from the
 samples at the sample nodes should be equal to the amount of material in the founders,
-to ensure that all available data is being used to estimate power for the estimation of
-admixture fractions.
+to ensure that all available data are being used in the simulations to predict the power for
+estimating admixture fractions.
 
 Figure~\ref{fig:gsp1} shows an example GSP for the simple case
 of simulating $F_2$ individuals. The figure and its caption
