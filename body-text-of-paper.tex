@@ -264,7 +264,6 @@ Figure~\ref{fig:gsp1} shows an example GSP for the simple case
 of simulating $F_2$ individuals. The figure and its caption
 should be studied, as the following section
 uses terminology that is defined in the figure caption.
-
 It is important to understand that, apart from the founder nodes, the individual
 nodes in a GSP do not necessarily represent only a single individual.  Specifically,
 since we are preserving all genetic material, multiple gametes may get segregated
@@ -311,8 +310,8 @@ In the \gscramble{} package there is a convenience function called {\footnotesiz
 will create GSPs for samples up to and including second-generation backcrosses (an example appears in Figure~\ref{fig:gsp2});
 however, \gscramble{} is designed
 to handle user-specified GSPs of arbitrary complexity.  When creating a unique GSP,
-the following requirements are necessary for the GSP to be valid
-and the simulation to execute successfully.
+there are several requirements to ensure that the GSP is valid
+and the simulation can execute successfully.
 Writing $\founders$ for the set of all founder nodes, $\nonfound$ for the set of all non-founder nodes, and $\nonfounds$ for all non-founder
 nodes that are not parents of other non-founders, but are adjacent to a sample node, $\nonfounde$ for all
 non-founder nodes that have non-founder node daughters, but no sample nodes, and $\nonfoundse$ for all
@@ -324,9 +323,22 @@ for a valid GSP, in addition to having no inbreeding loops, are:
 \sum_{i=1}^{e_x} G^-_{x,i} &= 2 & \forall x \in \founders \\
 G^+_{x,1} &= G^+_{x,2} & \forall x \in \nonfound \\
 \sum_{i=1}^{e_x} G^-_{x,i} &= G^+_{x,1} +  G^+_{x,2} & \forall x \in \nonfounde  \\
+ S_x/2  &= G^+_{x,1} +  G^+_{x,2} & ~~~\forall x \in \nonfounds \\
  S_x/2 + \sum_{i=1}^{e_x} G^-_{x,i} &= G^+_{x,1} +  G^+_{x,2} & ~~~\forall x \in \nonfoundse.  \\
 \end{aligned}
 \end{equation}
+In words, the separate lines above specify that 1) the number of samples
+must equal the number of founders; 2) exactly two gametes must be
+segregated from each founder; 3) the number of gametes incoming on each of the
+two edges coming into a non-founder (from its parents) must be equal; 
+4) the number of gametes going downward, out of a non-founder with no sample
+daughters, must equal the number of gametes coming into that non-founder;
+5)  the total number of gametes entering a non-founder with only sample daughters
+must be half the number of sample daughters; and 6) the number of gametes
+entering non-founders with both sample daughters and non-founder daughters must
+equal half the number of its sample daughters plus the sum of the number of gametes segregated
+along each edge to all of its non-founder daughters.
+
 Before simulating from a GSP, \gscramble{} checks to ensure the GSP
 satisfies these validity conditions.  The simulation of genomic segments
 from founders to samples in a GSP is performed by the \gscramble{} function
@@ -430,7 +442,7 @@ Fig.~\ref{fig:perms} depicts, graphically, the effect of using different setting
 \subsection*{Examples}
 
 We illustrate the use of \gscramble{} in three example cases. The first is
-a simple simulatino to show that, unlike sampling with replacement, the
+a simple simulation to show that, unlike sampling with replacement, the
 approach of \gscramble{} does not produce RISPI.
 The next two are examples using empirical data sets.
 The first of these involves
@@ -447,14 +459,14 @@ pigs in Missouri.
 
 \subsubsection*{No RISPI when using \gscramble{}}
 
-For this example, we repeat the simulation described in \nameref{sec:rispi-sim};
+For this example, we repeat the simulation described in {\em \nameref{sec:rispi-sim}};
 however, after simulating individuals in the two samples drawn from the same population,
 we create data sets of admixed individuals using \gscramble{}, rather than sampling
 gene copies with replacement.  As before, individuals were simulated with fractions of
 ancestry from sample $A$ in $\{0, \frac{1}{8}, \frac{1}{4}, \frac{3}{8}, \frac{1}{2}, \frac{5}{8}, \frac{3}{4}, \frac{7}{8}, 1\}$, but these were simulated from pedigrees using gscramble.  We limited
 this simulation to one of the scenarios that showed extreme RISPI when sampling gene
 copies with replacement: $L=1,000$ markers with sizes of samples $A$ and $B$ being
-$N=50$. This simulation was repeated 240 times, and the results of each analyzed with
+$N=50$. This simulation was repeated 240 times, and the results of each replicate were analyzed with
 ADMIXTURE to estimate the ancestry fractions of each simulated individual.
 
 \subsubsection*{Rainbow/cutthroat trout hybrids in California}
@@ -467,18 +479,18 @@ genotypes of these individuals as input to \gscramble{}.
 \citeauthor{rizza2023limited} mapped the 65 markers to the Omyk\_v1.0 genome assembly (RefSeq 
 Accession: GCF\_002163495.1), so we used
 the linkage map described in \citep{pearse2019sex} that was prepared by linkage mapping 
-of $\approx$57,000 markers described in \citet{palti2015development} to Omyk\_v1.0. We mapped the $\approx$57,000 markers to Omyk\_v1.0, and then resolved inconsistencies to produce a map
+of $\approx$57,000 markers described in \citet{palti2015development} to Omyk\_v1.0. We mapped these $\approx$57,000 markers to Omyk\_v1.0, and then resolved inconsistencies to produce a map
 of 32,923 markers throughout the genome and rendered it to plink format for use with \gscramble{}.
 
 In the original paper, \citet{rizza2023limited} identified 15 $F_1$s,
 1 $F_2$,
-6 cutthroat backcrosses ($BC1$s) and 
-6 second-generation cutthroat backcrosses ($BC2$s),
+6 cutthroat backcrosses ($BC_1$s) and 
+6 second-generation cutthroat backcrosses ($BC_2$s),
 and 1 fish of an unknown hybrid category that may have been the
-product of a $BC2$ crossed with a $BC1$.   In our simulations, we sought to simulate
+product of a $BC_2$ crossed with a $BC_1$.   In our simulations, we sought to simulate
 a similar collection of hybrid individuals, so, for each replicate, we used
-\gscramble{} to simulate 16 $F_1$s, 4 $F_2$s, 6 $BC1$s, 4 $BC2$s, 4 $BC3$s,  4 individuals
-that were the products of a $BC1$ mating with a $BC2$, and finally, 4 individuals that were simulated pure cutthroat. Individuals not used as founders
+\gscramble{} to simulate 16 $F_1$s, 4 $F_2$s, 6 $BC_1$s, 4 $BC_2$s, 4 $BC_3$s,  4 individuals
+that were the products of a $BC_1$ mating with a $BC_2$, and finally, 4 individuals that were simulated pure cutthroat. Individuals not used as founders
 in \gscramble{} were retained as pure cutthroat and pure steelhead.  The goal of the simulation
 was to assess how well these different hybrid categories can be distinguished from one another
 when using either all 65 markers, or just the 30 markers occurring on different chromosome arms
@@ -531,8 +543,7 @@ from the contact regions using simulated pedigrees from \gscramble{}. To address
 pedigrees to represent the likely classes of admixed individuals that would be present in the samples
 from the contact regions of the 3 reference populations. The types of admixed individuals we considered were
 $F_1$, $F_2$, $\BC_1$ and $\BC_2$ representing all two-population combinations
-(Pop1 x Pop2, Pop1 x Pop3, Pop2 x Pop3, and reciprocally Pop2 x Pop1, Pop3 x Pop1, Pop3 x Pop2 as required
-to simulate backcrossed classes).
+(Pop1 x Pop2, Pop1 x Pop3, Pop2 x Pop3, and reciprocally Pop2 x Pop1, Pop3 x Pop1, Pop3 x Pop2).
 We also simulated individuals from each of the founder populations. The first step of this workflow involved
 simulating admixed individuals for 2 founder populations using one of the preset \gscramble{}
 GSPs provided by the function {\footnotesize\tt create\_GSP()} for producing each of the types of admixed
