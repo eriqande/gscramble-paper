@@ -213,7 +213,8 @@ gene copies originating from species $a$.
 
 We also simulated the genomes of 48,000 individuals of each
 hybrid category using \gscramble{}'s {\footnotesize\tt segregate()} function, as described
-below, with number of chromosomes and sex-averaged recombination rates
+below, with 18 chromosomes (2.35 gigabases of physical genome length)  and
+sex-averaged recombination rates
 for pigs, as estimated by from \citet{tortereau2012high}. In this case, we recorded the
 admixture fraction of each simulated individual as the cumulative length of all genome segments
 that originated from species~$a$, divided by the total genome length.  This provides the distribution of the true admixture fraction
@@ -568,7 +569,7 @@ for larger values of $L$ and for smaller values of $N$ (Figure~\ref{fig:bias-sim
 \newcommand{\biassimscap}{\footnotesize ADMIXTURE estimates of $q_A$ as described in
 {\em An introductory motivating example}. In these results, the apparent ability to estimate $q_A$
 is a bias resulting from the use of sampling with replacement to simulate new, admixed genotypes to
-test in ADMIXTURE.  ({\bf a}) Results from the supervised analysis in ADMIXTURE, where 
+test in ADMIXTURE (e.g., these simulated samples suffer from RISPI).  ({\bf a}) Results from the supervised analysis in ADMIXTURE, where 
 "ref-2" and "ref-1" show the $Q$-values estimated by ADMIXTURE for the reference samples
 (even though they are treated by the program as being of known origin). ({\bf b}) Results for the
 unsupervised analysis in ADMIXTURE. In both {\bf a} and {\bf b}, the different columns represent different numbers of markers
@@ -595,12 +596,13 @@ samples $A$ and $B$ are drawn.
 When hybrids were simulated in a way that accounts for the physical linkage of
 markers, the variance in admixture fractions was considerably higher than when
 markers were simulated under the assumption that none of them are physically
-linked. (Fig.~\ref{fig:ad-fract-sims}).
+linked (Fig.~\ref{fig:ad-fract-sims}).
 %%%%%%%%%%
 \begin{figure}
 \newcommand{\adfcap}{\footnotesize Admixture fractions of individuals simulated
 assuming no physical linkage (top four panels)
-and when physical linkage is simulated using \gscramble{}.  In the top 4 panels the number
+and when physical linkage is simulated using \gscramble{} assuming a genetic map with 18 chromosomes spanning 2.35 gigabases with recombination fractions like those found in pigs
+\citep{tortereau2012high}.  In the top 4 panels the number
 of simulated loci appears in the panel header.  Failing to simulate markers with physical linkage
 produces distributions of admixture fractions that are far more narrow than reality, giving the
 mistaken impression that admixture fractions of different hybrid categories do not overlap.  }
@@ -614,12 +616,12 @@ hybrid categories continually declines as more markers are added, from 100, to 1
 makes it appear that different hybrid categories become increasingly well-resolved.  For example, 
 looking at the distributions for 100,000 unlinked markers one would think that it would be easy to 
 distinguish between the $BC_1$ through $BC_4$ categories on the basis of the admixture fractions.
-This is, however, not the case.  The bottom panel of Fig.\ref{fig:ad-fract-sims} shows the distribution
+This is, however, not the case.  The bottom panel of Fig.~\ref{fig:ad-fract-sims} shows the distribution
 of the true admixture fraction (calculated as the total length of genome from each of the two
 different species) of each individual when simulated with physical linkage using \gscramble{}.
 When physical linkage is not ignored, it is quite clear that there is considerable overlap in the
 admixture fractions between the $BC_1$ and $BC_2$ categories, and that $BC_2$, $BC_3$, and 
-$BC_4$ all have admixture fraction distributions that overlap greatly.  This shows that,
+$BC_4$ all have admixture-fraction distributions that overlap greatly.  This shows that,
 in real life, when physical linkage cannot be ignored, it may be quite difficult to distinguish
 between different backcross categories on the basis of their admixture fractions.
 
@@ -638,10 +640,10 @@ population.
 \begin{figure}
 \newcommand{\gssimcap}{\footnotesize ADMIXTURE estimates of ancestry
 fractions, $Q$, for individuals simulated from samples from the same population,
-simulated using \gscramble{}.  There is a considerable variation in the estimates,
+simulated using \gscramble{}.  There is considerable variation in the estimates,
 but the central tendency of them all is around 0.5, as would be expected in this case
-within which there is not genetic basis for distinguishing individuals from the different
-samples.  Contrast this to the corresponding panel ($L=1,000, N=50$) in Fig.~\ref{fig:bias-sims}(b),
+within which the different
+samples are drawn from the same population.  Contrast this to the corresponding panel ($L=1,000, N=50$) in Fig.~\ref{fig:bias-sims}(b),
 in which the RISPI is readily apparent.}
 \includegraphics[width=\columnwidth]{figures/gscram_supervised_Qs.pdf}
 \caption[\gssimcap]{\gssimcap}
@@ -653,12 +655,12 @@ in which the RISPI is readily apparent.}
 
 The barplots in Fig.~\ref{fig:newhyb-sims-barplot} show the distribution of posterior
 probabilities of the different hybrid categories. 
-
 %%%%%%%%%%
 \begin{figure}
 \newcommand{\nhbpcap}{\footnotesize Posterior probabilities for simulated
 individuals of different trout hybrid categories.  Each pair of plots shows the results
-for individuals of the true hybrid category listed atop the pair.  (See Table~\protect\ref{tab:newhybcats} for meaning of the names.)  The top panel of each pair
+for individuals of the true hybrid category listed atop the pair  (see
+ Table~\protect\ref{tab:newhybcats} for the meanings of the names).  The top panel of each pair
 shows results for fish simulated with the 30 markers used by \protect\citet{rizza2023limited}, and the bottom panel shows results for fish simulated with the original 30 markers,
 plus an additional  35 (65 total), some of which are linked
 on the same chromosome. Each individual appears as a thin vertical line, posterior probabilities of
@@ -672,7 +674,7 @@ maximum posterior probability. }
 \label{fig:newhyb-sims-barplot}
 \end{figure}
 %%%%%%%%%%
-These are similar to ADMIXTURE barplots;
+These are similar to STRUCTURE or ADMIXTURE barplots;
 however, rather than plotting the ancestry fraction, the different colors are showing the
 posterior probabilities of different hybrid categories.  Each individual is represented by a thin
 vertical line, and the individuals have been arranged from left to right and the colors have been
@@ -694,7 +696,7 @@ or when individuals that are truly of the $BC_1$--CCT~$\times$~$BC_2$--CCT categ
 maximum posterior of being from the $BC_2$--CCT category), many of those incorrect posteriors
 are quite high ($>0.90$).  In fact, using 65 markers yields more incorrect {\em and high} posteriors 
 than does using the 30 unlinked markers. So, as expected, ignoring physical linkage the way
-{\sc NewHybrids} does can yield a poor estimate of the certainty around different inferences.
+{\sc NewHybrids} does can yield a poor estimate of the uncertainty around different inferences.
 
 \subsubsection*{Invasive wild pigs in Missouri}
 
