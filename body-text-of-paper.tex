@@ -536,10 +536,10 @@ of 5 loci to remove markers above a linkage threshold of $R^2 > 0.5$.
 
 The 160 invasive wild pig samples represented 120 reference individuals from the core regions of
 3 populations (40 individuals each informed by previous analyses)
-and 40 individuals from the contact regions of these populations.
+and 40 individuals from contact regions between these populations.
 We used ADMIXTURE version 1.3.0 \citep{alexander2009fast} to characterize the genetic structure
 of the 160 samples (for $K = {1...6}$). Using the 120 reference individuals identified to represent population cores,
-we sought to classify the admixture patterns of the 40 empirical samples
+we sought to contextualize the admixture patterns of the 40 samples
 from the contact regions using simulated pedigrees from \gscramble{}. To address this objective we simulated
 pedigrees to represent the likely classes of admixed individuals that would be present in the samples
 from the contact regions of the 3 reference populations. The types of admixed individuals we considered were
@@ -549,9 +549,8 @@ We also simulated individuals from each of the founder populations. The first st
 simulating admixed individuals for 2 founder populations using one of the preset \gscramble{}
 GSPs provided by the function {\footnotesize\tt create\_GSP()} for producing each of the types of admixed
 individuals. Although we could have simulated all 4 types of admixed individuals from a single GSP (Figure~\ref{fig:gsp2}),
-different numbers of simulated individuals are produced for each hybrid class. Therefore, for the sake of the
-computational efficiency from simulating the exact number of desired individuals, we chose to simulate from
-a single GSP for each of the hybrid classes by setting the corresponding hybrid parameter in {\footnotesize\tt create\_GSP()} to {\footnotesize\tt TRUE}. We used the default settings of the {\footnotesize\tt plink\_map2rec\_rates()} to specify the recombination rates. The 120 simulated genotypes were written to PLINK .ped and .map files using {\footnotesize\tt gscramble2plink()}. We used PLINK version 1.9 \citep{purcell2007plink} to convert the genotypes to binary files and used these as input into ADMIXTURE for which we specified $K=3$ to produce ancestry values. We iteratively
+different numbers of simulated individuals are produced for each hybrid class. Therefore, for ease of simulating the exact number of desired individuals, we chose to simulate from
+a single GSP for each of the hybrid classes by setting the corresponding hybrid category (i.e. {\tt F1}, {\tt F2}, etc.) parameter in {\footnotesize\tt create\_GSP()} to {\footnotesize\tt TRUE} with all others set to {\footnotesize\tt FALSE}. We used the default settings of the {\footnotesize\tt plink\_map2rec\_rates()}  function to specify the recombination rates. The 120 simulated genotypes were written to PLINK .ped and .map files using {\footnotesize\tt gscramble2plink()}. We used PLINK version 1.9 \citep{purcell2007plink} to convert the genotypes to binary files and used these as input into ADMIXTURE for which we specified $K=3$ to produce ancestry values. We iteratively
 performed this workflow to produce 1,000 simulated genotypes and ancestry values for each of the
 4 hybrid classes, as well as founder individuals, for each of the population combinations, for a total of
 21,000 simulated individuals.
@@ -702,7 +701,7 @@ than does using the 30 unlinked markers. So, as expected, ignoring physical link
 
 SNP filtering resulted in 14,233 loci that were used for subsequent analysis.
 Using the 160 empirical samples, ADMIXTURE results supported the identification of
-$K=3$ genetic clusters grouped individuals from each of the core populations into 3 clusters
+$K=3$ genetic clusters that grouped individuals from each of the core populations into 3 clusters
 while the 40 individuals from the contact regions were highly admixed. The
 $F_\mathrm{ST}$ divergence from ADMIXTURE was:
 $F_\mathrm{ST} = 0.24$ for Pop1-Pop2,
@@ -713,9 +712,9 @@ The simulated hybrid classes produce
 the expected range of admixture with $F_1$ and $F_2$ individuals having mean $Q=0.5$, with $F_2$ individuals having
 more variation (Figure~\ref{fig:pig-sim-qs}A).
 Backcrossed individuals have higher ancestry associated with the backcrossed population with mean $Q$
-approximately $0.75$ ($\BC_1$) and $0.87$ ($\BC_2$) (Figure~\ref{fig:pig-sim-qs}A). Notably, the simulated
-$F_1$ hybrids have the most variation in the distribution of the $Q$ values associated with each of the genetic clusters.
-When the estimated Q values for the $F_1$ hybrids are separated by the population combinations,
+approximately $0.75$ ($\BC_1$) and $0.87$ ($\BC_2$) (Figure~\ref{fig:pig-sim-qs}A). Interestingly, the distribution of the $Q$ values for $F_1$'s varies more across the different genetic clusters than it does for the other
+hybrid categories.
+When the estimated $Q$ values for the $F_1$ hybrids are separated by the population combinations,
 $F_1$ hybrids for Pop1-Pop2 have the least variation around $q=0.5$ (standard deviation
 = 0.008), while Pop1-Pop3 and Pop2-Pop3
 have higher variation (standard deviation = 0.011-0.016) (Figure~\ref{fig:pig-sim-qs}B). Also, all $Q$
@@ -725,7 +724,10 @@ of Pop3, which have a mean of $Q=0.49$ (Figure~\ref{fig:pig-sim-qs}B).
 The differences among these
 distributions of $Q$ values for the simulated data reflect the genetic differences observed
 in the empirical data, specifically, that genetic differentiation is highest between Pop1 and Pop2 and that
-Pop14 is the most admixed population with ancestry contributions from both Pop1 and Pop2.
+Pop3 is the most admixed population with ancestry contributions from both Pop1 and Pop2.
+The results emphasize difficulties that may arise in estimating admixture fractions between
+groups that have experienced historical gene flow.
+
 
 
 %%%
