@@ -26,9 +26,11 @@ as a function of both the marker set and sample size, to resolve the true underl
  The challenge for researchers then becomes correctly identifying the ecological and/or statistical processes by which observed complex
  ancestry patterns were created.
 
-A best practice for evaluating the behavior of genetic clustering algorithms on an empirical dataset is to conduct
-parallel analyses on data that have been simulated---so the truth is known---so as to mirror the empirical data set
-as closely as possible \citep{vaha2006efficiency,anderson2008improved,latch2011fine}.
+A best practice for evaluating the behavior of genetic clustering algorithms on empirical data is to conduct
+parallel analyses on simulated data that mirror the empirical data set
+as closely as possible \citep{vaha2006efficiency,anderson2008improved,latch2011fine} while providing
+the benefit of known parameters (e.g.~$F_\mathrm{ST}$, admixture fractions, etc.) that can
+be compared to estimates.
 Techniques to simulate individual genotypes in this context frequently use sampling with replacement from the
 observed allele frequencies (see, for example, \citealt{nielsen2006hybridlab,kinziger2008hybridization}).
 However, sampling with replacement implicitly increases the pairwise genetic distance among simulated samples, relative to the observed
@@ -49,7 +51,7 @@ Recognizing that connectivity among genetically distinct populations may be rela
 frequency of immigration can be gained by integrating across generations to identify both direct migrants and descendants of migrants
  (i.e., F1 hybrids or advanced hybrids reflecting the effect of backcrossing across multiple generations $[BC_1, \ldots,
 BC_X])$.
-Evaluating the results of genetic clustering algorithms in the context of data that are
+Evaluating the results and resolution of genetic clustering algorithms in the context of data that are
 expected to arrive by such a process of hybridization requires simulation of
 explicit hybrids.  Such simulations are the purpose of the software {\sc hybridlab} 
 \citep{nielsen2006hybridlab}.
@@ -165,8 +167,7 @@ of each gene copy was simulated to be from
 population $A$ with probability $q_A$ and from population $B$ with probability $1-q_A$.  Subsequently,
 the allelic types of gene copies from $A$ ($B$), at a locus, were simulated by sampling with replacement
 from the alleles at that locus in sample $A$ ($B$).
-We then added these $9n$ simulated individuals to the $N$ original individuals  from $A$ and $N$ from $B$
-and analyzed all the genotypes using ADMIXTURE with $K=2$. On each data set we performed a supervised analysis in which the original
+We then analyzed all the genotypes ($9n + N + N$) using ADMIXTURE with $K=2$. On each data set we performed a supervised analysis in which the original
 $N$ samples from each
 population were provided as learning samples, and also an
 unsupervised analysis when the origin of the samples from $A$ and $B$ were regarded as unknown.
@@ -227,16 +228,16 @@ so they could be compared easily.
 \subsection*{Genomic Simulation Pedigrees}
 
 Our approach for simulating admixed individuals without creating RISPI is motivated by the traditional cross-validation
-approach for evaluating the power of mixture proportion
-estimation in genetic stock identification (e.g., the cross-validation approach
-described in \citealt{moran2019bayesian}).
+approach for assessing the power of mixed stock analysis (e.g., the ``Monte Carlo cross-validation'' approach
+described in \citealt{moran2019bayesian}, p.~555).
 In the cross-validation approach, individuals are removed from the reference
-samples and placed in a mixture sample of "unknowns", whose origin
+samples and placed in a mixture sample of ``unknowns,'' whose origin
 is inferred using the remaining individuals in the reference samples.  A key
 feature of this approach is that no new genetic material is being created by
 sampling with replacement; rather the genetic material of all individuals
 in the original sample is being used---either within the remaining individuals in the
-reference samples or within the individuals in the mixture.
+reference samples or within the individuals set aside as a test set in the
+simulated mixture.
 
 Our scheme, described here, extends the traditional cross-validation approach
 by simulating the descent of chromosomal segments through a user-specified
