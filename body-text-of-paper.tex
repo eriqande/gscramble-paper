@@ -760,7 +760,7 @@ genotypes of different hybrid classes. Two integral features of \gscramble{} are
 Our results show that both 
 of these features are especially important for accurately reflecting empirical data from large genetic 
 marker sets (thousands of markers), 
-which are common from  both custom SNP-chip genotyping and next generation sequencing methods. Sampling alleles without 
+which are common from both custom SNP-chip genotyping and next generation sequencing methods. Sampling alleles without 
 replacement, and thereby preserving the genetic differences (or lack thereof) of populations is 
 essential for avoiding RISPI---an issue that is exacerbated as the number of 
 alleles sampled for an individual increases. Additionally, we demonstrate the importance of accounting for 
@@ -771,7 +771,7 @@ fractions of simulated individuals.
 \gscramble{} is conducive for analysis of numerous types of marker sets available from contemporary data generation 
 techniques. As mentioned above, 
 one key feature of \gscramble{} is the integration of recombination rates, thereby accounting for physical 
-linkage which is expected among larger contemporary data sets. Furthermore, \gscramble{} performs marker 
+linkage which is expected among high density markers sets. Furthermore, \gscramble{} performs marker 
 segregation with computational efficiency---for the four different GSPs used with the invasive wild pig data set, 
 the mean run time of each simulation with 14,233 SNP loci was 2.3 seconds (range: 1.9-5.7 $s$). 
 While \gscramble{} is equally applicable to data sets with 
@@ -785,7 +785,7 @@ provided empirical examples with trout and wild pig data, we demonstrate the bas
 creating hybrid classes. In much the same manner, \gscramble{} has been used to evaluate the statistical power 
 of hybrid classification used to differentiate wild boar hybrids from domestic pigs 
 \citep{smyser2024probgen}. Specifically \citet{smyser2024probgen} used the segregation options in \gscramble{} 
- to preserve founder individuals' genotypes within populations in contrast to \textit{a priori} shuffling alleles 
+ to preserve founder individuals' genotypes in contrast to \textit{a priori} shuffling alleles 
 within populations. This retains the subpopulation structure present within certain populations---thereby, better reflecting the 
 actual admixture variation expected from wild boar and domestic pig hybrids. We think \gscramble{} 
 may also be useful for assessing relatedness estimates using pedigrees of varying complexity. Here, it 
@@ -793,6 +793,19 @@ is important to note that each time a gamete is segregated in a GSP, its complem
 segregated---an example of antithetical variate sampling in Monte Carlo methods. Thus, in the 
 example of relatedness, fixed specified founders should be repeatedly "mated" with one offspring 
 sampled per iteration to avoid sampling of anticorrelated genotypes.
+
+
+Here, we have demonstrated the consequences of failing to consider physical linkage among loci 
+given the availability of a recombination map. However, in the absence of a recombination map, 
+researchers with a basic understanding of the genome size and the number of chromosomes in 
+the study organism could still benefit from using gscramble to simulate assumed linkage. To do 
+so, users of gscramble would need to randomly distribution markers across, and within, the 
+known number of chromosomes to produce a conceptual marker map (*.map within the PLINK 
+file structure), and assume basic rates of recombination (e.g., 1 cM per 1 Mb). The resulting 
+simulations from gscramble would produce admixture fractions that capture the expected 
+variation from known linkage patterns, in contrast to the reduced variation produced from 
+assuming independence (Figure 5). Characterizing uncertainty would provide caution for 
+researchers to not over interpret conclusions drawn in the absence of a recombination map.
 
 \textbf{Eric's notes}: 
 Somewhere here I want to mention that the Anderson et al. (2008) approach for simulating
@@ -806,10 +819,6 @@ originated from each of the reference populations.  To do the same when doing si
 assessing power using ADMIXTURE or STRUCTURE would require hacking the underlying code
 of those programs, which is not desirable.  So, for these cases we have used the sampling
 without replacement approach.
-
-Also, we need to discuss the fact that, because each time a gamete is segregated in the
-pedigree, its complement is also segregated, this is an example of antithetical variate sampling
-in Monte Carlo.  
 
 \section*{Acknowledgements}
 Research was supported in part by the USDA-APHIS-National Feral Swine Damage
