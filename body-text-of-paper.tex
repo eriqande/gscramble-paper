@@ -40,8 +40,6 @@ We refer to this phenomenon as resampling-induced, spurious power inflation (RIS
 \citet{anderson2008improved} used simulations to document this type of artifact in the context of
 genetic stock identification (GSI), a type of clustering application in which individuals are constrained to have
 all their ancestry from a single subpopulation.
-Similar statistical artifacts occur when simulating data to
-assess how accurately admixture fractions can be estimated.
 
 
 Beyond simply evaluating the resolution of discrete populations in a simulated framework, researchers may also be
@@ -52,7 +50,7 @@ frequency of immigration can be gained by integrating across generations to iden
  (i.e., F1 hybrids or advanced hybrids reflecting the effect of backcrossing across multiple generations $[BC_1, \ldots,
 BC_X])$.
 Evaluating the results and resolution of genetic clustering algorithms in the context of data that are
-expected to arrive by such a process of hybridization requires simulation of
+expected to reflect a history of hybridization requires simulation of
 explicit hybrids.  Such simulations are the purpose of the software {\sc hybridlab} 
 \citep{nielsen2006hybridlab}.
 
@@ -149,7 +147,8 @@ the genotypes of hybrid individuals assuming no physical linkage.
 \subsubsection*{RISPI when estimating admixture fractions}
 \label{sec:rispi-sim}
 
-To construct this simple example, we used the R programming language \citep{Rcoreteam} to
+To construct this simple illustration of sampling-with-replacement induced RISPI, 
+we used the R programming language \citep{Rcoreteam} to
 simulate allele frequencies for $L$ biallelic
 loci in a single population from a $\mathrm{Beta}(1, 8)$ distribution and then simulated
 two samples, $A$ and $B$, each of size $N$ diploid genotypes. The genotypes in $A$ and $B$ were simulated
