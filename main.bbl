@@ -1,0 +1,152 @@
+\begin{thebibliography}{23}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[\protect\citeauthoryear{Alexander, Novembre, \& Lange}{Alexander {\em
+  et~al.\/}}{2009}]{alexander2009fast}
+Alexander DH, Novembre J, Lange K (2009) Fast model-based estimation of
+  ancestry in unrelated individuals. {\em Genome research\/}, {\bf 19},
+  1655--1664.
+
+\bibitem[\protect\citeauthoryear{Anderson \& Thompson}{Anderson \&
+  Thompson}{2002}]{anderson2002model}
+Anderson E, Thompson E (2002) A model-based method for identifying species
+  hybrids using multilocus genetic data. {\em Genetics\/}, {\bf 160},
+  1217--1229.
+
+\bibitem[\protect\citeauthoryear{Anderson, Waples, \& Kalinowski}{Anderson {\em
+  et~al.\/}}{2008}]{anderson2008improved}
+Anderson EC, Waples RS, Kalinowski ST (2008) An improved method for predicting
+  the accuracy of genetic stock identification. {\em Canadian Journal of
+  Fisheries and Aquatic Sciences\/}, {\bf 65}, 1475--1486.
+
+\bibitem[\protect\citeauthoryear{Baetscher, Clemento, Ng, Anderson, \&
+  Garza}{Baetscher {\em et~al.\/}}{2018}]{baetscher2018microhaplotypes}
+Baetscher DS, Clemento AJ, Ng TC, Anderson EC, Garza JC (2018) Microhaplotypes
+  provide increased power from short-read DNA sequences for relationship
+  inference. {\em Molecular Ecology Resources\/}, {\bf 18}, 296--305.
+
+\bibitem[\protect\citeauthoryear{Estoup \& Guillemaud}{Estoup \&
+  Guillemaud}{2010}]{estoup2010reconstructing}
+Estoup A, Guillemaud T (2010) Reconstructing routes of invasion using genetic
+  data: why, how and so what? {\em Molecular ecology\/}, {\bf 19}, 4113--4130.
+
+\bibitem[\protect\citeauthoryear{Huestis, Dao, Diallo, Sanogo, Samake, Yaro,
+  Ousman, Linton, Krishna, Veru {\em et~al.\/}}{Huestis {\em
+  et~al.\/}}{2019}]{huestis2019windborne}
+Huestis DL, Dao A, Diallo M, Sanogo ZL, Samake D, Yaro AS, Ousman Y, Linton YM,
+  Krishna A, Veru L, {\em et~al.\/} (2019) Windborne long-distance migration of
+  malaria mosquitoes in the Sahel. {\em Nature\/}, {\bf 574}, 404--408.
+
+\bibitem[\protect\citeauthoryear{Kinziger, Loudenslager, Hankin, Anderson, \&
+  Garza}{Kinziger {\em et~al.\/}}{2008}]{kinziger2008hybridization}
+Kinziger AP, Loudenslager EJ, Hankin DG, Anderson EC, Garza JC (2008)
+  Hybridization between spring-and fall-run Chinook salmon returning to the
+  Trinity River, California. {\em North American Journal of Fisheries
+  Management\/}, {\bf 28}, 1426--1438.
+
+\bibitem[\protect\citeauthoryear{Latch, Kierepka, Heffelfinger, \&
+  Rhodes}{Latch {\em et~al.\/}}{2011}]{latch2011fine}
+Latch EK, Kierepka EM, Heffelfinger JR, Rhodes OEJ (2011) Hybrid swarm between
+  divergent lineages of mule deer (Odocoileus hemionus). {\em Molecular
+  Ecology\/}, {\bf 20}, 5265--5279.
+
+\bibitem[\protect\citeauthoryear{Moran \& Anderson}{Moran \&
+  Anderson}{2019}]{moran2019bayesian}
+Moran BM, Anderson EC (2019) Bayesian inference from the conditional genetic
+  stock identification model. {\em Canadian Journal of Fisheries and Aquatic
+  Sciences\/}, {\bf 76}, 551--560.
+
+\bibitem[\protect\citeauthoryear{Nielsen, Bach, \& Kotlicki}{Nielsen {\em
+  et~al.\/}}{2006}]{nielsen2006hybridlab}
+Nielsen EE, Bach LA, Kotlicki P (2006) HYBRIDLAB (version 1.0): a program for
+  generating simulated hybrids from population samples. {\em Molecular Ecology
+  Notes\/}, {\bf 6}, 971--973.
+
+\bibitem[\protect\citeauthoryear{Paetkau, Calvert, Stirling, \&
+  Strobeck}{Paetkau {\em et~al.\/}}{1995}]{paetkau1995microsatellite}
+Paetkau D, Calvert W, Stirling I, Strobeck C (1995) Microsatellite analysis of
+  population structure in Canadian polar bears. {\em Molecular ecology\/}, {\bf
+  4}, 347--354.
+
+\bibitem[\protect\citeauthoryear{Palti, Gao, Liu, Kent, Lien, Miller,
+  Rexroad~III, \& Moen}{Palti {\em et~al.\/}}{2015}]{palti2015development}
+Palti Y, Gao G, Liu S, Kent M, Lien S, Miller M, Rexroad~III C, Moen T (2015)
+  The development and characterization of a 57 K single nucleotide polymorphism
+  array for rainbow trout. {\em Molecular ecology resources\/}, {\bf 15},
+  662--672.
+
+\bibitem[\protect\citeauthoryear{Pearse, Barson, Nome, Gao, Campbell,
+  Abad{\'\i}a-Cardoso, Anderson, Rundio, Williams, Naish {\em et~al.\/}}{Pearse
+  {\em et~al.\/}}{2019}]{pearse2019sex}
+Pearse DE, Barson NJ, Nome T, Gao G, Campbell MA, Abad{\'\i}a-Cardoso A,
+  Anderson EC, Rundio DE, Williams TH, Naish KA, {\em et~al.\/} (2019)
+  Sex-dependent dominance maintains migration supergene in rainbow trout. {\em
+  Nature ecology \& evolution\/}, {\bf 3}, 1731--1742.
+
+\bibitem[\protect\citeauthoryear{Pritchard, Stephens, \& Donnelly}{Pritchard
+  {\em et~al.\/}}{2000}]{pritchard2000inference}
+Pritchard JK, Stephens M, Donnelly P (2000) Inference of population structure
+  using multilocus genotype data. {\em Genetics\/}, {\bf 155}, 945--959.
+
+\bibitem[\protect\citeauthoryear{Purcell, Neale, Todd-Brown, Thomas, Ferreira,
+  Bender, Maller, Sklar, De~Bakker, Daly {\em et~al.\/}}{Purcell {\em
+  et~al.\/}}{2007}]{purcell2007plink}
+Purcell S, Neale B, Todd-Brown K, Thomas L, Ferreira MA, Bender D, Maller J,
+  Sklar P, De~Bakker PI, Daly MJ, {\em et~al.\/} (2007) PLINK: a tool set for
+  whole-genome association and population-based linkage analyses. {\em The
+  American journal of human genetics\/}, {\bf 81}, 559--575.
+
+\bibitem[\protect\citeauthoryear{{R Core Team}}{{R Core
+  Team}}{2023}]{Rcoreteam}
+{R Core Team} (2023) {\em R: A Language and Environment for Statistical
+  Computing\/}, R Foundation for Statistical Computing, Vienna, Austria.
+
+\bibitem[\protect\citeauthoryear{Rizza, Wilzbach, Kinziger, Anderson, \&
+  Carlos~Garza}{Rizza {\em et~al.\/}}{2023}]{rizza2023limited}
+Rizza SF, Wilzbach MA, Kinziger AP, Anderson EC, Carlos~Garza J (2023) Limited,
+  asymmetric hybridization between coastal cutthroat trout and steelhead in a
+  Northern California river. {\em Journal of Heredity\/}, {\bf 114}, 219--230.
+
+\bibitem[\protect\citeauthoryear{Smyser, Pfaffelhuber, Giglio, DeSaix, Davis,
+  Bowden, Tabak, Manunza {\em et~al.\/}}{Smyser {\em
+  et~al.\/}}{2024}]{smyser2024probgen}
+Smyser T, Pfaffelhuber P, Giglio R, DeSaix M, Davis A, Bowden C, Tabak M,
+  Manunza A, {\em et~al.\/} (2024) Probabilistic genetic identification of wild
+  boar hybridization to support control of invasive wild pigs (Sus scrofa).
+  {\em Ecosphere\/}.
+
+\bibitem[\protect\citeauthoryear{Tortereau, Servin, Frantz, Megens, Milan,
+  Rohrer, Wiedmann, Beever, Archibald, Schook {\em et~al.\/}}{Tortereau {\em
+  et~al.\/}}{2012}]{tortereau2012high}
+Tortereau F, Servin B, Frantz L, Megens HJ, Milan D, Rohrer G, Wiedmann R,
+  Beever J, Archibald AL, Schook LB, {\em et~al.\/} (2012) A high density
+  recombination map of the pig reveals a correlation between sex-specific
+  recombination and GC content. {\em BMC genomics\/}, {\bf 13}, 1--12.
+
+\bibitem[\protect\citeauthoryear{V{\"a}h{\"a} \& Primmer}{V{\"a}h{\"a} \&
+  Primmer}{2006}]{vaha2006efficiency}
+V{\"a}h{\"a} JP, Primmer CR (2006) Efficiency of model-based Bayesian methods
+  for detecting hybrid individuals under different hybridization scenarios and
+  with different numbers of loci. {\em Molecular Ecology\/}, {\bf 15}, 63--72.
+
+\bibitem[\protect\citeauthoryear{Wilson \& Rannala}{Wilson \&
+  Rannala}{2003}]{wilson2003bayesian}
+Wilson GA, Rannala B (2003) Bayesian inference of recent migration rates using
+  multilocus genotypes. {\em Genetics\/}, {\bf 163}, 1177--1191.
+
+\bibitem[\protect\citeauthoryear{Wringe, Anderson, Jeffery, Stanley, \&
+  Bradbury}{Wringe {\em et~al.\/}}{2019}]{wringe2019development}
+Wringe BF, Anderson EC, Jeffery NW, Stanley RR, Bradbury IR (2019) Development
+  and evaluation of SNP panels for the detection of hybridization between wild
+  and escaped Atlantic salmon (Salmo salar) in the western Atlantic. {\em
+  Canadian journal of fisheries and aquatic sciences\/}, {\bf 76}, 695--704.
+
+\bibitem[\protect\citeauthoryear{Zhan, Paterson, Fraser, Watson, Bradbury,
+  Nadukkalam~Ravindran, Reznick, Beiko, \& Bentzen}{Zhan {\em
+  et~al.\/}}{2017}]{zhan2017megasat}
+Zhan L, Paterson IG, Fraser BA, Watson B, Bradbury IR, Nadukkalam~Ravindran P,
+  Reznick D, Beiko RG, Bentzen P (2017) MEGASAT: automated inference of
+  microsatellite genotypes from sequence data. {\em Molecular Ecology
+  Resources\/}, {\bf 17}, 247--256.
+
+\end{thebibliography}
