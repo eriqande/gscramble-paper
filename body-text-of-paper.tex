@@ -187,8 +187,9 @@ $q_A$ that were
 centered around the simulated values, even though samples $A$ and $B$ were drawn from the same
 population. In other words, we expected to observe RISPI.
 We further expected that ADMIXTURE would return more accurate estimates of the simulated
-$q_A$ values when $N$ was smaller and the number of loci was larger.
-We summarized the results by plotting boxplots of the ADMIXTURE-inferred $q_A$ values,
+$q_A$ values when $N$ was smaller and the number of loci was larger - 
+attributes that magnify the effect of RISPI.
+We summarized the results with boxplots of the ADMIXTURE-inferred $q_A$ values,
  for the 480 newly simulated individuals (and for the original samples, $A$ and $B$, in the
  case of unsupervised clustering),
 for each combination of $L$, $N$, and $n$.
@@ -330,8 +331,8 @@ G^+_{x,1} &= G^+_{x,2} & \forall x \in \nonfound \\
 \end{equation}
 In words, the separate lines above specify that 1) the number of samples
 must equal the number of founders; 2) exactly two gametes must be
-segregated from each founder; 3) the number of gametes incoming on each of the
-two edges coming into a non-founder (from its parents) must be equal; 
+segregated from each founder; 3) the number of gametes to a non-founder along the 
+edges from its parents must be equal; 
 4) the number of gametes going downward, out of a non-founder with no sample
 daughters, must equal the number of gametes coming into that non-founder;
 5)  the total number of gametes entering a non-founder with only sample daughters
@@ -550,7 +551,7 @@ simulating admixed individuals for 2 founder populations using one of the preset
 GSPs provided by the function {\footnotesize\tt create\_GSP()} for producing each of the types of admixed
 individuals. Although we could have simulated all 4 types of admixed individuals from a single GSP (Figure~\ref{fig:gsp2}),
 different numbers of simulated individuals are produced for each hybrid class. Therefore, for ease of simulating the exact number of desired individuals, we chose to simulate from
-a single GSP for each of the hybrid classes by setting the corresponding hybrid category (i.e. {\tt F1}, {\tt F2}, etc.) parameter in {\footnotesize\tt create\_GSP()} to {\footnotesize\tt TRUE} with all others set to {\footnotesize\tt FALSE}. We used the default settings of the {\footnotesize\tt plink\_map2rec\_rates()}  function to specify the recombination rates. The 120 simulated genotypes were written to PLINK .ped and .map files using {\footnotesize\tt gscramble2plink()}. We used PLINK version 1.9 \citep{purcell2007plink} to convert the genotypes to binary files and used these as input into ADMIXTURE for which we specified $K=3$ to produce ancestry values. We iteratively
+a single GSP for each of the hybrid classes by setting the corresponding hybrid category (i.e., {\tt F1}, {\tt F2}, etc.) parameter in {\footnotesize\tt create\_GSP()} to {\footnotesize\tt TRUE} with all others set to {\footnotesize\tt FALSE}. We used the default settings of the {\footnotesize\tt plink\_map2rec\_rates()}  function to specify the recombination rates. The 120 simulated genotypes were written to PLINK .ped and .map files using {\footnotesize\tt gscramble2plink()}. We used PLINK version 1.9 \citep{purcell2007plink} to convert the genotypes to binary files and used these as input into ADMIXTURE for which we specified $K=3$ to produce ancestry values. We iteratively
 performed this workflow to produce 1,000 simulated genotypes and ancestry values for each of the
 4 hybrid classes, as well as founder individuals, for each of the population combinations, for a total of
 21,000 simulated individuals.
@@ -587,7 +588,7 @@ number of markers increases to 100,000---values that are becoming commonplace wi
 or sequencing-based approaches---it is apparent that the sampling-with-replacement approach
 induces an extreme bias.  With 100,000 markers, even if sample sizes ($N$) are as large as 250 individuals,
 using na\"{i}ve simulations improperly indicates that admixture fractions of individuals can be
-accurately estimated, even when there are no genetic differences, whatsoever between the populations that
+accurately estimated, even when there are no genetic differences between the populations from which
 samples $A$ and $B$ are drawn.
 
 \subsubsection*{Physical Linkage in Hybrid Individuals}
@@ -630,7 +631,7 @@ between different backcross categories on the basis of their admixture fractions
 
 \subsubsection*{No RISPI when using \gscramble{}}
 
-As expected, there was no RISPI apparent in the ADMIXTURE-estimated
+As expected, there was no observed RISPI in the ADMIXTURE-estimated
 ancestry proportions  when simulating individuals
 using \gscramble{} (Fig.~\ref{fig:norispi}).  On average, the estimated $Q$ values
 were around 0.5, which is expected when the samples are drawn from the same
@@ -681,7 +682,7 @@ arranged from top to bottom throughout different sections of the plot to make it
 the patterns.  The {\em maximum-a-posteriori} (MAP) hybrid category for any individual is represented
 by the color that is on the bottom of the bar, so it is easy to see the shifts where the MAP hybrid
 category changes from one to another.  It is apparent over all individuals simulated to be
-either CCT, $F_1$, $F_2$, $BC_1$--CCT, or $BC_2$--CCT, that the MAP estimate of their
+either CCT (cut-throat trout), $F_1$, $F_2$, $BC_1$--CCT, or $BC_2$--CCT, that the MAP estimate of their
 hybrid categories were correct for largely the same number of individuals whether 30 or 65 markers
 were used. By contrast, for the individuals simulated to be of the complex hybrid category
 $BC_1$--CCT~$\times$~$BC_2$--CCT, the MAP estimate from 65 markers was correct more often 
@@ -694,8 +695,9 @@ $BC_2$--CCT category,
 or when individuals that are truly of the $BC_1$--CCT~$\times$~$BC_2$--CCT category have a
 maximum posterior of being from the $BC_2$--CCT category), many of those incorrect posteriors
 are quite high ($>0.90$).  In fact, using 65 markers yields more incorrect {\em and high} posteriors 
-than does using the 30 unlinked markers. So, as expected, ignoring physical linkage the way
-{\sc NewHybrids} does can yield a poor estimate of the uncertainty around different inferences.
+than does using the 30 unlinked markers. So, as expected, ignoring physical linkage (e.g., as 
+implemented in {\sc NewHybrids}) 
+can yield a poor estimate of the uncertainty around different inferences.
 
 \subsubsection*{Invasive wild pigs in Missouri}
 
@@ -761,12 +763,13 @@ marker sets (thousands of markers),
 which are common from  both custom SNP-chip genotyping and next generation sequencing methods. Sampling alleles without 
 replacement, and thereby preserving the genetic differences (or lack thereof) of populations is 
 essential for avoiding RISPI---an issue that is exacerbated as the number of 
-alleles sampled for an individual increases. Additionally, we show the importance of accounting for 
-the physical linkage of markers when large marker sets are used and that treating loci as 
-independent results in erroneously reduced variation in the admixture 
+alleles sampled for an individual increases. Additionally, we demonstrate the importance of accounting for 
+the physical linkage of markers when large marker sets are used and that treating physically linked loci as 
+independent erroneously reduces the variation in the admixture 
 fractions of simulated individuals.
 
-\gscramble{} is conducive for numerous types of contemporary marker data sets. As mentioned above, 
+\gscramble{} is conducive for analysis of numerous types of marker sets available from contemporary data generation 
+techniques. As mentioned above, 
 one key feature of \gscramble{} is the integration of recombination rates, thereby accounting for physical 
 linkage which is expected among larger contemporary data sets. Furthermore, \gscramble{} performs marker 
 segregation with computational efficiency---for the four different GSPs used with the invasive wild pig data set, 
@@ -774,18 +777,17 @@ the mean run time of each simulation with 14,233 SNP loci was 2.3 seconds (range
 While \gscramble{} is equally applicable to data sets with 
 microhaplotypes \citep{baetscher2018microhaplotypes} or microsatellites \citep{zhan2017megasat}, 
 it is not suited for genotype likelihood data (i.e. from low-coverage whole genome sequencing). 
-The \gscramble{} simulation approach involves the segregation of gametes and therefore requires 
-that genotypes are resolved. 
+Specifically, simulations conducted within \gscramble{} involve the segregation of gametes within the 
+specified pedigrees and, therefore, requires genotypes to be resolved. 
 
 We envision \gscramble{} to be relevant for a diverse range of potential applications. In our 
 provided empirical examples with trout and wild pig data, we demonstrate the basics of 
-creating hybrid classes. Similarly, \gscramble{} has recently been used to demonstrate the 
-power for hybrid classification of a population genetics method used to differentiate wild pigs with 
-wildboar introgression from domestic pigs \citep{smyser2024probgen}. In \citet{smyser2024probgen}, 
-researchers made use of the segregation options in \gscramble{} in order to preserve founder individuals' 
-genotypes within populations (in contrast to \textit{a priori} shuffling alleles within populations) in order to 
-retain the subpopulation structure present within certain populations---thereby, better reflecting the 
-actual admixture variation expected from wildboar and domestic pig hybrids. We think \gscramble{} 
+creating hybrid classes. In much the same manner, \gscramble{} has been used to evaluate the statistical power 
+of hybrid classification used to differentiate wild boar hybrids from domestic pigs 
+\citep{smyser2024probgen}. Specifically \citet{smyser2024probgen} used the segregation options in \gscramble{} 
+ to preserve founder individuals' genotypes within populations in contrast to \textit{a priori} shuffling alleles 
+within populations. This retains the subpopulation structure present within certain populations---thereby, better reflecting the 
+actual admixture variation expected from wild boar and domestic pig hybrids. We think \gscramble{} 
 may also be useful for assessing relatedness estimates using pedigrees of varying complexity. Here, it 
 is important to note that each time a gamete is segregated in a GSP, its complement is also 
 segregated---an example of antithetical variate sampling in Monte Carlo methods. Thus, in the 

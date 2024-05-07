@@ -1,0 +1,13 @@
+\begin{table}
+\caption{The 10 hybrid categories considered for inference with {\sc NewHybrids} and the
+expected frequency of their genotypes having 2 ($f(C,C)$), 1 ($f(C,S)$) or 0 ($f(S,S)$) copies of ancestry from cutthroat trout.}
+\label{tab:newhybcats}
+{\small
+\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}} lrrr}
+\hline\hline
+Category & $f(C,C)$ & $f(C,S)$ &  $f(S,S)$ \\ \hline
+\input{inputs/newhybs-cats.tsv}
+\end{tabular*}
+}
+\vspace*{-2.3ex}\hrule\vspace*{0.3ex}\hrule
+\end{table}
