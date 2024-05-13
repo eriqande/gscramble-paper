@@ -21,8 +21,7 @@ as discrete genetic clusters.
 Alternatively, individuals of mixed ancestry could reflect immigration from outlying populations (e.g., exogenous immigration), with true source
 populations not sufficiently
 represented in the sample to be among the characterized $K$ subpopulations.
-Furthermore, the characterization of admixed individuals may reflect a limitation of the statistical power of the genetic data,
-as a function of both the marker set and sample size, to resolve the true underlying patterns of genetic structure.
+Furthermore, the characterization of admixed individuals may reflect a limitation of the statistical power of the genetic data (as a function of both the marker set and sample size) to resolve the true underlying patterns of genetic structure.
  The challenge for researchers then becomes correctly identifying the ecological and/or statistical processes by which observed complex
  ancestry patterns were created.
 
@@ -119,7 +118,7 @@ hybrid categories are more easily distinguished than they are. Therefore, in eva
 linkage among loci available for analysis. This was done recently to assess the power of a SNP panel for identifying descendants of escaped, farm-raised Atlantic salmon \citep{wringe2019development}; however the method used (described at https://eriqande.github.io/SalarHybPower/) was developed in an {\em ad hoc} fashion, was not easily extended to
 complex hybridization scenarios, and is not user-friendly.
 
-In response to these needs, we developed \gscramble{} – a simulation approach that samples alleles from respective populations without
+In response to these needs, we developed \gscramble{}---a simulation approach that samples alleles from respective populations without
 replacement, thus maintaining genetic differences between the clusters commensurate to those in the empirical dataset, and eliminating the effect of RISPI.
 Further, by simulating individual genotypes based on user-defined pedigrees of arbitrary complexity, \gscramble{} allows for the simulation of admixed genotypes resulting from any conceivable category of (non-inbred) hybrid, while allowing the tracking of haplotype blocks from source populations within the specified pedigree.
 By integrating species-specific recombination rates, \gscramble{} simulates biologically informed genotypes that mirror empirical data.
@@ -186,9 +185,8 @@ allele frequencies are identical to those observed in the samples themselves, we
 $q_A$ that were
 centered around the simulated values, even though samples $A$ and $B$ were drawn from the same
 population. In other words, we expected to observe RISPI.
-We further expected that ADMIXTURE would return more accurate estimates of the simulated
-$q_A$ values when $N$ was smaller and the number of loci was larger - 
-attributes that magnify the effect of RISPI.
+We further expected that ADMIXTURE would return estimates of $q_A$ that were closer
+to the simulated values when $N$ was smaller and the number of loci was larger---attributes that magnify the effect of RISPI.
 We summarized the results with boxplots of the ADMIXTURE-inferred $q_A$ values,
  for the 480 newly simulated individuals (and for the original samples, $A$ and $B$, in the
  case of unsupervised clustering),
@@ -281,7 +279,7 @@ These gametes are united within the founder individual and then
 recombination occurs between each chromosome
 with probability $\frac{1}{2}$ and within each chromosome according to
 a user-specified recombination map to create two new gametes, which are
-recombined versions of the original ones.  These two gametes are then segregated at random down the edge (or edges) from the founder node. Upon each edge, $i$ from founder node $f$, $G^-_{f,i}$ gametes are segregated. 
+recombined versions of the original ones.  These two gametes are then segregated at random down the edge (or edges) from the founder node. Upon each edge, $i$ from founder node $f$,  a number, $G^-_{f,i}$, of gametes are segregated. 
 \item Each non-founder node, $x$, will have exactly two edges coming
 into it---one from each parent.  Each of the $G^+_{x,1}$ gametes coming in from the
 first edge is united with a single one of the $G^+_{x,2}$ gametes coming
@@ -449,7 +447,7 @@ approach of \gscramble{} does not produce RISPI.
 The next two are examples using empirical data sets.
 The first of these involves
 simulating a small number ($<\,$70) of markers that are fixed, or nearly
-fixed, for alternate alleles between two species of trout: rainbow trout ({\em 
+fixed, for alternate alleles between two species of trout: steelhead trout ({\em 
 Oncorhynchus mykiss}) and cutthroat trout ({\em O. clarkii}). The goal of the 
 simulation study is to determine how accurately individuals of different hybrid
 categories between the species can be identified, and whether the use of linked 
@@ -465,16 +463,16 @@ For this example, we repeat the simulation described in {\em \nameref{sec:rispi-
 however, after simulating individuals in the two samples drawn from the same population,
 we create data sets of admixed individuals using \gscramble{}, rather than sampling
 gene copies with replacement.  As before, individuals were simulated with fractions of
-ancestry from sample $A$ in $\{0, \frac{1}{8}, \frac{1}{4}, \frac{3}{8}, \frac{1}{2}, \frac{5}{8}, \frac{3}{4}, \frac{7}{8}, 1\}$, but these were simulated from pedigrees using gscramble.  We limited
+ancestry from sample $A$ in $\{0, \frac{1}{8}, \frac{1}{4}, \frac{3}{8}, \frac{1}{2}, \frac{5}{8}, \frac{3}{4}, \frac{7}{8}, 1\}$, but these were simulated from pedigrees using \gscramble{}.  We limited
 this simulation to one of the scenarios that showed extreme RISPI when sampling gene
 copies with replacement: $L=1,000$ markers with sizes of samples $A$ and $B$ being
 $N=50$. This simulation was repeated 240 times, and the results of each replicate were analyzed with
 ADMIXTURE to estimate the ancestry fractions of each simulated individual.
 
-\subsubsection*{Rainbow/cutthroat trout hybrids in California}
+\subsubsection*{Steelhead/cutthroat trout hybrids in California}
 
 We used the archived data from \citet{rizza2023limited}, drawing upon their 65 markers
-that are fixed or are nearly fixed for alternate alleles between rainbow trout and cutthroat trout.
+that are fixed or are nearly fixed for alternate alleles between steelhead trout and cutthroat trout.
 They designated 634 fish as pure cutthroat trout and 213 as pure steelhead.  We used the
 genotypes of these individuals as input to \gscramble{}.
 
@@ -486,8 +484,8 @@ of 32,923 markers throughout the genome and rendered it to plink format for use 
 
 In the original paper, \citet{rizza2023limited} identified 15 $F_1$s,
 1 $F_2$,
-6 cutthroat backcrosses ($BC_1$s) and 
-6 second-generation cutthroat backcrosses ($BC_2$s),
+6 cutthroat backcrosses ($BC_1$--CCTs) and 
+6 second-generation cutthroat backcrosses ($BC_2$--CCTs),
 and 1 fish of an unknown hybrid category that may have been the
 product of a $BC_2$ crossed with a $BC_1$.   In our simulations, we sought to simulate
 a similar collection of hybrid individuals, so, for each replicate, we used
@@ -651,7 +649,7 @@ in which the RISPI is readily apparent.}
 \end{figure}
 %%%
 
-\subsubsection*{Rainbow/cutthroat trout hybrids in California}
+\subsubsection*{Steehlead/cutthroat trout hybrids in California}
 
 The barplots in Fig.~\ref{fig:newhyb-sims-barplot} show the distribution of posterior
 probabilities of the different hybrid categories. 
@@ -682,7 +680,7 @@ arranged from top to bottom throughout different sections of the plot to make it
 the patterns.  The {\em maximum-a-posteriori} (MAP) hybrid category for any individual is represented
 by the color that is on the bottom of the bar, so it is easy to see the shifts where the MAP hybrid
 category changes from one to another.  It is apparent over all individuals simulated to be
-either CCT (cut-throat trout), $F_1$, $F_2$, $BC_1$--CCT, or $BC_2$--CCT, that the MAP estimate of their
+either CCT (cutthroat trout), $F_1$, $F_2$, $BC_1$--CCT, or $BC_2$--CCT, that the MAP estimate of their
 hybrid categories were correct for largely the same number of individuals whether 30 or 65 markers
 were used. By contrast, for the individuals simulated to be of the complex hybrid category
 $BC_1$--CCT~$\times$~$BC_2$--CCT, the MAP estimate from 65 markers was correct more often 
@@ -711,10 +709,10 @@ $F_\mathrm{ST} = 0.14$ for Pop1-Pop3 and
 $F_\mathrm{ST} = 0.13$ for Pop2-Pop3.
 
 The simulated hybrid classes produce
-the expected range of admixture with $F_1$ and $F_2$ individuals having mean $Q=0.5$, with $F_2$ individuals having
+the expected range of admixture with $F_1$ and $F_2$ individuals having mean $Q=0.5$, and $F_2$ individuals having
 more variation (Figure~\ref{fig:pig-sim-qs}A).
 Backcrossed individuals have higher ancestry associated with the backcrossed population with mean $Q$
-approximately $0.75$ ($\BC_1$) and $0.87$ ($\BC_2$) (Figure~\ref{fig:pig-sim-qs}A). Interestingly, the distribution of the $Q$ values for $F_1$'s varies more across the different genetic clusters than it does for the other
+approximately $0.75$ ($\BC_1$) and $0.87$ ($\BC_2$) (Figure~\ref{fig:pig-sim-qs}A). Interestingly, the distribution of the $Q$ values for $F_1$ hybrids varies more across the different genetic clusters than it does for the other
 hybrid categories.
 When the estimated $Q$ values for the $F_1$ hybrids are separated by the population combinations,
 $F_1$ hybrids for Pop1-Pop2 have the least variation around $q=0.5$ (standard deviation
@@ -753,7 +751,8 @@ from both Pop1-Pop2 and Pop2-Pop1).}
 
 \section*{Discussion}
 
-Here, we present \gscramble{}, a simulation approach for creating biologically informed individual 
+Here, we present \gscramble{}, an R package implementing a simulation
+approach for creating biologically informed individual 
 genotypes of different hybrid classes. Two integral features of \gscramble{} are: 
 1) alleles are sampled from populations without replacement and 
 2) alleles are segregated based on species-specific recombination rates. 
@@ -763,22 +762,22 @@ marker sets (thousands of markers),
 which are common from both custom SNP-chip genotyping and next generation sequencing methods. Sampling alleles without 
 replacement, and thereby preserving the genetic differences (or lack thereof) of populations is 
 essential for avoiding RISPI---an issue that is exacerbated as the number of 
-alleles sampled for an individual increases. Additionally, we demonstrate the importance of accounting for 
-the physical linkage of markers when large marker sets are used and that treating physically linked loci as 
+genetic markers increases. Additionally, we demonstrate the importance of accounting for 
+the physical linkage of markers when large marker sets are used, and that treating physically linked loci as 
 independent erroneously reduces the variation in the admixture 
 fractions of simulated individuals.
 
-\gscramble{} is conducive for analysis of numerous types of marker sets available from contemporary data generation 
+\gscramble{} is suitable for analysis of numerous types of marker sets available from contemporary data generation 
 techniques. As mentioned above, 
 one key feature of \gscramble{} is the integration of recombination rates, thereby accounting for physical 
-linkage which is expected among high density markers sets. Furthermore, \gscramble{} performs marker 
+linkage which is expected among high-density markers sets. Furthermore, \gscramble{} performs marker 
 segregation with computational efficiency---for the four different GSPs used with the invasive wild pig data set, 
 the mean run time of each simulation with 14,233 SNP loci was 2.3 seconds (range: 1.9-5.7 $s$). 
 While \gscramble{} is equally applicable to data sets with 
 microhaplotypes \citep{baetscher2018microhaplotypes} or microsatellites \citep{zhan2017megasat}, 
-it is not suited for genotype likelihood data (i.e. from low-coverage whole genome sequencing). 
+it is not built to use genotype likelihoods (i.e., from low-coverage whole genome sequencing). 
 Specifically, simulations conducted within \gscramble{} involve the segregation of gametes within the 
-specified pedigrees and, therefore, requires genotypes to be resolved. 
+specified pedigrees and, therefore, require called genotypes (though missing data is acceptable). 
 
 We envision \gscramble{} to be relevant for a diverse range of potential applications. In our 
 provided empirical examples with trout and wild pig data, we demonstrate the basics of 
@@ -790,42 +789,31 @@ within populations. This retains the subpopulation structure present within cert
 actual admixture variation expected from wild boar and domestic pig hybrids. We think \gscramble{} 
 may also be useful for assessing relatedness estimates using pedigrees of varying complexity. Here, it 
 is important to note that each time a gamete is segregated in a GSP, its complement is also 
-segregated---an example of antithetical variate sampling in Monte Carlo methods. Thus, in the 
-example of relatedness, fixed specified founders should be repeatedly "mated" with one offspring 
+segregated---an example of antithetical variate sampling in Monte Carlo methods \citep{hammersley}.
+Thus, in the  example of relatedness, fixed specified founders should be repeatedly "mated" with one offspring 
 sampled per iteration to avoid sampling of anticorrelated genotypes.
 
 
 Here, we have demonstrated the consequences of failing to consider physical linkage among loci 
 given the availability of a recombination map. However, in the absence of a recombination map, 
 researchers with a basic understanding of the genome size and the number of chromosomes in 
-the study organism could still benefit from using gscramble to simulate assumed linkage. To do 
-so, users of gscramble would need to randomly distribution markers across, and within, the 
+the study organism could still benefit from using \gscramble{} to simulate genetic data under
+an assumed, approximate linkage map. To do 
+so, users of \gscramble{} could randomly distribute markers across, and within, the 
 known number of chromosomes to produce a conceptual marker map (*.map within the PLINK 
 file structure), and assume basic rates of recombination (e.g., 1 cM per 1 Mb). The resulting 
-simulations from gscramble would produce admixture fractions that capture the expected 
+simulations from \gscramble{} would produce admixture fractions that capture the expected 
 variation from known linkage patterns, in contrast to the reduced variation produced from 
-assuming independence (Figure 5). Characterizing uncertainty would provide caution for 
-researchers to not over interpret conclusions drawn in the absence of a recombination map.
+assuming independence (Figure 5). Characterizing uncertainty in this way would provide caution for 
+researchers to not overinterpret conclusions drawn in the absence of a recombination map.
 
-\textbf{Eric's notes}: 
-Somewhere here I want to mention that the Anderson et al. (2008) approach for simulating
-mixtures of genotypes to assess how well one can estimate mixture proportions---the fraction
-of individuals from each of a set of baseline or reference populations---allows the user to
-simulate, if desired, more genotypes than occur in the reference samples.  This is because
-a trick is done in the inference stage to remove the correlation between the simulated individual
-and the reference sample, relative to the true population, by removing the simulated individual's
-genotypes from its own reference population when calculating the likelihood that its genotype
-originated from each of the reference populations.  To do the same when doing simulations for
-assessing power using ADMIXTURE or STRUCTURE would require hacking the underlying code
-of those programs, which is not desirable.  So, for these cases we have used the sampling
-without replacement approach.
 
 \section*{Acknowledgements}
 Research was supported in part by the USDA-APHIS-National Feral Swine Damage
 Management Program. We are grateful for the numerous Wildlife Services and Missouri
 Department of Conservation employees that contributed to genetic sampling of wild pigs
-within southeastern Missouri. We thank Yniv Palti for providing flanking sequences and the linkage map for 57K markers for making a recombination map for the cutthroat/rainbow trout example. Writing of this paper was facilitated by the Mobile High Altitude Venue for Ecological Analysis,
-Genetics and Statistics, through which ECA, MGD, and TJS were scientists-in-residence on location in
+within southeastern Missouri. We thank Yniv Palti for providing flanking sequences and the linkage map for 57K markers for making a recombination map for the steelhead/cutthroat trout example. Writing of this paper was facilitated by the Mobile High Altitude Venue for Ecological Analysis,
+Genetics and Statistics, through which ECA, MGD, and TJS were scientists-in-residence on location near
 Cheyenne, WY for 3 days in October 2023. This is contribution number mHAVEAGAS-003.
 This work utilized the Alpine high performance computing resource at the University of Colorado Boulder.
 Alpine is jointly funded by the University of Colorado Boulder, the University of Colorado Anschutz, Colorado State University,

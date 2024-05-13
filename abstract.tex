@@ -1,18 +1,24 @@
-%!TEX main.tex
+%!TEX root = main.tex
 
 
 While a best practice for evaluating the behavior of genetic clustering algorithms 
 on empirical data is to conduct parallel analyses on simulated data, these types 
 of simulation techniques often involve sampling genetic data with replacement. 
 In this paper we demonstrate that sampling with replacement, especially with large 
-marker sets, inflates the perceived statistical power to correctly assign individuals 
+marker sets, inflates the perceived statistical power to correctly assign individuals
+(or the alleles that they carry)
 back to source populations---a phenomenon we refer to as resampling-induced, 
 spurious power inflation (RISPI). To address this issue, we present \gscramble{}, a 
 simulation approach in R for creating biologically informed individual genotypes from 
 empirical data that: 1) samples alleles from populations \textit{without} replacement, 
-2) segregates alleles based on species-specific recombination rates. \gscramble{} is 
-a flexible simulation approach that allows users to create pedigrees of varying complexity 
-in order to simulate admixed genotypes and it allows users to track haplotype blocks 
-from the source populations through the pedigrees. We demonstrate the functionality of 
+2) segregates alleles based on species-specific recombination rates. This framework
+makes it possible to simulate admixed individuals in a way that respects the physical
+linkage between markers on the same chromosome and which does not suffer
+from RISPI.  This is achieved in \gscramble{} by allowing 
+users to specify pedigrees of varying complexity 
+in order to simulate admixed genotypes, segregating and tracking haplotype blocks 
+from different source populations through those pedigrees, and then sampling---using
+a variety of permutation schemes---alleles from empirical data into those haplotype blocks.
+We demonstrate the functionality of 
 \gscramble{} with both simulated and empirical data sets and highlight additional uses of 
 the package that users may find valuable.
