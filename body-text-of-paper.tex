@@ -8,7 +8,7 @@ is limited by the extent of genetic differentiation among populations and the ca
 set and sample sizes from the respective populations.  Based on an initial description of genetic structure, ecologists are frequently
 interested in describing patterns of genetic movement among populations, often inferred from the mismatch between the sampling location
 and genetic origins of a given individual \citep{paetkau1995microsatellite,wilson2003bayesian}.  Genetic movement has many implications,
-such as influencing evolutionary processes, maintaining genetic variation through gene flow, driving disease dynamics and affecting patterns
+such as influencing evolutionary processes, maintaining genetic variation through gene flow, driving disease dynamics, and affecting patterns
 of invasive species expansion \citep{huestis2019windborne, estoup2010reconstructing}.
 
 In using clustering algorithms to describe genetic structure among natural populations, researchers frequently identify individuals of
@@ -31,10 +31,20 @@ as closely as possible \citep{vaha2006efficiency,anderson2008improved,latch2011f
 the benefit of known parameters (e.g.~$F_\mathrm{ST}$, admixture fractions, etc.) that can
 be compared to estimates.
 Techniques to simulate individual genotypes in this context frequently use sampling with replacement from the
-observed allele frequencies (see, for example, \citealt{nielsen2006hybridlab,kinziger2008hybridization}).
-However, sampling with replacement implicitly increases the pairwise genetic distance among simulated samples, relative to the observed
+observed allele frequencies (see, for example, \citealt{nielsen2006hybridlab,kinziger2008hybridization}). In this
+approach, allele frequencies are estimated for each population (or cluster) from the samples, and then new
+genotypes are simulated at each locus by drawing, for each simulated diploid individual, two gene copies from a 
+multinomial distribution with two trials
+and cell probabilities given by the estimated allele frequencies.  Such a simulation is akin to assuming that the
+population is of infinite size with allele frequencies given by those observed in the sample; however the allele
+frequencies in the sample differ from those in the actual population because of the variation from random sampling.
+As a consequence, this sort of sampling with replacement implicitly increases the pairwise genetic distance among simulated samples, relative to the observed
 samples, and
-inflates the perceived statistical power to correctly assign individuals (or segments of the genome) back to source populations.
+inflates the perceived statistical power to correctly assign individuals (or segments of the genome) back to source 
+populations.  In effect, simulations that sample with replacement from the samples are assessing how well one could 
+assign individuals to populations
+that have the same allele frequencies as the samples, rather than the same allele frequencies as the populations
+{\em from which the samples were drawn}, which is what is needed.
 We refer to this phenomenon as resampling-induced, spurious power inflation (RISPI).
 \citet{anderson2008improved} used simulations to document this type of artifact in the context of
 genetic stock identification (GSI), a type of clustering application in which individuals are constrained to have
@@ -159,7 +169,7 @@ there is clearly no basis for performing population assignment between $A$ and $
 however, we treated samples $A$ and $B$ as if they were sampled from two potentially different
 populations, and simulated $9n$ new individuals: $n$ new individuals at each of the 9 values of
 $q_A$, the admixture fraction for population $A$, in  $\{0, \frac{1}{8}, \frac{1}{4}, \frac{3}{8}, \frac{1}{2}, \frac{5}{8}, \frac{3}{4}, \frac{7}{8}, 1\}$.
-We simulated these genotypes according to the "admixture model" used in {\em structure} \citep{pritchard2000inference}.  Briefly, at each
+We simulated these genotypes according to the ``admixture model'' used in {\em structure} \citep{pritchard2000inference}.  Briefly, at each
 locus, independently, the origin
 of each gene copy was simulated to be from
 population $A$ with probability $q_A$ and from population $B$ with probability $1-q_A$.  Subsequently,
@@ -212,11 +222,12 @@ gene copies originating from species $a$.
 
 We also simulated the genomes of 48,000 individuals of each
 hybrid category using \gscramble{}'s {\footnotesize\tt segregate()} function, as described
-below, with 18 chromosomes (2.35 gigabases of physical genome length)  and
-sex-averaged recombination rates
-for pigs, as estimated by from \citet{tortereau2012high}. In this case, we recorded the
+below, taking as an example, a species with 18 chromosomes across 2.35 gigabases of total physical genome length
+and sex-averaged recombination rates the same as for pigs, as estimated by from \citet{tortereau2012high}. (We chose
+a pig-like genome here, as wild pigs form one of our example empirical data sets for illustration, below.)  In this case, we recorded the
 admixture fraction of each simulated individual as the cumulative length of all genome segments
-that originated from species~$a$, divided by the total genome length.  This provides the distribution of the true admixture fraction
+that originated from species~$a$, divided by the total genome length.
+This provides the distribution of the true admixture fraction
 when physical linkage of markers is not ignored.  
 
 All the admixture fraction distributions were summarized by plotting them as histograms
@@ -479,8 +490,8 @@ genotypes of these individuals as input to \gscramble{}.
 
 \citeauthor{rizza2023limited} mapped the 65 markers to the Omyk\_v1.0 genome assembly (RefSeq 
 Accession: GCF\_002163495.1), so we used
-the linkage map described in \citep{pearse2019sex} that was prepared by linkage mapping 
-of $\approx$57,000 markers described in \citet{palti2015development} to Omyk\_v1.0. We mapped these $\approx$57,000 markers to Omyk\_v1.0, and then resolved inconsistencies to produce a map
+the linkage map described in \citep{pearse2019sex} that was prepared 
+with $\approx$57,000 markers described in \citet{palti2015development} mapped to Omyk\_v1.0. We mapped these $\approx$57,000 markers to Omyk\_v1.0, and then resolved inconsistencies to produce a map
 of 32,923 markers throughout the genome and rendered it to plink format for use with \gscramble{}.
 
 In the original paper, \citet{rizza2023limited} identified 15 $F_1$s,
@@ -794,7 +805,7 @@ actual admixture variation expected from wild boar and domestic pig hybrids. We 
 may also be useful for assessing relatedness estimates using pedigrees of varying complexity. Here, it 
 is important to note that each time a gamete is segregated in a GSP, its complement is also 
 segregated---an example of antithetical variate sampling in Monte Carlo methods \citep{hammersley}.
-Thus, in the  example of relatedness, fixed specified founders should be repeatedly "mated" with one offspring 
+Thus, in the  example of relatedness, fixed specified founders should be repeatedly ``mated'' with one offspring 
 sampled per iteration to avoid sampling of anticorrelated genotypes.
 
 
