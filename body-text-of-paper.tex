@@ -99,7 +99,7 @@ created from a single simulation on this GSP.
 \begin{center}
 \includegraphics[width=0.48\textwidth]{figures/F2.pdf}
 \end{center}
-\caption[\gspcapone]{\gspcapone}
+\caption[\gspcapone]{\sometimes{\gspcapone}}
 \label{fig:gsp1}
 \end{figure}
 %%%%%%%%%%%%
@@ -112,7 +112,7 @@ admixture categories: one~$F_1$ in sample node~s7; two~$F_2$'s in sample node~s1
 \begin{center}
 \includegraphics[width=0.48\textwidth]{figures/AllThem.pdf}
 \end{center}
-\caption[\gspcaptwo]{\gspcaptwo}
+\caption[\gspcaptwo]{\sometimes{\gspcaptwo}}
 \label{fig:gsp2}
 \end{figure}
 %%%%
@@ -390,8 +390,10 @@ of a single chromosome within an individual remains together when permuted. When
 while permuting. This option should only be used when the original data set is phased.
 }
 \begin{figure*}
+\begin{center}
 \includegraphics[width=\textwidth]{figures/permutations-plot.png}
-\caption[\permcap]{\permcap}
+\end{center}
+\caption[\permcap]{\sometimes{\permcap}}
 \label{fig:perms}
 \end{figure*}
 %%%%%%%
@@ -515,6 +517,7 @@ simulated data set was then analyzed using {\sc NewHybrids} \citep{anderson2002m
 \caption{The 10 hybrid categories considered for inference with {\sc NewHybrids} and the
 expected frequency of their genotypes having 2 ($f(C,C)$), 1 ($f(C,S)$) or 0 ($f(S,S)$) copies of ancestry from cutthroat trout.}
 \label{tab:newhybcats}
+\begin{center}
 {\small
 \begin{tabular*}{0.48\textwidth}{@{\extracolsep{\fill}} lrrr}
 \hline\hline
@@ -523,6 +526,7 @@ Category	& $f(C,C)$ &	$f(C,S)$ & 	$f(S,S)$ \\ \hline
 \end{tabular*}
 }
 \vspace*{-2.3ex}\hrule\vspace*{0.3ex}\hrule
+\end{center}
 \end{table}
 %%%%%%%%%%%%
 
@@ -586,8 +590,10 @@ unsupervised analysis in ADMIXTURE. In both {\bf a} and {\bf b}, the different c
 from 10 to 100,000, while different rows represent different original sample sizes, $N$, taken. Colors
 of the boxplots indicate how many new individuals, $n$, of each $q_A$ value were simulated during each
 replicate.}
+\begin{center}
 \includegraphics[width=0.96\textwidth]{figures/bias-sims-unsup-and-sup.pdf}
-\caption[\biassimscap]{\biassimscap}
+\end{center}
+\caption[\biassimscap]{\sometimes{\biassimscap}}
 \label{fig:bias-sims}
 \end{figure*}
 %%%
@@ -616,8 +622,10 @@ and when physical linkage is simulated using \gscramble{} assuming a genetic map
 of simulated loci appears in the panel header.  Failing to simulate markers with physical linkage
 produces distributions of admixture fractions that are far more narrow than reality, giving the
 mistaken impression that admixture fractions of different hybrid categories do not overlap.  }
+\begin{center}
 \includegraphics[width=0.48\textwidth]{figures/link-and-nolink-sims-crop.pdf}
-\caption[\adfcap]{\adfcap}
+\end{center}
+\caption[\adfcap]{\sometimes{\adfcap}}
 \label{fig:ad-fract-sims}
 \end{figure}
 %%%%%%%%%%
@@ -655,8 +663,10 @@ but the central tendency of them all is around 0.5, as would be expected in this
 within which the different
 samples are drawn from the same population.  Contrast this to the corresponding panel ($L=1,000, N=50$) in Fig.~\ref{fig:bias-sims}(b),
 in which the RISPI is readily apparent.}
+\begin{center}
 \includegraphics[width=0.48\textwidth]{figures/gscram_supervised_Qs.pdf}
-\caption[\gssimcap]{\gssimcap}
+\end{center} 
+\caption[\gssimcap]{\sometimes{\gssimcap}}
 \label{fig:norispi}
 \end{figure}
 %%%
@@ -677,10 +687,10 @@ on the same chromosome. Each individual appears as a thin vertical line, posteri
 each inferred hybrid category are indicated by extent of different colors on those lines.  Individuals
 are sorted according to maximum {\em a posteriori} hybrid category, and, within that by the
 maximum posterior probability. }
-{\centering
+\begin{center}
 \includegraphics[width=0.48\textwidth]{figures/newhybs-texed-crop.pdf}
-}
-\caption[\nhbpcap]{\nhbpcap}
+\end{center}
+\caption[\nhbpcap]{\sometimes{\nhbpcap}}
 \label{fig:newhyb-sims-barplot}
 \end{figure}
 %%%%%%%%%%
@@ -758,8 +768,10 @@ separated by the population combinations, reveals the least variance in estimate
 Pop1-Pop2 compared to Pop1-Pop3 and Pop2-Pop3. Note that these population combinations group the
 reciprocal population combination in each plot (e.g., "Pop1\_Pop2" has simulations
 from both Pop1-Pop2 and Pop2-Pop1).}
+\begin{center}
 \includegraphics[width=0.48\textwidth]{figures/simulation-density-multipanel.pdf}
-\caption[\pigsimsqscap]{\pigsimsqscap}
+\end{center}
+\caption[\pigsimsqscap]{\sometimes{\pigsimsqscap}}
 \label{fig:pig-sim-qs}
 \end{figure}
 %%%
