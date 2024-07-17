@@ -6,10 +6,14 @@
 # When I see that it does compile, I re-run this, then I zip the TMP-SUBMIT
 # folder and submit to Wiley as a Latex Source Folder
 
+# which version?
+BASE="main-one-col"
+#BASE="main"
+
 rm -rf TMP-SUBMIT
 mkdir TMP-SUBMIT
 
-cp main.{tex,bbl} TMP-SUBMIT/
+cp $BASE.{tex,bbl} TMP-SUBMIT/
 cp eca_molecolres.sty TMP-SUBMIT/
 
 cp abstract.tex \
