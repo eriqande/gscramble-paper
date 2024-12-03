@@ -4,7 +4,7 @@
 \bibitem[\protect\citeauthoryear{Alexander, Novembre, \& Lange}{Alexander {\em
   et~al.\/}}{2009}]{alexander2009fast}
 Alexander DH, Novembre J, Lange K (2009) Fast model-based estimation of
-  ancestry in unrelated individuals. {\em Genome research\/}, {\bf 19},
+  ancestry in unrelated individuals. {\em Genome Research\/}, {\bf 19},
   1655--1664.
 
 \bibitem[\protect\citeauthoryear{Anderson \& Thompson}{Anderson \&
@@ -28,7 +28,7 @@ Baetscher DS, Clemento AJ, Ng TC, Anderson EC, Garza JC (2018) Microhaplotypes
 \bibitem[\protect\citeauthoryear{Estoup \& Guillemaud}{Estoup \&
   Guillemaud}{2010}]{estoup2010reconstructing}
 Estoup A, Guillemaud T (2010) Reconstructing routes of invasion using genetic
-  data: why, how and so what? {\em Molecular ecology\/}, {\bf 19}, 4113--4130.
+  data: why, how and so what? {\em Molecular Ecology\/}, {\bf 19}, 4113--4130.
 
 \bibitem[\protect\citeauthoryear{Hammersley \& Handscomb}{Hammersley \&
   Handscomb}{1964}]{hammersley}
@@ -52,7 +52,7 @@ Kinziger AP, Loudenslager EJ, Hankin DG, Anderson EC, Garza JC (2008)
 \bibitem[\protect\citeauthoryear{Latch, Kierepka, Heffelfinger, \&
   Rhodes}{Latch {\em et~al.\/}}{2011}]{latch2011fine}
 Latch EK, Kierepka EM, Heffelfinger JR, Rhodes OEJ (2011) Hybrid swarm between
-  divergent lineages of mule deer (Odocoileus hemionus). {\em Molecular
+  divergent lineages of mule deer ({\em Odocoileus hemionus}). {\em Molecular
   Ecology\/}, {\bf 20}, 5265--5279.
 
 \bibitem[\protect\citeauthoryear{Moran \& Anderson}{Moran \&
@@ -70,14 +70,14 @@ Nielsen EE, Bach LA, Kotlicki P (2006) HYBRIDLAB (version 1.0): a program for
 \bibitem[\protect\citeauthoryear{Paetkau, Calvert, Stirling, \&
   Strobeck}{Paetkau {\em et~al.\/}}{1995}]{paetkau1995microsatellite}
 Paetkau D, Calvert W, Stirling I, Strobeck C (1995) Microsatellite analysis of
-  population structure in Canadian polar bears. {\em Molecular ecology\/}, {\bf
+  population structure in Canadian polar bears. {\em Molecular Ecology\/}, {\bf
   4}, 347--354.
 
 \bibitem[\protect\citeauthoryear{Palti, Gao, Liu, Kent, Lien, Miller,
   Rexroad~III, \& Moen}{Palti {\em et~al.\/}}{2015}]{palti2015development}
 Palti Y, Gao G, Liu S, Kent M, Lien S, Miller M, Rexroad~III C, Moen T (2015)
   The development and characterization of a 57 K single nucleotide polymorphism
-  array for rainbow trout. {\em Molecular ecology resources\/}, {\bf 15},
+  array for rainbow trout. {\em Molecular Ecology Resources\/}, {\bf 15},
   662--672.
 
 \bibitem[\protect\citeauthoryear{Pearse, Barson, Nome, Gao, Campbell,
@@ -86,7 +86,7 @@ Palti Y, Gao G, Liu S, Kent M, Lien S, Miller M, Rexroad~III C, Moen T (2015)
 Pearse DE, Barson NJ, Nome T, Gao G, Campbell MA, Abad{\'\i}a-Cardoso A,
   Anderson EC, Rundio DE, Williams TH, Naish KA, {\em et~al.\/} (2019)
   Sex-dependent dominance maintains migration supergene in rainbow trout. {\em
-  Nature ecology \& evolution\/}, {\bf 3}, 1731--1742.
+  Nature Ecology \& Evolution\/}, {\bf 3}, 1731--1742.
 
 \bibitem[\protect\citeauthoryear{Pritchard, Stephens, \& Donnelly}{Pritchard
   {\em et~al.\/}}{2000}]{pritchard2000inference}
@@ -98,8 +98,8 @@ Pritchard JK, Stephens M, Donnelly P (2000) Inference of population structure
   et~al.\/}}{2007}]{purcell2007plink}
 Purcell S, Neale B, Todd-Brown K, Thomas L, Ferreira MA, Bender D, Maller J,
   Sklar P, De~Bakker PI, Daly MJ, {\em et~al.\/} (2007) PLINK: a tool set for
-  whole-genome association and population-based linkage analyses. {\em The
-  American journal of human genetics\/}, {\bf 81}, 559--575.
+  whole-genome association and population-based linkage analyses. {\em American
+  Journal of Human Genetics\/}, {\bf 81}, 559--575.
 
 \bibitem[\protect\citeauthoryear{{R Core Team}}{{R Core
   Team}}{2023}]{Rcoreteam}
@@ -126,7 +126,7 @@ Smyser T, Pfaffelhuber P, Giglio R, DeSaix M, Davis A, Bowden C, Tabak M,
 Tortereau F, Servin B, Frantz L, Megens HJ, Milan D, Rohrer G, Wiedmann R,
   Beever J, Archibald AL, Schook LB, {\em et~al.\/} (2012) A high density
   recombination map of the pig reveals a correlation between sex-specific
-  recombination and GC content. {\em BMC genomics\/}, {\bf 13}, 1--12.
+  recombination and GC content. {\em BMC Genomics\/}, {\bf 13}, 1--12.
 
 \bibitem[\protect\citeauthoryear{V{\"a}h{\"a} \& Primmer}{V{\"a}h{\"a} \&
   Primmer}{2006}]{vaha2006efficiency}
@@ -144,7 +144,7 @@ Wilson GA, Rannala B (2003) Bayesian inference of recent migration rates using
 Wringe BF, Anderson EC, Jeffery NW, Stanley RR, Bradbury IR (2019) Development
   and evaluation of SNP panels for the detection of hybridization between wild
   and escaped Atlantic salmon (Salmo salar) in the western Atlantic. {\em
-  Canadian journal of fisheries and aquatic sciences\/}, {\bf 76}, 695--704.
+  Canadian Journal of Fisheries and Aquatic Sciences\/}, {\bf 76}, 695--704.
 
 \bibitem[\protect\citeauthoryear{Zhan, Paterson, Fraser, Watson, Bradbury,
   Nadukkalam~Ravindran, Reznick, Beiko, \& Bentzen}{Zhan {\em

@@ -1,0 +1,193 @@
+---
+title: "Responses to Editor and Referees"
+output: pdf_document
+
+---
+
+
+
+
+
+## Editor Comments to Author:
+
+Two reviewers have provided comments on this manuscript and both are favorably impressed.  They have raised a few minor issues that should be addressed in a revision.  In particular, it would be good to better address the limitations when there is inbreeding present.  I look forward to reading a revised version.
+
+_Thank you.  We address the issue of inbreeding in the revised version.  See below.
+Our replies and comments are in italic text throughout._
+
+Subject Editor, Molecular Ecology Resources
+
+
+
+
+
+## Reviewer Comments to Author:
+
+## Reviewer: 1
+
+
+### General comments:
+
+In this work, Anderson and colleagues present a new R package; gscramble which can be used to simulate genotypes across hybrid classes. The package differs from other commonly used programs such as ADMIXTURE by, sampling alleles without replacement and using recombination rates to account for linkage among large genetic datasets.
+
+Both these considerations are important and represent improvements to current methods. I do have some questions about how the package is implemented and what some of the requirements mean for real-world applications detailed below. Once clarified, I believe this work is suitable for publication in Molecular Ecology Resources.
+
+
+### Detailed comments:
+
+L90-91: Are the first two figures supposed to appear one after the other in the Introduction? They aren’t referred to in the text until line 202 in the methods.
+
+_Thank you for catching that.  They should not appear there.  That was a byproduct of using the same
+\LaTeX{} input for both a typeset-2-column version and our submission version.  We have moved the
+figure callouts to their appropriate locations in the paper._
+
+
+L120-123: Is it not possible to simply filter the loci set based on linkage disequilibrium? Do you have evidence that this will not alleviate the problem?
+
+_No, it is not possible. Genomic material is inherited in chunks that are typically orders of magnitude longer than
+the typical range over which LD decays.  Thus, pairs of markers that are
+on the same chromosome, are much more likely to be co-inherited than markers that
+are not on the same chromosome, even if the two markers are far enough apart on the
+same chromosome that they are not in LD. We have noted this in the discussion for any other readers that may
+wonder whether LD pruning will solve the problem of physical linkage._
+
+L196-198: How would the requirement of having no inbreeding loops in the GSP affect the applicability of these simulations to real-life scenarios? Within most wild populations, especially threatened species, inbreeding is a regular occurrence.
+
+_This is a reasonable question and we address it now in the Discussion. In short, gscramble works fine
+for inbred populations.  Partly this is because if the founders are related (as they would be in a tiny population)
+the offspring produced by the GSP will by inbred despite the absence of inbreeding loops in the GSP._
+
+L202-204: Figure captions should not contain required information for the text only. The terminology should be described in the text at the first mention.
+
+_We pulled that long caption out of the figure and include it in the text. That improves things.
+Thank you!_
+
+L227-229: Will recombination rates be something the user will have to input?
+
+_Yes, the user has to put those in, though we already note in the discussion that even if an
+accurate recombination map is not known, it is still possible to use one simply with
+average rates across each chromosome._
+
+L363-365: My understanding was that gscramble accounted for the bias associated with linked loci without the need to filter, so why would an empirical dataset need to be filtered for linked loci? What benefit then does gscramble present over other methods in this regard?
+
+_As noted above, LD and physical linkage are quite different.  Where we now address that in the discussion, we also
+note that for applications of the data after it has been run through gscramble, like using ADMIXTURE, it can be
+advantageous to have LD-pruned data._
+
+Figure 7: How did the results of gscramble differ from the original paper? How do you know what is the truth? Or do the results simply differ?
+
+_The point of this simulation was to see whether the original authors were justified in limiting their data set to just the 30
+markers on separate chromosome arms. We now emphasize in the results section that this choice is justified by the simulation results._
+
+
+
+L482: Is there a function in gscramble for users to estimate the “specific-specific recombination rates” from their empirical data?
+
+_No, there is not._
+
+
+
+## Reviewer: 2
+
+### Comments to the Author
+
+The manuscript "gscramble: Simulation of admixed individuals without reuse of genetic material" presents a new R package to simulate genetically admixed individuals. The main advancement presented is that this simulation avoids the issue of resampling and the spurious power inflation that can result from this.
+
+The method allows users to upload their own recombination maps and specify complex hybridization scenarios. To test their method the authors present simulations with trout and pig data which showcase the strength of their method.
+
+Overall the paper is well written. It takes complex concepts and presents them in plain english. I commend the authors for the clear organization and concise writing.
+
+The authors do present some of the limitations of their method, but I think they could do a little bit more of this. This might be outside the scope of the paper but I wonder how this might apply in the field of human genetics.
+
+_This is an interesting question. We do feel that gscramble could be applicable in some
+contexts within human genetics.  The ready availability of phased dense data in humans
+would be appropriate for use with the `preserve_haplotypes = TRUE` option. So, gscramble
+could be used to assess how well admixture from different poulations could be detected.
+Given the emphasis on molecular ecology in the outlet, however, we agree with the
+reviewer that including discussion of human genetics might be outside of the scope of the
+paper._
+
+The authors mention "genetic clustering algorithms" multiple times in the text, it seems to be a major motivator for their software, however they only use ADMIXTURE. I wonder if the authors could make these results more robust by presenting results using another clustering algorithm (could even just be K-means) to show that their results hold up using more than other clustering algorithm.
+
+_I think it is fairly well understood from the explanations in Anderson, Waples, and Kalinowski (2008) that
+RISPI would also affect something like K-means clustering.  We considered adding more simulations to the paper, but felt that
+the paper was already quite long as it is.  We focus on ADMIXTURE in the paper because it provides
+an explicit estimate of the admixture fraction, and one of the main points of the paper is that
+the variance of admixture fractions within recent hybrids is strongly affected by physical linkage._
+
+The graphics of the paper could be improved with larger text sizes. This is an aesthetic suggestion, but I wonder if the 4 by 4 grid plots could be reduced to a 3 by 3 grid to increase the overall size of each plot while preserving the visualization of the trends.
+
+_Yes, being able to make those 3 x 3 grids could make them more readable; however we do
+feel it is important to have those four magnitudes of marker numbers available, since they
+do attempt to span the range of the sorts of data sets that might be encountered in molecular
+ecology today: 100 = Fluidigm chips and amplicon sequencing; 1000 = marker capture;
+10,000 = RAD seq and small SNP chips; 100,000+ RAD seq, large SNP chips and whole genome
+sequencing. Ultimately, we chose to keep them 4 x 4 to preserve that range, and symmetry
+in the vertical dimension._
+
+
+## Production Checklist
+
+
+To hasten the appearance of your manuscript online, I urge you to complete the following prior to returning your revised manuscript:
+
+1. Ensure data is archived in a publicly-accessible repository. Please see the Data Storage and Documentation section in the author guidelines for details of what data should be archived, appropriate public archives for specific data types and suitable file formats. Exemptions to the data archiving policy may be granted for cases involving sensitive information such as human subject data or the location of endangered species.
+
+_Done. Data and code are archived and publicly accessible._
+
+2. Complete Data Accessibility and Benefit-Sharing section in your manuscript. For correct formatting of this section, please see our author guidelines. Please include DOIs or accession numbers in your Data Accessibility Statement. Data Accessibility statements will be checked post acceptance but prior to publication for completeness and that information such as DOIs or accession numbers are included.
+
+_Done. Data and code are archived and publicly accessible, and that is described in the statement._
+
+Molecular Ecology Resources strongly encourages authors to include a Benefit-Sharing Statement, which should disclose non-monetary benefits generated by your research in the context of the Nagoya Protocol (https://www.cbd.int/abs/). Please review the benefits associated with this research and describe them within the Data Accessibility and Benefit-Sharing section in your manuscript. For more information, please see our editorial https://onlinelibrary.wiley.com/doi/10.1111/mec.15702.
+
+_We have added a Benefit-Sharing Statement_
+
+3. Consolidate Supplemental Information into as few files as possible.
+
+    * Use the attached Molecular Ecology Resources Supplemental Information Template if possible (not required)
+    * If the file is quite long, create a Table of Contents for the first page
+    * Make sure the title of the paper and the names of all authors appear on the Supplemental document.
+    * Your Supplemental Information will not be copy-edited.  Do not leave in track-changes and other editing marks.  The document will be posted "as is.”
+    * Save as PDF if possible.
+
+_The Supplemental Information has been saved as a PDF_
+
+4. Provide your manuscript in an editable format (not PDF!)
+
+5. Provide tables in an editable format (not images)
+
+6. Make sure all table and figure captions are present and editable
+
+_All will be submitted in LaTeX format, and we will ensure proper rendering_
+
+The title and abstract of your article are very important to increasing its visibility. We encourage you to make your article more discoverable online with the following tips:
+
+https://authorservices.wiley.com/author-resources/Journal-Authors/Prepare/writing-for-seo.html
+
+_Thank you for those SEO tips!_
+
+To submit your revised manuscript:
+
+1. Log in to your Scholar One account and click on the 'manuscripts with decisions' link
+2. Click 'create a revision' and follow the on-screen instructions. (Do not upload your revised manuscripts as a new submission.)
+3. Please include a point-by-point response to the reviewer comments, including a detailed list of changes made and a rebuttal to any comments with which you disagree, being as specific as possible in your responses.
+4. Please provide a version of your manuscript with the changes tracked or highlighted.
+5. Your original files will be available to you when you upload your revised manuscript. Please delete any outdated files before completing the submission.
+
+In order to schedule publication efficiently, we impose a deadline of 30 days for the return of revised manuscripts. Manuscripts returned after the deadline may be regarded as new submissions, with a new receipt date, and may be subject to the full peer review process.
+
+Wiley Editing Services Available to All Authors
+Should you be interested, Wiley Editing Services offers expert help with manuscript, language, and format editing, along with other article preparation services. You can learn more about this service option at www.wileyauthors.com/eeo/preparation. You can also check out Wiley’s collection of free article preparation resources for general guidance about writing and preparing your manuscript at www.wileyauthors.com/eeo/prepresources.
+
+This journal offers a number of license options for published papers; information about this is available here: https://authorservices.wiley.com/author-resources/Journal-Authors/licensing/index.html. The submitting author has confirmed that all co-authors have the necessary rights to grant in the submission, including in light of each co-author’s funder policies. If any author’s funder has a policy that restricts which kinds of license they can sign, for example if the funder is a member of Coalition S, please make sure the submitting author is aware.
+
+Thank you for submitting your research to Molecular Ecology Resources.
+
+
+Best Wishes,
+
+Benjamin Sibbett PhD
+Executive Editor, Molecular Ecology Resources
+E-mail: molecol@wiley.com
+
