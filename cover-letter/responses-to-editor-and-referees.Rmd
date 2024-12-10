@@ -1,19 +1,56 @@
 ---
-title: "Responses to Editor and Referees"
 output: pdf_document
-
 ---
 
 
+Benjamin Sibbett PhD  
+Executive Editor, Molecular Ecology Resources  
+4 December 2024  
 
+  
+  
+  
+  
+Dear Dr Sibbett,
+
+Thank you for the opportunity to revise our work for consideration of acceptance
+in _Molecular Ecology Resources_.  We appreciate the efforts and helpful
+questions and suggestions from the associate editor and the two referees.  We have
+addressed all queries in the decision letter and are pleased with how doing so
+has improved the manuscript.
+
+On the following pages of thie PDF document, please find:
+
+- a PDF version of our responses to the decision letter (these are also pasted in 
+into the text box on manuscript central)
+- a latexdiff PDF file showing changes we made to between the original submission and our
+new revised version of the manuscript.
+
+Thank you again for considering our work.  As always, the MER editorial process has
+been a model of efficiency and clarity.  Thank you for all your efforts and leadership.
+
+
+Best regards,
+
+\vspace*{4em}
+
+Eric C. Anderson, PhD
+
+
+\newpage 
+
+
+
+
+
+# Responses to Editor and Referees
 
 
 ## Editor Comments to Author:
 
 Two reviewers have provided comments on this manuscript and both are favorably impressed.  They have raised a few minor issues that should be addressed in a revision.  In particular, it would be good to better address the limitations when there is inbreeding present.  I look forward to reading a revised version.
 
-_Thank you.  We address the issue of inbreeding in the revised version.  See below.
-Our replies and comments are in italic text throughout._
+_Thank you.  We address the issue of inbreeding in the revised version.  See below. Our replies and comments are in italic text throughout._
 
 Subject Editor, Molecular Ecology Resources
 
@@ -37,47 +74,32 @@ Both these considerations are important and represent improvements to current me
 
 L90-91: Are the first two figures supposed to appear one after the other in the Introduction? They aren’t referred to in the text until line 202 in the methods.
 
-_Thank you for catching that.  They should not appear there.  That was a byproduct of using the same
-\LaTeX{} input for both a typeset-2-column version and our submission version.  We have moved the
-figure callouts to their appropriate locations in the paper._
+_Thank you for catching that.  They should not appear there.  That was a byproduct of using the same \LaTeX{} input for both a typeset-2-column version and our submission version.  We have moved the figure callouts to their appropriate locations in the paper._
 
 
 L120-123: Is it not possible to simply filter the loci set based on linkage disequilibrium? Do you have evidence that this will not alleviate the problem?
 
-_No, it is not possible. Genomic material is inherited in chunks that are typically orders of magnitude longer than
-the typical range over which LD decays.  Thus, pairs of markers that are
-on the same chromosome, are much more likely to be co-inherited than markers that
-are not on the same chromosome, even if the two markers are far enough apart on the
-same chromosome that they are not in LD. We have noted this in the discussion for any other readers that may
-wonder whether LD pruning will solve the problem of physical linkage._
+_No, it is not possible. Genomic material is inherited in chunks that are typically orders of magnitude longer than the typical range over which LD decays.  Thus, pairs of markers that are on the same chromosome, are much more likely to be co-inherited than markers that are not on the same chromosome, even if the two markers are far enough apart on the same chromosome that they are not in LD. We have noted this in the discussion for any other readers that may wonder whether LD pruning will solve the problem of physical linkage._
 
 L196-198: How would the requirement of having no inbreeding loops in the GSP affect the applicability of these simulations to real-life scenarios? Within most wild populations, especially threatened species, inbreeding is a regular occurrence.
 
-_This is a reasonable question and we address it now in the Discussion. In short, gscramble works fine
-for inbred populations.  Partly this is because if the founders are related (as they would be in a tiny population)
-the offspring produced by the GSP will by inbred despite the absence of inbreeding loops in the GSP._
+_This is a reasonable question and we address it now in the Discussion. In short, gscramble works fine for inbred populations.  Partly this is because if the founders are related (as they would be in a tiny population) the offspring produced by the GSP will be inbred despite the absence of inbreeding loops in the GSP._
 
 L202-204: Figure captions should not contain required information for the text only. The terminology should be described in the text at the first mention.
 
-_We pulled that long caption out of the figure and include it in the text. That improves things.
-Thank you!_
+_We pulled that long caption out of the figure and include it in the text. That improves things. Thank you!_
 
 L227-229: Will recombination rates be something the user will have to input?
 
-_Yes, the user has to put those in, though we already note in the discussion that even if an
-accurate recombination map is not known, it is still possible to use one simply with
-average rates across each chromosome._
+_Yes, the user has to put those in, though we already note in the discussion that even if an accurate recombination map is not known, it is still possible to use one simply with average rates across each chromosome._
 
 L363-365: My understanding was that gscramble accounted for the bias associated with linked loci without the need to filter, so why would an empirical dataset need to be filtered for linked loci? What benefit then does gscramble present over other methods in this regard?
 
-_As noted above, LD and physical linkage are quite different.  Where we now address that in the discussion, we also
-note that for applications of the data after it has been run through gscramble, like using ADMIXTURE, it can be
-advantageous to have LD-pruned data._
+_As noted above, LD and physical linkage are quite different.  Where we now address this issuein the discussion, we also note that for analyses of simulated data produced with gscramble, i.e., the use of ADMIXTURE, it can be advantageous to conduct LD-pruning._
 
 Figure 7: How did the results of gscramble differ from the original paper? How do you know what is the truth? Or do the results simply differ?
 
-_The point of this simulation was to see whether the original authors were justified in limiting their data set to just the 30
-markers on separate chromosome arms. We now emphasize in the results section that this choice is justified by the simulation results._
+_The point of this simulation was to see whether the original authors were justified in limiting their data set to just the 30 markers on separate chromosome arms. We now emphasize in the results section that this choice is justified by the simulation results._
 
 
 
@@ -99,31 +121,15 @@ Overall the paper is well written. It takes complex concepts and presents them i
 
 The authors do present some of the limitations of their method, but I think they could do a little bit more of this. This might be outside the scope of the paper but I wonder how this might apply in the field of human genetics.
 
-_This is an interesting question. We do feel that gscramble could be applicable in some
-contexts within human genetics.  The ready availability of phased dense data in humans
-would be appropriate for use with the `preserve_haplotypes = TRUE` option. So, gscramble
-could be used to assess how well admixture from different poulations could be detected.
-Given the emphasis on molecular ecology in the outlet, however, we agree with the
-reviewer that including discussion of human genetics might be outside of the scope of the
-paper._
+_This is an interesting question. We do feel that gscramble could be applicable in some contexts within human genetics.  The ready availability of phased dense data in humans would be appropriate for use with the `preserve_haplotypes = TRUE` option. So, gscramble could be used to assess how well admixture from different poulations could be detected. Given the emphasis on molecular ecology in the outlet, however, we agree with the reviewer that including discussion of human genetics might be outside of the scope of the paper._
 
 The authors mention "genetic clustering algorithms" multiple times in the text, it seems to be a major motivator for their software, however they only use ADMIXTURE. I wonder if the authors could make these results more robust by presenting results using another clustering algorithm (could even just be K-means) to show that their results hold up using more than other clustering algorithm.
 
-_I think it is fairly well understood from the explanations in Anderson, Waples, and Kalinowski (2008) that
-RISPI would also affect something like K-means clustering.  We considered adding more simulations to the paper, but felt that
-the paper was already quite long as it is.  We focus on ADMIXTURE in the paper because it provides
-an explicit estimate of the admixture fraction, and one of the main points of the paper is that
-the variance of admixture fractions within recent hybrids is strongly affected by physical linkage._
+_I think it is fairly well understood from the explanations in Anderson, Waples, and Kalinowski (2008) that RISPI would also affect something like K-means clustering.  We considered adding more simulations to the paper, but felt that the paper was already quite long as it is.  We focus on ADMIXTURE in the paper because it provides an explicit estimate of the admixture fraction, and one of the main points of the paper is that the variance of admixture fractions within recent hybrids is strongly affected by physical linkage._
 
 The graphics of the paper could be improved with larger text sizes. This is an aesthetic suggestion, but I wonder if the 4 by 4 grid plots could be reduced to a 3 by 3 grid to increase the overall size of each plot while preserving the visualization of the trends.
 
-_Yes, being able to make those 3 x 3 grids could make them more readable; however we do
-feel it is important to have those four magnitudes of marker numbers available, since they
-do attempt to span the range of the sorts of data sets that might be encountered in molecular
-ecology today: 100 = Fluidigm chips and amplicon sequencing; 1000 = marker capture;
-10,000 = RAD seq and small SNP chips; 100,000+ RAD seq, large SNP chips and whole genome
-sequencing. Ultimately, we chose to keep them 4 x 4 to preserve that range, and symmetry
-in the vertical dimension._
+_Yes, being able to make those 3 x 3 grids could make them more readable; however we do feel it is important to have those four magnitudes of marker numbers available, since they do attempt to span the range of the sorts of data sets that might be encountered in molecular ecology today: 100 = Fluidigm chips and amplicon sequencing; 1000 = marker capture; 10,000 = RAD seq and small SNP chips; 100,000+ RAD seq, large SNP chips and whole genome sequencing. Ultimately, we chose to keep them 4 x 4 to preserve that range, and symmetry in the vertical dimension._
 
 
 ## Production Checklist
@@ -154,9 +160,7 @@ _We have added a Benefit-Sharing Statement_
 _The Supplemental Information has been saved as a PDF_
 
 4. Provide your manuscript in an editable format (not PDF!)
-
 5. Provide tables in an editable format (not images)
-
 6. Make sure all table and figure captions are present and editable
 
 _All will be submitted in LaTeX format, and we will ensure proper rendering_

@@ -390,7 +390,7 @@ while permuting. This option should only be used when the original data set is p
 }
 \begin{figure*}
 \begin{center}
-\includegraphics[width=\textwidth]{figures/permutations-plot.png}
+\includegraphics[width=\textwidth]{figures/permutations-plot.pdf}
 \end{center}
 \caption[\permcap]{\sometimes{\permcap}}
 \label{fig:perms}
@@ -525,7 +525,7 @@ Category	& $f(C,C)$ &	$f(C,S)$ & 	$f(S,S)$ \\ \hline
 \input{inputs/newhybs-cats.tsv}
 \end{tabular*}
 }
-\vspace*{-2.3ex}\hrule\vspace*{0.3ex}\hrule
+\vspace*{-0.3ex}\hrule\vspace*{0.3ex}\hrule
 \end{center}
 \end{table}
 %%%%%%%%%%%%
@@ -714,11 +714,11 @@ incorrect (for example, when $BC_1$--CCT individuals have a maximum posterior of
 $BC_2$--CCT category,
 or when individuals that are truly of the $BC_1$--CCT~$\times$~$BC_2$--CCT category have a
 maximum posterior of being from the $BC_2$--CCT category), many of those incorrect posteriors
-are quite high ($>0.90$).  In fact, using 65 markers yields more incorrect {\em and high} posteriors 
+are quite high ($>0.90$).  In fact, using 65 markers yields more posteriors $>0.90$ for an {\em incorrect} hybrid category
 than does using the 30 unlinked markers. So, as expected, ignoring physical linkage (e.g., as 
 implemented in {\sc NewHybrids}) 
 can yield a poor estimate of the uncertainty around different inferences, and this analysis
-supports the choice of \citet{rizza2023limited} to limit markers to those 
+supports the choice of \citet{rizza2023limited} to limit markers to those on different chromosome arms during their {\sc NewHybrids} analysis. 
 
 \subsubsection*{Invasive wild pigs in Missouri}
 
@@ -801,7 +801,7 @@ the typical range over which LD decays.  Thus, pairs of markers that are
 on the same chromosome, are much more likely to be co-inherited than markers that
 are not on the same chromosome, even if the two markers are far enough apart on the
 same chromosome that they are not in LD.  That said, for some downstream analyses (after
-running \gscramble{}),  LD pruning can be advantageous; for example, ADMIXTURE will run faster on a smaller, pruned data set.
+running \gscramble{}),  LD pruning can be advantageous; for example, ADMIXTURE assumes independent loci and will run faster on a smaller, pruned data set.
 
 \gscramble{} is suitable for analysis of numerous types of marker sets available from contemporary data generation 
 techniques. As mentioned above, 
@@ -829,7 +829,7 @@ segregated---an example of antithetical variate sampling in Monte Carlo methods 
 Thus, in the  example of relatedness, fixed specified founders should be repeatedly ``mated,'' with one offspring 
 sampled per iteration to avoid sampling of anticorrelated genotypes.
 
-As noted in the methods, the GSP used to simulate with \gscramble{} must not contain
+As noted in the methods, the GSP used to conduct simulations with \gscramble{} must not contain
 inbreeding loops, since the occurrence of such loops means genes would be
 sampled with replacement from the founders, potentially inducing RISPI and incorrectly
 inflating the
@@ -838,9 +838,7 @@ limits the application of \gscramble{} in small populations of conservation conc
 inbreeding occurs; we submit that it does not.  If genetic structure between two
 locales is driven by family structure (as it often may be in very small and inbred populations), that
 family structure will be reflected in samples taken from each locale---the samples within a locale 
-may be close relatives of one another.  If related individuals are used as founders in a GSP, then
-the offspring they produce will essentially be inbred, even though the GSP itself contains no
-inbreeding loops, because the founders are related.  The inclusion of related founders in this way, then, also appropriately reflects the genetic drift that is causing allele frequency differences between the locales.   
+may be close relatives of one another.  If related individuals are used as founders in a GSP, then the offspring they produce will essentially be inbred because the founders are related even though the GSP contains to inbreeding loops.  The inclusion of related founders in this way, then, also appropriately reflects the genetic drift that is causing allele frequency differences between the locales.   
 
 
 
